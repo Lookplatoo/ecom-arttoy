@@ -131,7 +131,7 @@
   </div>
 
   <!-- Modal ดูรายละเอียดออเดอร์ -->
-  <div id="order-detail-modal" class="modal-overlay" style="display: none;">
+  <div id="order-detail-modal" class="modal-overlay">
     <div class="modal-card" style="max-width: 620px;">
       <div class="modal-header">
         <h3 class="modal-header-title">รายละเอียดคำสั่งซื้อ <span id="modal-order-id-title"></span></h3>
@@ -318,7 +318,7 @@
           `;
         }
 
-        modal.style.display = "flex";
+        modal.classList.add("active");
       }
 
       document.addEventListener("click", function (e) {
@@ -328,8 +328,8 @@
         }
       });
 
-      if (modalClose) modalClose.addEventListener("click", () => modal.style.display = "none");
-      if (modalCloseFoot) modalCloseFoot.addEventListener("click", () => modal.style.display = "none");
+      if (modalClose) modalClose.addEventListener("click", () => modal.classList.remove("active"));
+      if (modalCloseFoot) modalCloseFoot.addEventListener("click", () => modal.classList.remove("active"));
     });
   </script>
 </body>

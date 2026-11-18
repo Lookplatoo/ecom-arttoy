@@ -156,7 +156,7 @@
   </div>
 
   <!-- Modal: View Member Detail & Record Box Shipment -->
-  <div id="sub-admin-modal" class="modal-overlay" style="display: none;">
+  <div id="sub-admin-modal" class="modal-overlay">
     <div class="modal-card" style="max-width: 680px;">
       <div class="modal-header">
         <h3 class="modal-header-title">ข้อมูลสมาชิก <span id="modal-sub-id-title"></span></h3>
@@ -369,7 +369,7 @@
           </div>
         `;
 
-        modal.style.display = "flex";
+        modal.classList.add("active");
       }
 
       document.addEventListener("click", function (e) {
@@ -409,8 +409,8 @@
         });
       }
 
-      if (modalClose) modalClose.addEventListener("click", () => modal.style.display = "none");
-      if (modalCloseFoot) modalCloseFoot.addEventListener("click", () => modal.style.display = "none");
+      if (modalClose) modalClose.addEventListener("click", () => modal.classList.remove("active"));
+      if (modalCloseFoot) modalCloseFoot.addEventListener("click", () => modal.classList.remove("active"));
     });
   </script>
 </body>
