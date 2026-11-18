@@ -284,24 +284,30 @@ img {
   display: block;
 }
 
-.btn-admin {
+.btn-admin,
+.btn-admin-nav-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 44px;
-  padding: 0 24px;
+  height: 38px;
+  padding: 0 18px;
   background-color: var(--color-primary);
   color: var(--color-white);
-  font-size: 15px;
+  font-family: var(--font-en);
+  font-size: 14px;
   font-weight: 600;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-subtle);
   cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.15s, transform 0.15s;
 }
 
-.btn-admin:hover {
+.btn-admin:hover,
+.btn-admin-nav-link:hover {
   background-color: var(--color-primary-hover);
   transform: translateY(-1px);
+  color: var(--color-white);
 }
 
 /* Sub-Hero Banner Bars (Search, Detail, Team) */
@@ -717,19 +723,58 @@ img {
 
 .profile-avatar-fig {
   width: 100%;
-  height: 200px;
-  background-color: #f2f0eb;
+  height: 180px;
+  background-color: #f7f6f2;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
-.profile-avatar-fig.placeholder {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="%23b0b0b0" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 64px;
+.avatar-initial-badge {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-en);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  border: 3px solid #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.profile-card:hover .avatar-initial-badge {
+  transform: scale(1.06);
+}
+
+.avatar-theme-founder {
+  background: linear-gradient(135deg, #1c1b1a 0%, #3d5a80 100%);
+  color: #ffffff;
+}
+
+.avatar-theme-auth {
+  background: linear-gradient(135deg, #2b9348 0%, #52b788 100%);
+  color: #ffffff;
+}
+
+.avatar-theme-ops {
+  background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+  color: #ffffff;
+}
+
+.avatar-theme-partners {
+  background: linear-gradient(135deg, #c2593f 0%, #e76f51 100%);
+  color: #ffffff;
+}
+
+.avatar-theme-cx {
+  background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+  color: #ffffff;
 }
 
 .profile-body {

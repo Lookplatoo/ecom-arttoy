@@ -318,10 +318,16 @@ const MockDB = {
       list = list.filter(p => p.status === filters.status);
     }
     if (filters.min_price !== undefined && filters.min_price !== '') {
-      list = list.filter(p => Number(p.price) >= Number(filters.min_price));
+      const minP = Number(filters.min_price);
+      if (!isNaN(minP)) {
+        list = list.filter(p => Number(p.price) >= minP);
+      }
     }
     if (filters.max_price !== undefined && filters.max_price !== '') {
-      list = list.filter(p => Number(p.price) <= Number(filters.max_price));
+      const maxP = Number(filters.max_price);
+      if (!isNaN(maxP)) {
+        list = list.filter(p => Number(p.price) <= maxP);
+      }
     }
     return list;
   },
@@ -363,6 +369,12 @@ const MockDB = {
     }
     list[index] = { ...list[index], ...updatedFields };
     if (updatedFields.price !== undefined) list[index].price = Number(updatedFields.price);
+    if (updatedFields.stock !== undefined) {
+      list[index].stock = Math.max(0, Number(updatedFields.stock) || 0);
+      if (list[index].stock === 0 && !updatedFields.status) {
+        list[index].status = 'Out of Stock';
+      }
+    }
     localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(list));
     return { success: true, message: 'แก้ไขข้อมูลสินค้าสำเร็จ', data: list[index] };
   },
@@ -463,10 +475,22 @@ const MockDB = {
     this.init();
     const product = this.getProductById(productId);
     if (!product) return { success: false, message: 'ไม่พบสินค้า' };
-    if (product.status === 'Out of Stock') return { success: false, message: 'ขออภัย สินค้านี้หมดชั่วคราว' };
+    const stock = product.stock !== undefined ? Number(product.stock) : 10;
+    if (product.status === 'Out of Stock' || stock <= 0) {
+      return { success: false, message: 'ขออภัย สินค้านี้หมดชั่วคราว' };
+    }
 
     let cart = this.getCart();
     const existing = cart.find(item => item.id === productId);
+    const currentQty = existing ? existing.qty : 0;
+    if (currentQty + qty > stock) {
+      const remaining = stock - currentQty;
+      if (remaining <= 0) {
+        return { success: false, message: `สินค้าชิ้นนี้มีในคลังทั้งหมด ${stock} ชิ้น คุณเพิ่มในตะกร้าครบตามสต็อกแล้ว` };
+      }
+      return { success: false, message: `สามารถเพิ่มได้อีกเพียง ${remaining} ชิ้น (สต็อกคงเหลือ ${stock} ชิ้น)` };
+    }
+
     if (existing) {
       existing.qty += qty;
     } else {
@@ -489,8 +513,11 @@ const MockDB = {
     if (qty <= 0) {
       cart = cart.filter(item => item.id !== productId);
     } else {
+      const product = this.getProductById(productId);
+      const stock = product && product.stock !== undefined ? Number(product.stock) : 999;
+      const targetQty = Math.min(qty, stock);
       const item = cart.find(i => i.id === productId);
-      if (item) item.qty = qty;
+      if (item) item.qty = targetQty;
     }
     localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify(cart));
     return cart;
@@ -534,6 +561,28 @@ const MockDB = {
       status: orderData.paymentMethod === 'Cash on Delivery' ? 'Processing' : 'Paid',
       trackingNumber: '-'
     };
+
+    // Deduct stock from products in storage
+    if (Array.isArray(orderData.items) && orderData.items.length > 0) {
+      let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS) || '[]');
+      let updated = false;
+
+      orderData.items.forEach(it => {
+        const prod = products.find(p => p.id === it.id);
+        if (prod) {
+          const currentStock = prod.stock !== undefined ? Number(prod.stock) : 10;
+          prod.stock = Math.max(0, currentStock - (Number(it.qty) || 1));
+          if (prod.stock === 0) {
+            prod.status = 'Out of Stock';
+          }
+          updated = true;
+        }
+      });
+
+      if (updated) {
+        localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+      }
+    }
 
     orders.unshift(newOrder);
     localStorage.setItem(STORAGE_KEYS.ORDERS, JSON.stringify(orders));

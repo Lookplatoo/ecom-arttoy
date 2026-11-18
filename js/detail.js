@@ -126,8 +126,12 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (btnBuyNow && !isOut) {
     btnBuyNow.addEventListener("click", () => {
       const qty = parseInt(qtyInput.value) || 1;
-      ApiService.addToCart(product.id, qty);
-      window.location.href = "checkout.html";
+      const res = ApiService.addToCart(product.id, qty);
+      if (res && res.success) {
+        window.location.href = "checkout.html";
+      } else {
+        showToast((res && res.message) || "ไม่สามารถเพิ่มสินค้าลงในตะกร้าได้", "error");
+      }
     });
   }
 
@@ -140,6 +144,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   function renderReviews() {
     const listContainer = document.getElementById("reviews-list-container");
     const avgScoreEl = document.getElementById("reviews-avg-score");
+    const ratingBadgeEl = document.getElementById("detail-rating-badge");
     if (!listContainer) return;
 
     const reviews = ApiService.getReviews(product.id);
@@ -150,11 +155,18 @@ document.addEventListener("DOMContentLoaded", async function () {
         </div>
       `;
       if (avgScoreEl) avgScoreEl.textContent = "ยังไม่มีรีวิว";
+      if (ratingBadgeEl) {
+        const baseRating = Number(product.rating || 5.0).toFixed(1);
+        const baseCount = product.reviewCount || 0;
+        ratingBadgeEl.textContent = `${baseRating}/5.0 (${baseCount} รีวิว)`;
+      }
       return;
     }
 
     const avg = reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length;
-    if (avgScoreEl) avgScoreEl.textContent = `${avg.toFixed(1)}/5.0 (${reviews.length} รีวิว)`;
+    const scoreStr = `${avg.toFixed(1)}/5.0 (${reviews.length} รีวิว)`;
+    if (avgScoreEl) avgScoreEl.textContent = scoreStr;
+    if (ratingBadgeEl) ratingBadgeEl.textContent = scoreStr;
 
     let html = "";
     reviews.forEach(r => {
