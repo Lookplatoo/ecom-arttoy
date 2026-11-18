@@ -14,7 +14,8 @@ const STORAGE_KEYS = {
   CART: 'arttoy_cart_v2',
   ORDERS: 'arttoy_orders_v2',
   REVIEWS: 'arttoy_reviews_v2',
-  SUBSCRIPTIONS: 'arttoy_subscriptions_v2'
+  SUBSCRIPTIONS: 'arttoy_subscriptions_v2',
+  MEMBER_SESSION: 'arttoy_member_session'
 };
 
 const DEFAULT_PRODUCTS = [
@@ -107,6 +108,22 @@ const DEFAULT_PRODUCTS = [
     reviewCount: 63,
     badge: 'Sold Out',
     isFeatured: false
+  },
+  {
+    id: 'SECRET-CHII-01',
+    name: 'น้องจี้คาวะ ร่างทองคำ (Chiikawa Golden Secret Rare)',
+    category: 'Limited Edition',
+    status: 'Available',
+    price: 1290.00,
+    description: 'ฟิกเกอร์ Chiikawa ร่างทองคำพรีเมียมเคลือบเงาสุดหรู ผลิตจำนวนจำกัดเพียง 100 ชิ้นทั่วโลก สิทธิ์ในการสั่งซื้อสงวนไว้เป็นพิเศษเฉพาะสมาชิก Mystery Box Club เท่านั้น',
+    image: 'assets/images/chiikawa.png',
+    reference: 'https://chiikawa.fandom.com/wiki/Chiikawa',
+    stock: 5,
+    rating: 5.0,
+    reviewCount: 18,
+    badge: 'Member Only',
+    memberOnly: true,
+    isFeatured: true
   }
 ];
 
@@ -177,6 +194,34 @@ const DEFAULT_ORDERS = [
 ];
 
 const DEFAULT_SUBSCRIPTIONS = [
+  {
+    subId: 'SUB-202611-1001',
+    planId: 'starter',
+    planName: 'Starter Box',
+    cycle: 'monthly',
+    price: 390,
+    startDate: '2026-11-01',
+    nextBillingDate: '2026-12-01',
+    nextDeliveryDate: '2026-12-05',
+    status: 'Active',
+    paymentMethod: 'PromptPay QR',
+    customer: {
+      fullName: 'คุณกิตติคุณ อำนาคะ',
+      phone: '081-234-5678',
+      address: '999 ถนนพุทธมณฑลสาย 4 ตำบลศาลายา อำเภอพุทธมณฑล จังหวัดนครปฐม 73170',
+      note: 'โทรแจ้งล่วงหน้าก่อนส่ง'
+    },
+    deliveries: [
+      {
+        month: 'พฤศจิกายน 2026',
+        theme: 'Starter Explorer Set',
+        items: ['Chiikawa Mini Keychain Figure'],
+        status: 'Delivered',
+        trackingNumber: 'FLASH-TH10029381',
+        shippedDate: '2026-11-05'
+      }
+    ]
+  },
   {
     subId: 'SUB-202611-8842',
     planId: 'collector',
@@ -300,6 +345,30 @@ const MockDB = {
     if (!localStorage.getItem(STORAGE_KEYS.CART)) {
       localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify([]));
     }
+
+    // Auto-migrate สินค้าพิเศษเฉพาะสมาชิกเข้า localStorage หากยังไม่มี
+    try {
+      let storedProds = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS) || '[]');
+      if (storedProds.length > 0 && !storedProds.some(p => p.id === 'SECRET-CHII-01')) {
+        const secretP = DEFAULT_PRODUCTS.find(p => p.id === 'SECRET-CHII-01');
+        if (secretP) {
+          storedProds.push(secretP);
+          localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(storedProds));
+        }
+      }
+    } catch (e) { }
+
+    // Auto-migrate สมาชิกรหัสเริ่มต้นหากยังไม่มี
+    try {
+      let storedSubs = JSON.parse(localStorage.getItem(STORAGE_KEYS.SUBSCRIPTIONS) || '[]');
+      if (storedSubs.length > 0 && !storedSubs.some(s => s.subId === 'SUB-202611-1001')) {
+        const starterS = DEFAULT_SUBSCRIPTIONS.find(s => s.subId === 'SUB-202611-1001');
+        if (starterS) {
+          storedSubs.unshift(starterS);
+          localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(storedSubs));
+        }
+      }
+    } catch (e) { }
   },
 
   // 1. ดึงรายการสินค้า
@@ -475,6 +544,19 @@ const MockDB = {
     this.init();
     const product = this.getProductById(productId);
     if (!product) return { success: false, message: 'ไม่พบสินค้า' };
+
+    // ตรวจสอบสิทธิ์เฉพาะสมาชิก Mystery Box Club
+    if (product.memberOnly) {
+      const activeMember = this.getActiveMember();
+      if (!activeMember || activeMember.status !== 'Active') {
+        return {
+          success: false,
+          memberRequired: true,
+          message: 'สินค้ารายการนี้สงวนสิทธิ์เฉพาะสมาชิก Mystery Box Club เท่านั้น กรุณายืนยันสิทธิ์สมาชิกก่อนสั่งซื้อ'
+        };
+      }
+    }
+
     const stock = product.stock !== undefined ? Number(product.stock) : 10;
     if (product.status === 'Out of Stock' || stock <= 0) {
       return { success: false, message: 'ขออภัย สินค้านี้หมดชั่วคราว' };
@@ -697,7 +779,21 @@ const MockDB = {
 
     subs.unshift(newSub);
     localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(subs));
-    return { success: true, subscription: newSub };
+
+    // ล็อกอินสถานะสมาชิกให้อัตโนมัติทันที
+    const discountPercent = newSub.planId === 'secret-master' ? 15 : (newSub.planId === 'collector' ? 10 : 5);
+    const memberSession = {
+      subId: newSub.subId,
+      planId: newSub.planId,
+      planName: newSub.planName,
+      cycle: newSub.cycle,
+      discountPercent: discountPercent,
+      customer: newSub.customer || {},
+      status: newSub.status
+    };
+    this.setActiveMember(memberSession);
+
+    return { success: true, subscription: newSub, member: memberSession };
   },
 
   updateSubscriptionStatus: function (subId, newStatus) {
@@ -745,6 +841,105 @@ const MockDB = {
     sub.deliveries.unshift(newDelivery);
     localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(subs));
     return { success: true, subscription: sub, delivery: newDelivery };
+  },
+
+  // 11. ตรวจสอบและจัดการสิทธิ์สมาชิก (Member Authentication & Perks)
+  verifyMember: function (query) {
+    this.init();
+    if (!query || typeof query !== 'string') {
+      return { success: false, message: 'กรุณาระบุ Subscription ID หรือเบอร์โทรศัพท์' };
+    }
+
+    const rawQuery = query.trim();
+    if (!rawQuery) {
+      return { success: false, message: 'กรุณาระบุ Subscription ID หรือเบอร์โทรศัพท์' };
+    }
+
+    const qLower = rawQuery.toLowerCase();
+    const cleanPhone = rawQuery.replace(/[^0-9]/g, '');
+    const subs = this.getSubscriptions();
+
+    const found = subs.find(s => {
+      const matchId = s.subId && s.subId.toLowerCase() === qLower;
+      const sPhoneClean = (s.customer && s.customer.phone) ? s.customer.phone.replace(/[^0-9]/g, '') : '';
+      const matchPhone = cleanPhone.length >= 9 && sPhoneClean === cleanPhone;
+      return matchId || matchPhone;
+    });
+
+    if (!found) {
+      return { success: false, message: 'ไม่พบข้อมูลสมาชิกรหัสหรือเบอร์โทรนี้ในระบบ' };
+    }
+
+    if (found.status !== 'Active') {
+      return {
+        success: false,
+        message: `สถานะแพ็กเกจของคุณคือ "${found.status}" ไม่สามารถรับสิทธิประโยชน์ได้ (ต้องมีสถานะ Active)`
+      };
+    }
+
+    let discountPercent = 5;
+    if (found.planId === 'secret-master') {
+      discountPercent = 15;
+    } else if (found.planId === 'collector') {
+      discountPercent = 10;
+    } else {
+      discountPercent = 5;
+    }
+
+    const memberData = {
+      subId: found.subId,
+      planId: found.planId,
+      planName: found.planName,
+      cycle: found.cycle,
+      discountPercent: discountPercent,
+      customer: found.customer || {},
+      status: found.status
+    };
+
+    this.setActiveMember(memberData);
+
+    return {
+      success: true,
+      message: `ยืนยันสิทธิ์สมาชิก ${found.planName} สำเร็จ (รับส่วนลด ${discountPercent}% และส่งฟรีทุกออเดอร์)`,
+      member: memberData
+    };
+  },
+
+  getActiveMember: function () {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEYS.MEMBER_SESSION);
+      if (!raw) return null;
+      const session = JSON.parse(raw);
+      if (!session || !session.subId) return null;
+
+      // ตรวจสอบสถานะจริงในฐานข้อมูลสมาชิก
+      const current = this.getSubscriptionById(session.subId);
+      if (!current || current.status !== 'Active') {
+        localStorage.removeItem(STORAGE_KEYS.MEMBER_SESSION);
+        return null;
+      }
+      return session;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  setActiveMember: function (memberData) {
+    if (!memberData) {
+      this.clearActiveMember();
+      return;
+    }
+    localStorage.setItem(STORAGE_KEYS.MEMBER_SESSION, JSON.stringify(memberData));
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('memberSessionChanged', { detail: memberData }));
+    }
+  },
+
+  clearActiveMember: function () {
+    localStorage.removeItem(STORAGE_KEYS.MEMBER_SESSION);
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('memberSessionChanged', { detail: null }));
+    }
   }
 };
 
@@ -931,6 +1126,20 @@ const ApiService = {
   },
   addSubscriptionDelivery: function (subId, deliveryInfo) {
     return MockDB.addSubscriptionDelivery(subId, deliveryInfo);
+  },
+
+  // 8. ยืนยันและตรวจสอบสิทธิ์สมาชิก (Member Authentication & Perks)
+  verifyMember: function (query) {
+    return MockDB.verifyMember(query);
+  },
+  getActiveMember: function () {
+    return MockDB.getActiveMember();
+  },
+  setActiveMember: function (data) {
+    return MockDB.setActiveMember(data);
+  },
+  clearActiveMember: function () {
+    return MockDB.clearActiveMember();
   }
 };
 

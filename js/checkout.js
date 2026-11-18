@@ -1,5 +1,5 @@
 /**
- * checkout.js - ควบคุมขั้นตอนการกรอกที่อยู่ คำนวณค่าส่ง และชำระเงิน
+ * checkout.js - ควบคุมขั้นตอนการกรอกที่อยู่ คำนวณค่าส่ง และชำระเงิน พร้อมสิทธิประโยชน์สมาชิก
  * Art Toy Community Store
  */
 
@@ -17,10 +17,76 @@ document.addEventListener("DOMContentLoaded", function () {
   let selectedShippingMethod = "Flash Express";
   let selectedPaymentMethod = "PromptPay QR";
 
+  // Auto-fill ข้อมูลสมาชิกหากมี session ล็อกอินอยู่
+  function autoFillMemberInfo() {
+    const activeMember = ApiService.getActiveMember();
+    if (!activeMember || !activeMember.customer) return;
+
+    const cust = activeMember.customer;
+    const nameInput = document.getElementById("cust-fullname");
+    const phoneInput = document.getElementById("cust-phone");
+    const addressInput = document.getElementById("cust-address");
+    const noteInput = document.getElementById("cust-note");
+
+    if (nameInput && cust.fullName) nameInput.value = cust.fullName;
+    if (phoneInput && cust.phone) phoneInput.value = cust.phone;
+    if (addressInput && cust.address) addressInput.value = cust.address;
+    if (noteInput && cust.note && cust.note !== '-') noteInput.value = cust.note;
+  }
+
+  // แสดงผล Banner สมาชิกในหน้า Checkout
+  function renderMemberBanner() {
+    const banner = document.getElementById("checkout-member-banner");
+    if (!banner) return;
+
+    const activeMember = ApiService.getActiveMember();
+    if (activeMember && activeMember.status === 'Active') {
+      banner.style.display = 'block';
+      banner.innerHTML = `
+        <div class="checkout-vip-banner-inner">
+          <span class="vip-badge-icon">👑</span>
+          <div class="vip-info-wrap">
+            <div class="vip-header-title">
+              <strong>บัญชีสมาชิก VIP: ${activeMember.customer ? activeMember.customer.fullName : 'ท่านสมาชิก'}</strong>
+              <span class="vip-tier-pill">${activeMember.planName}</span>
+            </div>
+            <p class="vip-perks-desc">
+              ปลดล็อคส่วนลดสมาชิก <strong>${activeMember.discountPercent}%</strong> และรับสิทธิ์ <strong>จัดส่งฟรีทุกออเดอร์ (฿0)</strong>
+            </p>
+          </div>
+        </div>
+      `;
+    } else {
+      banner.style.display = 'block';
+      banner.innerHTML = `
+        <div class="checkout-guest-banner-inner">
+          <div class="guest-prompt-text">
+            <span>👑 <strong>คุณเป็นสมาชิก Mystery Box Club หรือไม่?</strong></span>
+            <p>กรอกรหัสสมาชิกหรือเบอร์โทรเพื่อรับส่วนลด 5-15% และสิทธิ์ส่งฟรีทันที</p>
+          </div>
+          <button type="button" id="btn-checkout-verify-member" class="btn-checkout-verify-link">
+            ยืนยันสิทธิ์สมาชิก
+          </button>
+        </div>
+      `;
+
+      const verifyBtn = document.getElementById("btn-checkout-verify-member");
+      if (verifyBtn) {
+        verifyBtn.addEventListener("click", () => {
+          if (window.CartManager && window.CartManager.openMemberModal) {
+            window.CartManager.openMemberModal();
+          }
+        });
+      }
+    }
+  }
+
   // ฟังก์ชันคำนวณและแสดงผลสรุปคำสั่งซื้อ
   function renderCheckoutSummary() {
     const currentCart = ApiService.getCart() || [];
     const mainForm = document.getElementById("checkout-main-form");
+    const activeMember = ApiService.getActiveMember();
+    const isMemberActive = activeMember && activeMember.status === 'Active';
 
     if (currentCart.length === 0) {
       if (mainForm) {
@@ -32,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         `;
       }
-      return { subtotal: 0, discountAmount: 0, finalShippingCost: 0, grandTotal: 0 };
+      return { subtotal: 0, discountAmount: 0, memberDiscountAmount: 0, couponDiscountAmount: 0, finalShippingCost: 0, grandTotal: 0 };
     }
 
     const totalItems = currentCart.reduce((sum, i) => sum + i.qty, 0);
@@ -57,18 +123,30 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const subtotal = currentCart.reduce((sum, i) => sum + (i.price * i.qty), 0);
     const freeShippingThreshold = 999;
-    const isFreeShipping = subtotal >= freeShippingThreshold;
+    const isFreeShipping = isMemberActive || subtotal >= freeShippingThreshold;
 
     const finalShippingCost = isFreeShipping ? 0 : selectedShippingCost;
 
-    let discountAmount = 0;
-    if (appliedCoupon && subtotal > 0) {
-      discountAmount = (subtotal * appliedCoupon.discountPercent) / 100;
+    // ส่วนลดสมาชิก
+    let memberDiscountAmount = 0;
+    if (isMemberActive && subtotal > 0) {
+      memberDiscountAmount = (subtotal * activeMember.discountPercent) / 100;
     }
 
-    const grandTotal = Math.max(0, subtotal - discountAmount + finalShippingCost);
+    // ส่วนลดคูปอง
+    let couponDiscountAmount = 0;
+    if (appliedCoupon && subtotal > 0) {
+      couponDiscountAmount = (subtotal * appliedCoupon.discountPercent) / 100;
+    }
+
+    const totalDiscount = memberDiscountAmount + couponDiscountAmount;
+    const grandTotal = Math.max(0, subtotal - totalDiscount + finalShippingCost);
 
     const subtotalEl = document.getElementById("co-subtotal-val");
+    const memberDiscountRow = document.getElementById("co-member-discount-row");
+    const memberDiscountLabel = document.getElementById("co-member-discount-label");
+    const memberDiscountVal = document.getElementById("co-member-discount-val");
+
     const discountRow = document.getElementById("co-discount-row");
     const discountVal = document.getElementById("co-discount-val");
     const shippingEl = document.getElementById("co-shipping-val");
@@ -76,15 +154,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const qrAmount = document.getElementById("qr-pay-amount");
 
     if (subtotalEl) subtotalEl.textContent = `฿${subtotal.toFixed(2)}`;
-    if (shippingEl) shippingEl.textContent = isFreeShipping ? "ฟรี" : `฿${finalShippingCost.toFixed(2)}`;
-    if (totalEl) totalEl.textContent = `฿${grandTotal.toFixed(2)}`;
-    if (qrAmount) qrAmount.textContent = `฿${grandTotal.toFixed(2)}`;
 
+    // Member Discount Display
+    if (memberDiscountRow) {
+      if (memberDiscountAmount > 0) {
+        memberDiscountRow.style.display = "flex";
+        if (memberDiscountLabel) memberDiscountLabel.textContent = `ส่วนลดสมาชิก (${activeMember.planName} ${activeMember.discountPercent}%)`;
+        if (memberDiscountVal) memberDiscountVal.textContent = `-฿${memberDiscountAmount.toFixed(2)}`;
+      } else {
+        memberDiscountRow.style.display = "none";
+      }
+    }
+
+    // Coupon Display
     const couponTag = document.getElementById("checkout-coupon-applied-tag");
     const codeName = document.getElementById("checkout-code-name");
-    if (appliedCoupon && subtotal > 0) {
+    if (couponDiscountAmount > 0 && subtotal > 0) {
       if (discountRow) discountRow.style.display = "flex";
-      if (discountVal) discountVal.textContent = `-฿${discountAmount.toFixed(2)}`;
+      if (discountVal) discountVal.textContent = `-฿${couponDiscountAmount.toFixed(2)}`;
       if (couponTag && codeName) {
         couponTag.style.display = "inline-flex";
         codeName.textContent = appliedCoupon.code;
@@ -94,19 +181,43 @@ document.addEventListener("DOMContentLoaded", function () {
       if (couponTag) couponTag.style.display = "none";
     }
 
+    if (shippingEl) {
+      shippingEl.textContent = isFreeShipping 
+        ? (isMemberActive ? "ฟรี (สมาชิก VIP)" : "ฟรี") 
+        : `฿${finalShippingCost.toFixed(2)}`;
+    }
+    if (totalEl) totalEl.textContent = `฿${grandTotal.toFixed(2)}`;
+    if (qrAmount) qrAmount.textContent = `฿${grandTotal.toFixed(2)}`;
+
     const flashLabel = document.getElementById("shipping-cost-label-flash");
     if (flashLabel) {
       flashLabel.textContent = isFreeShipping ? "ฟรี" : "฿40.00";
     }
 
-    return { subtotal, discountAmount, finalShippingCost, grandTotal, currentCart };
+    return { 
+      subtotal, 
+      memberDiscountAmount, 
+      couponDiscountAmount, 
+      totalDiscount, 
+      finalShippingCost, 
+      grandTotal, 
+      currentCart 
+    };
   }
 
   // เรียกใช้ครั้งแรก
+  autoFillMemberInfo();
+  renderMemberBanner();
   renderCheckoutSummary();
 
-  // ซิงค์ทันทีเมื่อตะกร้าเปลี่ยนจากหน้าอื่นหรือจาก Cart Drawer
+  // ซิงค์ทันทีเมื่อตะกร้าหรือสมาชิกเปลี่ยน
   window.addEventListener('cartChanged', function () {
+    renderCheckoutSummary();
+  });
+
+  window.addEventListener('memberSessionChanged', function () {
+    autoFillMemberInfo();
+    renderMemberBanner();
     renderCheckoutSummary();
   });
 
@@ -223,6 +334,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+      const activeMember = ApiService.getActiveMember();
+
       const orderData = {
         customer: {
           fullName,
@@ -233,8 +346,11 @@ document.addEventListener("DOMContentLoaded", function () {
         items: [...currentCart],
         shippingMethod: selectedShippingMethod,
         shippingCost: amounts.finalShippingCost,
-        discountAmount: amounts.discountAmount,
+        discountAmount: amounts.totalDiscount,
+        memberDiscountAmount: amounts.memberDiscountAmount || 0,
         couponCode: appliedCoupon ? appliedCoupon.code : "",
+        memberId: activeMember ? activeMember.subId : null,
+        memberPlan: activeMember ? activeMember.planName : null,
         totalAmount: amounts.grandTotal,
         paymentMethod: selectedPaymentMethod
       };

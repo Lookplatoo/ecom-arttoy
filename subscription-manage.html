@@ -178,6 +178,25 @@
 
         currentSub = sub;
 
+        // ซิงค์สถานะสมาชิกลงใน Session ของร้านค้า
+        if (sub.status === 'Active') {
+          const discountPercent = sub.planId === 'secret-master' ? 15 : (sub.planId === 'collector' ? 10 : 5);
+          ApiService.setActiveMember({
+            subId: sub.subId,
+            planId: sub.planId,
+            planName: sub.planName,
+            cycle: sub.cycle,
+            discountPercent: discountPercent,
+            customer: sub.customer || {},
+            status: sub.status
+          });
+        } else {
+          const cur = ApiService.getActiveMember();
+          if (cur && cur.subId === sub.subId) {
+            ApiService.clearActiveMember();
+          }
+        }
+
         let deliveriesHtml = "";
         if (sub.deliveries && sub.deliveries.length > 0) {
           deliveriesHtml = sub.deliveries.map(d => `
@@ -246,6 +265,24 @@
               <div>
                 ${renderStatusBadge(sub.status)}
               </div>
+            </div>
+
+            <!-- Member Perks Store Integration Banner -->
+            <div class="portal-member-perks-banner">
+              <div class="perks-banner-content">
+                <span class="perks-banner-crown">👑</span>
+                <div class="perks-banner-text">
+                  <div class="perks-title">สิทธิประโยชน์พิเศษสำหรับสมาชิก <strong>${sub.planName}</strong></div>
+                  <div class="perks-badges-row">
+                    <span class="perk-tag">✓ ส่วนลด ${sub.planId === 'secret-master' ? '15%' : (sub.planId === 'collector' ? '10%' : '5%')} ทุกออเดอร์</span>
+                    <span class="perk-tag">✓ ส่งฟรีทุกชิ้น (฿0)</span>
+                    <span class="perk-tag">✓ ปลดล็อคสินค้า Secret Drop</span>
+                  </div>
+                </div>
+              </div>
+              <a href="search.html" class="btn-perks-shop-now">
+                ไปช้อปปิ้งใช้สิทธิ์พิเศษ
+              </a>
             </div>
 
             <!-- Details Grid -->

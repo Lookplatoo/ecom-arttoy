@@ -90,7 +90,10 @@ document.addEventListener("DOMContentLoaded", function () {
             </a>
           </h3>
           <div class="product-card-footer">
-            <div class="product-card-price-val">฿${Number(product.price).toFixed(2)}</div>
+            <div class="product-card-price-val">
+              ฿${Number(product.price).toFixed(2)}
+              ${product.memberOnly ? '<div style="font-size: 11px; color: #b8860b; font-weight: 600;">👑 Member Only</div>' : ''}
+            </div>
             <div class="product-card-actions">
               <a href="detail.html?id=${encodeURIComponent(product.id)}" class="btn-card-view-detail">ดูรายละเอียด</a>
               <button type="button" class="btn-card-add-cart" onclick="CartManager.addItem('${product.id}')" title="เพิ่มลงในตะกร้า" ${isOutOfStock ? 'disabled' : ''}>

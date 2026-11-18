@@ -86,6 +86,9 @@
       <!-- ฝั่งซ้าย: ข้อมูลที่อยู่ + ขนส่ง + ชำระเงิน -->
       <div class="checkout-main-col">
 
+        <!-- Member Status Banner in Checkout -->
+        <div id="checkout-member-banner" class="checkout-member-banner" style="display: none;"></div>
+
         <!-- Card 1: ที่อยู่จัดส่ง -->
         <section class="checkout-box-card">
           <h2 class="checkout-box-title">
@@ -292,6 +295,10 @@
           <div class="summary-line">
             <span>รวมค่าสินค้า</span>
             <span id="co-subtotal-val">฿0.00</span>
+          </div>
+          <div class="summary-line discount-line member-discount-line" id="co-member-discount-row" style="display: none;">
+            <span id="co-member-discount-label">ส่วนลดสมาชิก</span>
+            <span id="co-member-discount-val">-฿0.00</span>
           </div>
           <div class="summary-line discount-line" id="co-discount-row" style="display: none;">
             <span>ส่วนลดคูปอง</span>

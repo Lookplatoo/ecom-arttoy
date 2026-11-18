@@ -65,6 +65,96 @@ document.addEventListener("DOMContentLoaded", async function () {
     priceElement.textContent = `฿${Number(product.price).toFixed(2)}`;
   }
 
+  // 5.1 อัปเดตราคาสมาชิกและสถานะ Member Exclusive Drop
+  function renderMemberPerks() {
+    const memberPriceBox = document.getElementById("detail-member-price-box");
+    const lockContainer = document.getElementById("detail-member-lock-container");
+    const actionButtonsWrap = document.getElementById("detail-action-buttons-wrap") || document.querySelector(".detail-action-buttons");
+    const activeMember = ApiService.getActiveMember();
+    const isMemberActive = activeMember && activeMember.status === 'Active';
+    const basePrice = Number(product.price) || 0;
+
+    if (memberPriceBox) {
+      if (isMemberActive) {
+        const discountedPrice = basePrice * (1 - activeMember.discountPercent / 100);
+        const saveAmt = basePrice * (activeMember.discountPercent / 100);
+        memberPriceBox.innerHTML = `
+          <div class="member-price-active-card">
+            <span class="member-price-crown">👑</span>
+            <div class="member-price-info">
+              <span class="member-price-tag">ราคาสมาชิกของคุณ (${activeMember.planName} ลด ${activeMember.discountPercent}%)</span>
+              <div class="member-price-row">
+                <span class="member-price-amount">฿${discountedPrice.toFixed(2)}</span>
+                <span class="member-price-savings">ประหยัด ฿${saveAmt.toFixed(2)} + ส่งฟรี ฿0</span>
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        const p15 = basePrice * 0.85;
+        const p5 = basePrice * 0.95;
+        memberPriceBox.innerHTML = `
+          <div class="member-price-guest-card">
+            <span class="member-price-crown">👑</span>
+            <div class="member-price-info">
+              <span class="member-price-tag">ราคาสมาชิก Mystery Box Club (ลด 5% - 15%)</span>
+              <div class="member-price-row">
+                <span class="member-price-amount">฿${p15.toFixed(2)} - ฿${p5.toFixed(2)}</span>
+                <span class="member-price-savings">+ จัดส่งพัสดุด่วนฟรีทุกคำสั่งซื้อ</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // จัดการสิทธิ์การสั่งซื้อสำหรับสินค้าเฉพาะสมาชิก (Member Only)
+    if (lockContainer && actionButtonsWrap) {
+      if (product.memberOnly) {
+        if (isMemberActive) {
+          actionButtonsWrap.style.display = "flex";
+          lockContainer.innerHTML = `
+            <div class="member-access-unlocked-pill">
+              <span class="unlocked-icon">✓</span>
+              <span>คุณได้รับสิทธิ์สั่งซื้อสินค้า Secret Limited นี้ในฐานะสมาชิก <strong>${activeMember.planName}</strong></span>
+            </div>
+          `;
+        } else {
+          actionButtonsWrap.style.display = "none";
+          lockContainer.innerHTML = `
+            <div class="detail-member-lock-card">
+              <div class="lock-header">
+                <span class="lock-icon">🔒</span>
+                <h4>สิทธิ์การสั่งซื้อเฉพาะสมาชิก Mystery Box Club</h4>
+              </div>
+              <p class="lock-desc">
+                สินค้ารุ่นพิเศษนี้ผลิตจำนวนจำกัดเพียง 100 ชิ้น สงวนสิทธิ์การสั่งซื้อเฉพาะสมาชิกแพ็กเกจกล่องสุ่มเท่านั้น สมัครสมาชิกเพื่อปลดล็อคสิทธิ์สั่งซื้อพร้อมรับส่วนลดและส่งฟรีทันที
+              </p>
+              <div class="lock-actions">
+                <a href="subscription.html" class="btn-unlock-subscribe">
+                  สมัครสมาชิกเพื่อปลดล็อคสิทธิ์
+                </a>
+                <button type="button" id="btn-login-member-detail" class="btn-unlock-login">
+                  ยืนยันรหัสสมาชิก (เข้าสู่ระบบ)
+                </button>
+              </div>
+            </div>
+          `;
+        }
+      } else {
+        actionButtonsWrap.style.display = "flex";
+        lockContainer.innerHTML = "";
+      }
+    }
+  }
+
+  renderMemberPerks();
+
+  // ซิงค์เมื่อสถานะสมาชิกเปลี่ยน
+  window.addEventListener('memberSessionChanged', () => {
+    renderMemberPerks();
+  });
+
   // 6. อัปเดตคำอธิบายสินค้า
   const descElement = document.getElementById("detail-desc");
   if (descElement) {
