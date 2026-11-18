@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เข้าสู่ระบบผู้ดูแลระบบ - Art Toy Community</title>
+  <!-- Google Fonts: Inter & Kanit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-body">
+
+  <main id="main-content" style="display: flex; align-items: center; justify-content: center; width: 100%;">
+    
+    <article id="admin-login-card" class="login-card-article">
+      <h1 class="login-header-title">Admin Login</h1>
+
+      <form id="login-form-box" action="admin-products.html" method="GET">
+        <div class="form-group">
+          <label for="admin-username">Username</label>
+          <input type="text" id="admin-username" name="username" class="login-input-field" required>
+        </div>
+
+        <div class="form-group">
+          <label for="admin-password">Password</label>
+          <input type="password" id="admin-password" name="password" class="login-input-field" required>
+        </div>
+
+        <button type="submit" class="btn-login-submit">Login</button>
+      </form>
+
+      <!-- Demo Credentials Helper for Standalone Prototype -->
+      <div style="margin: 16px 0; padding: 10px 14px; background: #faf9f6; border: 1px dashed var(--color-border-grey); border-radius: 6px; font-size: 12px; font-family: var(--font-th); color: var(--color-dark-grey); text-align: left;">
+        <strong>บัญชีทดสอบ (Demo Account):</strong><br>
+        Username: <code>Admin</code> &bull; Password: <code>1234</code><br>
+        <button type="button" onclick="document.getElementById('admin-username').value='Admin'; document.getElementById('admin-password').value='1234';" style="margin-top: 6px; padding: 4px 10px; background: #e8e5dc; border: none; border-radius: 4px; cursor: pointer; font-size: 11px;">กดเพื่อกรอกอัตโนมัติ</button>
+      </div>
+
+      <!-- ลิงก์กลับสู่หน้าหลัก Home -->
+      <a href="index.html" class="login-home-back">
+        <svg width="24" height="24" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="color: #8d7e7e;">
+          <path d="M21 27V21.5C21 20.3954 20.1046 19.5 19 19.5H17C15.8954 19.5 15 20.3954 15 21.5V27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 12L17.7317 4.63416C17.9006 4.5497 18.0994 4.5497 18.2683 4.63416L33 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M30 16.5V29.5C30 30.6046 29.1046 31.5 28 31.5H8C6.89543 31.5 6 30.6046 6 29.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>Home</span>
+      </a>
+    </article>
+
+  </main>
+
+  <!-- JavaScript -->
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

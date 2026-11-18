@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Art Toy Community - ร้านของเล่นสะสมและฟิกเกอร์ของแท้</title>
+  <!-- Google Fonts: Inter & Kanit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="main-header">
+    <div class="header-container">
+      <nav id="main-nav" aria-label="Main Navigation">
+        <a href="index.html" class="nav-item active" aria-current="page">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M21 27V21.5C21 20.3954 20.1046 19.5 19 19.5H17C15.8954 19.5 15 20.3954 15 21.5V27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 12L17.7317 4.63416C17.9006 4.5497 18.0994 4.5497 18.2683 4.63416L33 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 16.5V29.5C30 30.6046 29.1046 31.5 28 31.5H8C6.89543 31.5 6 30.6046 6 29.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Home</span>
+        </a>
+        <a href="search.html" class="nav-item">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20.5 20.5L25.5 25.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Shop</span>
+        </a>
+        <a href="subscription.html" class="nav-item">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+            <rect x="2" y="7" width="20" height="5"></rect>
+            <line x1="12" y1="22" x2="12" y2="7"></line>
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+          </svg>
+          <span>Subscription</span>
+        </a>
+        <a href="order-tracking.html" class="nav-item">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+          <span>Tracking</span>
+        </a>
+        <a href="team.html" class="nav-item">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M7.5 30V25C7.5 21.134 10.634 18 14.5 18H21.5C25.366 18 28.5 21.134 28.5 25V30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M24 12C24 15.3137 21.3137 18 18 18C14.6863 18 12 15.3137 12 12C12 8.68629 14.6863 6 18 6C21.3137 6 24 8.68629 24 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>About Us</span>
+        </a>
+      </nav>
+
+      <div id="nav-brand-group" class="header-actions-group">
+        <button type="button" id="header-cart-btn" class="btn-header-cart btn-cart-trigger" aria-label="Open Shopping Cart" title="ตะกร้าสินค้า">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="cart-badge-count" style="display: none;">0</span>
+        </button>
+
+        <a href="login.html" class="btn-admin">Admin login</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner with CTA -->
+  <figure id="hero-banner" class="banner-placeholder hero-wrapper">
+    <div class="hero-banner-inner">
+      <img src="assets/images/banner.png" alt="Art Toy Community Banner" class="banner-image">
+      
+      <div class="hero-cta-overlay">
+        <h1 class="hero-cta-title">ของเล่นสะสมและฟิกเกอร์ของแท้</h1>
+        <p class="hero-cta-subtitle">คัดสรรฟิกเกอร์และกล่องสุ่มคอลเลกชันยอดนิยม ลิขสิทธิ์แท้ พร้อมบริการจัดส่งที่ได้มาตรฐานถึงมือนักสะสมทุกท่าน</p>
+        <div class="hero-btn-group">
+          <a href="search.html" class="btn-hero-primary">
+            <span>เลือกซื้อสินค้า</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#featured-section" class="btn-hero-secondary">สินค้าขายดี</a>
+        </div>
+      </div>
+    </div>
+    <figcaption class="sr-only">ภาพแบนเนอร์หลัก Art Toy Community Store</figcaption>
+  </figure>
+
+  <!-- Main Content -->
+  <main id="main-content">
+
+    <!-- แถบจุดเด่นและบริการ -->
+    <section class="trust-badges-bar" aria-label="จุดเด่นของบริการ">
+      <div class="trust-badge-card">
+        <div class="trust-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <div class="trust-info">
+          <h3>ของแท้ 100% ลิขสิทธิ์ถูกต้อง</h3>
+          <p>ตรวจสอบแหล่งผลิตและนำเข้าอย่างเป็นทางการ</p>
+        </div>
+      </div>
+
+      <div class="trust-badge-card">
+        <div class="trust-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+        </div>
+        <div class="trust-info">
+          <h3>จัดส่งฟรีเมื่อช้อปครบ 999 บาท</h3>
+          <p>ระยะเวลาจัดส่ง 1-2 วันทำการทั่วประเทศ</p>
+        </div>
+      </div>
+
+      <div class="trust-badge-card">
+        <div class="trust-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="trust-info">
+          <h3>บรรจุภัณฑ์กันกระแทกมาตรฐาน</h3>
+          <p>ห่อหุ้มป้องกันกล่องบุบเสียหายระหว่างขนส่ง</p>
+        </div>
+      </div>
+
+      <div class="trust-badge-card">
+        <div class="trust-icon-box">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+        </div>
+        <div class="trust-info">
+          <h3>ระบบติดตามสถานะคำสั่งซื้อ</h3>
+          <p>ตรวจสอบความคืบหน้าของพัสดุได้ตลอด 24 ชั่วโมง</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ส่วนแสดงสินค้าขายดี -->
+    <section id="featured-section" class="featured-products-section">
+      <div class="section-header-row">
+        <div class="section-title-wrap">
+          <h2>สินค้าขายดี (Best Sellers)</h2>
+          <p>รายการสินค้าที่ได้รับความนิยมสูงจากนักสะสม</p>
+        </div>
+        <a href="search.html" class="btn-view-all-link">
+          <span>ดูสินค้าทั้งหมด</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
+
+      <div class="products-container" style="padding: 0 16px;">
+        <div id="home-featured-grid" class="product-grid"></div>
+      </div>
+    </section>
+
+    <!-- แบนเนอร์โค้ดส่วนลด -->
+    <section class="promo-banner-card" aria-label="ส่วนลดพิเศษ">
+      <div class="promo-banner-text">
+        <h3 style="font-size: 22px; margin-bottom: 6px;">รับส่วนลด 10% สำหรับทุกคำสั่งซื้อ</h3>
+        <p>ใช้โค้ดส่วนลดในหน้าตะกร้าสินค้าหรือในขั้นตอนชำระเงิน</p>
+      </div>
+      <div class="promo-coupon-badge">
+        <span class="coupon-code-label">CODE:</span>
+        <span class="coupon-code-text">ARTTOY10</span>
+        <button type="button" class="btn-copy-coupon" onclick="copyPromoCode('ARTTOY10')">คัดลอกโค้ด</button>
+      </div>
+    </section>
+
+    <!-- ส่วนแสดงรีวิวจากผู้ซื้อ -->
+    <section class="testimonials-section">
+      <div class="section-header-row">
+        <div class="section-title-wrap">
+          <h2>ความคิดเห็นจากผู้ซื้อ</h2>
+          <p>ข้อความตอบรับจากลูกค้าที่สั่งซื้อสินค้าจริง</p>
+        </div>
+      </div>
+
+      <div class="testimonials-grid">
+        <article class="testimonial-card">
+          <div class="testimonial-stars" style="color: #f59e0b; margin-bottom: 8px;">5.0 / 5.0</div>
+          <p class="testimonial-comment">"ได้รับสินค้าเรียบร้อย กล่องบรรจุภัณฑ์ห่อบับเบิ้ลมาหนาแน่น กล่องคมกริบ รายละเอียดโมเดลเนียนเรียบ จัดส่งตรงเวลาใน 2 วันทำการ"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">P</div>
+            <div class="author-info">
+              <h4>คุณแพรวา ส.</h4>
+              <span style="color: #2b7a3a; font-size: 11px;">ยืนยันคำสั่งซื้อแล้ว</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-stars" style="color: #f59e0b; margin-bottom: 8px;">5.0 / 5.0</div>
+          <p class="testimonial-comment">"หาตัวนี้มานาน ร้านมีสินค้าพร้อมส่งและราคาเป็นธรรม ระบบติดตามพัสดุชัดเจน ตรวจสอบสถานะการขนส่งได้ตลอด"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">T</div>
+            <div class="author-info">
+              <h4>คุณธนวัฒน์ พ.</h4>
+              <span style="color: #2b7a3a; font-size: 11px;">ยืนยันคำสั่งซื้อแล้ว</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div class="testimonial-stars" style="color: #f59e0b; margin-bottom: 8px;">5.0 / 5.0</div>
+          <p class="testimonial-comment">"การชำระเงินผ่าน PromptPay สะดวกและปลอดภัย มีหน้าใบเสร็จรับเงินให้บันทึกเก็บไว้ได้ พัสดุจัดส่งถึงบ้านรวดเร็ว"</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">K</div>
+            <div class="author-info">
+              <h4>คุณกมลวรรณ ท.</h4>
+              <span style="color: #2b7a3a; font-size: 11px;">ยืนยันคำสั่งซื้อแล้ว</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ส่วนแนะนำ Art Toy Community -->
+    <section id="about-company-section">
+      <div class="about-header">
+        <h1>เกี่ยวกับ Art Toy Community</h1>
+        <h2>ศูนย์รวมของเล่นสะสมและฟิกเกอร์ลิขสิทธิ์แท้</h2>
+      </div>
+
+      <article id="about-article" class="content-box">
+        <p class="company-description">
+          Art Toy Community ก่อตั้งขึ้นเพื่อเป็นพื้นที่รวบรวมข้อมูล รายละเอียดโมเดล ขนาด วัสดุ และการสั่งซื้อของเล่นสะสมระดับสากล เรามุ่งมั่นคัดสรรเฉพาะสินค้าลิขสิทธิ์ถูกต้องจากสตูดิโอผู้ผลิต พร้อมระบบบริการจัดส่งที่ได้มาตรฐาน เพื่อส่งมอบผลงานศิลปะคุณภาพสูงสู่มือนักสะสมทุกท่าน
+        </p>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="main-footer">
+    <div class="footer-inner">
+      <p id="footer-course-tag">
+        &copy; 2026 Art Toy Community. สงวนลิขสิทธิ์ทุกประการ &bull; Authentic Art Toys &amp; Collectibles
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+    function copyPromoCode(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showToast(`คัดลอกโค้ด "${code}" แล้ว`, 'success');
+        if (typeof CartManager !== 'undefined') {
+          CartManager.appliedCoupon = { code: code, discountPercent: 10 };
+          sessionStorage.setItem('arttoy_coupon', JSON.stringify(CartManager.appliedCoupon));
+          CartManager.render();
+        }
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", async function () {
+      const grid = document.getElementById("home-featured-grid");
+      if (!grid) return;
+
+      const products = await ApiService.getProducts();
+      if (!products || products.length === 0) return;
+
+      const featured = products.slice(0, 4);
+      grid.innerHTML = "";
+
+      featured.forEach(product => {
+        const badgeClass = product.badge ? `badge-${product.badge.toLowerCase().replace(/[\s-]/g, '')}` : 'badge-popular';
+        const card = document.createElement("article");
+        card.className = "product-card";
+        card.innerHTML = `
+          ${product.badge ? `<span class="product-card-badge ${badgeClass}">${product.badge}</span>` : ''}
+          <div class="product-thumbnail">
+            <a href="detail.html?id=${encodeURIComponent(product.id)}">
+              <img src="${product.image}" alt="${product.name}">
+            </a>
+          </div>
+          <div class="product-card-body">
+            <div class="product-card-meta">
+              <span class="product-card-cat">${product.category}</span>
+              <span class="product-card-rating">${Number(product.rating || 5.0).toFixed(1)}/5.0</span>
+            </div>
+            <h3 class="product-card-name">
+              <a href="detail.html?id=${encodeURIComponent(product.id)}" style="color: inherit; text-decoration: none;">${product.name}</a>
+            </h3>
+            <div class="product-card-footer">
+              <div class="product-card-price-val">฿${Number(product.price).toFixed(2)}</div>
+              <div class="product-card-actions">
+                <a href="detail.html?id=${encodeURIComponent(product.id)}" class="btn-card-view-detail">ดูสินค้า</a>
+                <button type="button" class="btn-card-add-cart" onclick="CartManager.addItem('${product.id}')" title="เพิ่มลงในตะกร้า" ${product.status === 'Out of Stock' ? 'disabled' : ''}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>

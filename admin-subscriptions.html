@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscription Management - Admin - Art Toy Community</title>
+  <!-- Google Fonts: Inter & Kanit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Authentication Guard -->
+  <script>
+    const adminSession = sessionStorage.getItem("arttoy_admin_session");
+    if (!adminSession) {
+      sessionStorage.setItem("login_redirect_notice", "กรุณาเข้าสู่ระบบก่อนเข้าใช้งานส่วนผู้ดูแลระบบ");
+      window.location.replace("login.html?redirect=admin-subscriptions.html");
+    }
+  </script>
+</head>
+<body>
+
+  <div class="admin-layout-wrapper">
+
+    <!-- Admin Sidebar -->
+    <aside id="admin-sidebar" class="admin-sidebar">
+      <header class="admin-brand-title">Admin Management</header>
+
+      <nav id="admin-nav" class="admin-sidebar-nav" aria-label="Admin Navigation">
+        <a href="admin-products.html" class="admin-nav-link">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+            <line x1="12" y1="22.08" x2="12" y2="12"></line>
+          </svg>
+          <span>Products</span>
+        </a>
+        <a href="admin-orders.html" class="admin-nav-link">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span>Customer Orders</span>
+        </a>
+        <a href="admin-subscriptions.html" class="admin-nav-link active">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+            <rect x="2" y="7" width="20" height="5"></rect>
+            <line x1="12" y1="22" x2="12" y2="7"></line>
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+          </svg>
+          <span>Subscriptions</span>
+        </a>
+        <a href="admin-users.html" class="admin-nav-link">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7.5 30V25C7.5 21.134 10.634 18 14.5 18H21.5C25.366 18 28.5 21.134 28.5 25V30"/>
+            <circle cx="18" cy="12" r="6"/>
+          </svg>
+          <span>User Account</span>
+        </a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <a href="index.html" class="admin-home-btn">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M21 27V21.5C21 20.3954 20.1046 19.5 19 19.5H17C15.8954 19.5 15 20.3954 15 21.5V27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 12L17.7317 4.63416C17.9006 4.5497 18.0994 4.5497 18.2683 4.63416L33 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 16.5V29.5C30 30.6046 29.1046 31.5 28 31.5H8C6.89543 31.5 6 30.6046 6 29.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Home Page</span>
+        </a>
+        <div id="admin-profile-badge" class="admin-profile-badge">
+          <p id="admin-user-role">Admin</p>
+          <p id="admin-user-name">Lookplatoo</p>
+        </div>
+        <button type="button" id="btn-admin-logout" class="admin-logout-btn" title="ออกจากระบบ">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span>Log Out</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main id="admin-main-view" class="admin-content-area">
+      <header class="admin-header-row">
+        <h1 class="admin-page-title">Subscription Management</h1>
+      </header>
+
+      <!-- KPI Metrics Cards -->
+      <section class="admin-kpi-grid">
+        <div class="admin-kpi-card">
+          <div class="admin-kpi-label">สมาชิกทั้งหมด (Total Members)</div>
+          <div class="admin-kpi-val" id="kpi-total-members">0</div>
+        </div>
+        <div class="admin-kpi-card">
+          <div class="admin-kpi-label">กำลังใช้งาน (Active Members)</div>
+          <div class="admin-kpi-val" id="kpi-active-members" style="color: #2b9348;">0</div>
+        </div>
+        <div class="admin-kpi-card">
+          <div class="admin-kpi-label">รายได้รายเดือนคาดการณ์ (Est. MRR)</div>
+          <div class="admin-kpi-val" id="kpi-mrr">฿0</div>
+        </div>
+        <div class="admin-kpi-card">
+          <div class="admin-kpi-label">ต้องจัดส่งรอบถัดไป (Pending Boxes)</div>
+          <div class="admin-kpi-val" id="kpi-pending-boxes" style="color: #3d5a80;">0</div>
+        </div>
+      </section>
+
+      <!-- Controls Bar -->
+      <section class="admin-controls-bar">
+        <select id="sub-status-filter" class="admin-select-filter" aria-label="Status Filter">
+          <option value="">All Status (ทุกสถานะ)</option>
+          <option value="Active">กำลังใช้งาน (Active)</option>
+          <option value="Paused">พักชั่วคราว (Paused)</option>
+          <option value="Canceled">ยกเลิกแล้ว (Canceled)</option>
+        </select>
+
+        <select id="sub-plan-filter" class="admin-select-filter" aria-label="Plan Filter">
+          <option value="">All Plans (ทุกแพ็กเกจ)</option>
+          <option value="starter">Starter Box</option>
+          <option value="collector">Collector Box</option>
+          <option value="secret-master">Secret Master</option>
+        </select>
+
+        <input type="text" id="sub-admin-search" class="admin-search-box" placeholder="ค้นหาตาม Subscription ID, ชื่อลูกค้า หรือเบอร์โทร">
+      </section>
+
+      <!-- Subscriptions Table -->
+      <section class="admin-table-wrapper">
+        <table id="subs-table" class="admin-data-table">
+          <thead>
+            <tr>
+              <th>Sub ID</th>
+              <th>ลูกค้า / เบอร์โทร</th>
+              <th>แพ็กเกจ / รอบบิล</th>
+              <th>ยอดตัดเงิน</th>
+              <th>รอบส่งถัดไป</th>
+              <th>สถานะ</th>
+              <th style="text-align: center;">จัดการ</th>
+            </tr>
+          </thead>
+          <tbody id="subs-table-body">
+            <!-- Loaded via JS -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+
+  </div>
+
+  <!-- Modal: View Member Detail & Record Box Shipment -->
+  <div id="sub-admin-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 class="modal-header-title">ข้อมูลสมาชิก <span id="modal-sub-id-title"></span></h3>
+        <button type="button" class="modal-close-btn" id="btn-close-sub-modal">&times;</button>
+      </div>
+
+      <div class="modal-body" style="padding: 20px;" id="modal-sub-content">
+        <!-- Content via JS -->
+      </div>
+
+      <!-- Section: Record New Dispatch -->
+      <div id="record-dispatch-box" style="padding: 16px 20px; background: #faf9f6; border-top: 1px solid var(--color-border-grey);">
+        <h4 style="font-family: var(--font-th); font-size: 15px; font-weight: 700; margin-bottom: 10px;">บันทึกการจัดส่งกล่องประจำรอบ</h4>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+          <input type="text" id="dispatch-theme" placeholder="ธีมกล่อง (เช่น Chiikawa Winter Special)" style="padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
+          <input type="text" id="dispatch-items" placeholder="ของในกล่อง (คั่นด้วยจุลภาค)" style="padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="dispatch-tracking" placeholder="เลขพัสดุ (เว้นว่างไว้เพื่อสุ่ม FLASH-TH...)" style="flex: 1; padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
+          <button type="button" id="btn-save-dispatch" class="btn-primary-action" style="padding: 8px 18px; font-size: 13px;">
+            บันทึกการจัดส่ง
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="padding: 14px 20px; display: flex; justify-content: flex-end;">
+        <button type="button" class="btn-cancel" id="btn-modal-close-foot">ปิดหน้าต่าง</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 1. Session check & Admin profile
+      const sessionData = JSON.parse(sessionStorage.getItem("arttoy_admin_session") || "{}");
+      if (sessionData.name) {
+        const userNameEl = document.getElementById("admin-user-name");
+        const userRoleEl = document.getElementById("admin-user-role");
+        if (userNameEl) userNameEl.textContent = sessionData.name;
+        if (userRoleEl) userRoleEl.textContent = sessionData.role;
+      }
+
+      const logoutBtn = document.getElementById("btn-admin-logout");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          sessionStorage.removeItem("arttoy_admin_session");
+          window.location.href = "login.html";
+        });
+      }
+
+      // 2. Table & KPI Rendering
+      const tableBody = document.getElementById("subs-table-body");
+      const statusFilter = document.getElementById("sub-status-filter");
+      const planFilter = document.getElementById("sub-plan-filter");
+      const searchInput = document.getElementById("sub-admin-search");
+
+      const kpiTotal = document.getElementById("kpi-total-members");
+      const kpiActive = document.getElementById("kpi-active-members");
+      const kpiMrr = document.getElementById("kpi-mrr");
+      const kpiPending = document.getElementById("kpi-pending-boxes");
+
+      const modal = document.getElementById("sub-admin-modal");
+      const modalClose = document.getElementById("btn-close-sub-modal");
+      const modalCloseFoot = document.getElementById("btn-modal-close-foot");
+      const modalSubIdTitle = document.getElementById("modal-sub-id-title");
+      const modalContent = document.getElementById("modal-sub-content");
+      const btnSaveDispatch = document.getElementById("btn-save-dispatch");
+
+      let currentModalSubId = null;
+
+      function renderStatusBadge(status) {
+        if (status === 'Active') return '<span class="sub-status-badge sub-status-active">Active</span>';
+        if (status === 'Paused') return '<span class="sub-status-badge sub-status-paused">Paused</span>';
+        if (status === 'Canceled') return '<span class="sub-status-badge sub-status-canceled">Canceled</span>';
+        return `<span class="sub-status-badge">${status}</span>`;
+      }
+
+      function updateKPIs(allSubs) {
+        kpiTotal.textContent = allSubs.length;
+        const activeSubs = allSubs.filter(s => s.status === 'Active');
+        kpiActive.textContent = activeSubs.length;
+        kpiPending.textContent = activeSubs.length;
+
+        // MRR estimate: monthly price + quarterly/3
+        const mrr = activeSubs.reduce((sum, s) => {
+          const monthlyEquiv = s.cycle === 'quarterly' ? s.price / 3 : s.price;
+          return sum + monthlyEquiv;
+        }, 0);
+        kpiMrr.textContent = `฿${Math.round(mrr).toLocaleString()}`;
+      }
+
+      function renderTable() {
+        const allSubs = ApiService.getSubscriptions();
+        updateKPIs(allSubs);
+
+        const selStatus = statusFilter.value;
+        const selPlan = planFilter.value;
+        const q = searchInput.value.trim().toLowerCase();
+
+        let filtered = allSubs.filter(s => {
+          if (selStatus && s.status !== selStatus) return false;
+          if (selPlan && s.planId.toLowerCase() !== selPlan.toLowerCase()) return false;
+          if (q) {
+            const matchId = s.subId.toLowerCase().includes(q);
+            const matchName = s.customer && s.customer.fullName.toLowerCase().includes(q);
+            const matchPhone = s.customer && s.customer.phone.includes(q);
+            return matchId || matchName || matchPhone;
+          }
+          return true;
+        });
+
+        if (!tableBody) return;
+        tableBody.innerHTML = "";
+
+        if (filtered.length === 0) {
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 40px; color: #76736d;">
+                ไม่พบข้อมูลสมาชิกตามเงื่อนไขที่เลือก
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        filtered.forEach(s => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><strong>${s.subId}</strong></td>
+            <td>
+              <div style="font-weight: 600;">${s.customer.fullName}</div>
+              <small style="color: #76736d;">${s.customer.phone}</small>
+            </td>
+            <td>
+              <div>${s.planName}</div>
+              <small style="color: #76736d;">${s.cycle === 'quarterly' ? 'รอบ 3 เดือน' : 'รายเดือน'}</small>
+            </td>
+            <td><strong>฿${Number(s.price).toFixed(2)}</strong></td>
+            <td>
+              <div>${s.status === 'Paused' ? '<span style="color:#f57f17;">พักชั่วคราว</span>' : s.nextDeliveryDate}</div>
+              <small style="color: #76736d;">ตัดบิล: ${s.nextBillingDate}</small>
+            </td>
+            <td>${renderStatusBadge(s.status)}</td>
+            <td style="text-align: center;">
+              <button type="button" class="btn-card-view-detail btn-view-sub" data-id="${s.subId}" style="cursor: pointer; padding: 4px 8px;">
+                จัดการสมาชิก
+              </button>
+            </td>
+          `;
+          tableBody.appendChild(tr);
+        });
+      }
+
+      renderTable();
+
+      statusFilter.addEventListener("change", renderTable);
+      planFilter.addEventListener("change", renderTable);
+      searchInput.addEventListener("input", renderTable);
+
+      // Detail Modal
+      function openModal(subId) {
+        const sub = ApiService.getSubscriptionById(subId);
+        if (!sub) return;
+
+        currentModalSubId = subId;
+        modalSubIdTitle.textContent = sub.subId;
+
+        let deliveriesHtml = "";
+        if (sub.deliveries && sub.deliveries.length > 0) {
+          deliveriesHtml = sub.deliveries.map(d => `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-bottom: 1px solid #f0ede6; font-size: 13px;">
+              <div>
+                <strong>${d.month}</strong> — <span>${d.theme}</span>
+                <div style="font-size: 11px; color: #76736d;">ของในกล่อง: ${d.items ? d.items.join(", ") : "-"}</div>
+              </div>
+              <div style="text-align: right;">
+                <span style="font-size: 11px; padding: 2px 6px; border-radius: 6px; background: #e8f5e9; color: #2e7d32; font-weight: 600;">${d.status}</span>
+                <div style="font-size: 11px; font-family: var(--font-en); color: #76736d;"><code>${d.trackingNumber}</code></div>
+              </div>
+            </div>
+          `).join("");
+        } else {
+          deliveriesHtml = `<div style="padding: 10px; text-align: center; color: #888; font-size: 12px;">ยังไม่มีประวัติการจัดส่งกล่อง</div>`;
+        }
+
+        modalContent.innerHTML = `
+          <div style="font-family: var(--font-th); font-size: 14px; line-height: 1.6;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid #e8e5dc;">
+              <div>
+                <strong style="color: #76736d;">ชื่อผู้รับ:</strong> ${sub.customer.fullName}<br>
+                <strong style="color: #76736d;">เบอร์โทร:</strong> ${sub.customer.phone}<br>
+                <strong style="color: #76736d;">ที่อยู่:</strong> ${sub.customer.address}<br>
+                <strong style="color: #76736d;">หมายเหตุ:</strong> ${sub.customer.note || "-"}
+              </div>
+              <div>
+                <strong style="color: #76736d;">แพ็กเกจ:</strong> ${sub.planName} (${sub.cycle === 'quarterly' ? '3 เดือน' : 'รายเดือน'})<br>
+                <strong style="color: #76736d;">ยอดชำระ:</strong> ฿${Number(sub.price).toFixed(2)}<br>
+                <strong style="color: #76736d;">ช่องทางชำระ:</strong> ${sub.paymentMethod}<br>
+                <strong style="color: #76736d;">สถานะ:</strong> ${renderStatusBadge(sub.status)}
+              </div>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+              <strong style="color: var(--color-dark); font-size: 14px;">ประวัติการจัดส่งกล่องประจำรอบ:</strong>
+              <div style="border: 1px solid var(--color-border-grey); border-radius: 8px; margin-top: 8px; overflow: hidden; background: #ffffff;">
+                ${deliveriesHtml}
+              </div>
+            </div>
+          </div>
+        `;
+
+        modal.style.display = "flex";
+      }
+
+      document.addEventListener("click", function (e) {
+        const btn = e.target.closest(".btn-view-sub");
+        if (btn) {
+          openModal(btn.dataset.id);
+        }
+      });
+
+      // Save Dispatch Record
+      if (btnSaveDispatch) {
+        btnSaveDispatch.addEventListener("click", function () {
+          if (!currentModalSubId) return;
+          const theme = document.getElementById("dispatch-theme").value.trim() || "Mystery Box Collection";
+          const itemsRaw = document.getElementById("dispatch-items").value.trim();
+          const items = itemsRaw ? itemsRaw.split(",").map(i => i.trim()) : ["Chiikawa Mystery Box Figure"];
+          const tracking = document.getElementById("dispatch-tracking").value.trim();
+
+          const now = new Date();
+          const thaiMonth = now.toLocaleDateString("th-TH", { month: "long", year: "numeric" });
+
+          ApiService.addSubscriptionDelivery(currentModalSubId, {
+            month: thaiMonth,
+            theme: theme,
+            items: items,
+            trackingNumber: tracking,
+            status: "Shipped"
+          });
+
+          showToast("บันทึกการจัดส่งกล่องประจำรอบเรียบร้อยแล้ว", "success");
+          document.getElementById("dispatch-theme").value = "";
+          document.getElementById("dispatch-items").value = "";
+          document.getElementById("dispatch-tracking").value = "";
+
+          openModal(currentModalSubId);
+          renderTable();
+        });
+      }
+
+      if (modalClose) modalClose.addEventListener("click", () => modal.style.display = "none");
+      if (modalCloseFoot) modalCloseFoot.addEventListener("click", () => modal.style.display = "none");
+    });
+  </script>
+</body>
+</html>

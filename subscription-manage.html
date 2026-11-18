@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Subscription - Art Toy Community</title>
+  <!-- Google Fonts: Inter & Kanit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header id="main-header" class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand-logo-link">
+        <div class="brand-avatar-box">
+          <img src="assets/images/chiikawa.png" alt="Art Toy Community Logo" class="brand-avatar-img">
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">Art Toy Community</span>
+          <span class="brand-slogan">Authentic Figures & Collectibles</span>
+        </div>
+      </a>
+
+      <nav id="primary-nav" class="nav-links-wrap" aria-label="Main Navigation">
+        <a href="index.html" class="nav-item">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M21 27V21.5C21 20.3954 20.1046 19.5 19 19.5H17C15.8954 19.5 15 20.3954 15 21.5V27" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 12L17.7317 4.63416C17.9006 4.5497 18.0994 4.5497 18.2683 4.63416L33 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30 16.5V29.5C30 30.6046 29.1046 31.5 28 31.5H8C6.89543 31.5 6 30.6046 6 29.5V16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Home</span>
+        </a>
+        <a href="search.html" class="nav-item">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20.5 20.5L25.5 25.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Shop</span>
+        </a>
+        <a href="subscription.html" class="nav-item active">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+            <rect x="2" y="7" width="20" height="5"></rect>
+            <line x1="12" y1="22" x2="12" y2="7"></line>
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+          </svg>
+          <span>Subscription</span>
+        </a>
+        <a href="order-tracking.html" class="nav-item">
+          <svg class="nav-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+          <span>Tracking</span>
+        </a>
+      </nav>
+
+      <div id="nav-brand-group" class="header-actions-group">
+        <a href="login.html" class="btn-admin-nav-link" title="ระบบแอดมิน">Admin</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="manage-portal-wrap">
+    <!-- Header Title -->
+    <header style="margin-bottom: 24px; text-align: center;">
+      <h1 style="font-family: var(--font-th); font-size: 28px; font-weight: 700; color: var(--color-dark); margin-bottom: 8px;">
+        พอร์ทัลจัดการสมาชิกกล่องสุ่ม (Subscription Portal)
+      </h1>
+      <p style="font-family: var(--font-th); font-size: 14px; color: var(--color-muted-grey);">
+        ตรวจสอบรอบบิล กำหนดจัดส่งกล่องรอบถัดไป แก้ไขที่อยู่ หรือพักรอบรับกล่องสุ่มชั่วคราว
+      </p>
+    </header>
+
+    <!-- Search / Lookup Bar -->
+    <div style="background: #ffffff; border: 1px solid var(--color-border-grey); border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow-subtle);">
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input type="text" id="sub-search-input" placeholder="กรอก Subscription ID (เช่น SUB-202611-8842) หรือเบอร์โทรศัพท์" style="flex: 1; min-width: 240px; padding: 12px 16px; border: 1px solid var(--color-border-grey); border-radius: 8px; font-family: var(--font-th); font-size: 14px;">
+        <button type="button" id="btn-sub-search" class="btn-primary-action" style="padding: 12px 24px; border-radius: 8px; font-size: 14px;">
+          ค้นหาข้อมูล
+        </button>
+      </div>
+
+      <!-- Quick sample accounts -->
+      <div style="margin-top: 14px; font-family: var(--font-th); font-size: 12px; color: var(--color-muted-grey); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <span>ตัวอย่างสมาชิกในระบบ:</span>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-8842" style="padding: 4px 10px; background: #f0ede6; border: 1px solid #e0ddd5; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-8842 (Collector Box - Active)</button>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-9214" style="padding: 4px 10px; background: #f0ede6; border: 1px solid #e0ddd5; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-9214 (Secret Master - Active)</button>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-7301" style="padding: 4px 10px; background: #f0ede6; border: 1px solid #e0ddd5; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-7301 (Starter - Paused)</button>
+      </div>
+    </div>
+
+    <!-- Active Subscription Details Container -->
+    <div id="sub-detail-container">
+      <!-- Loaded dynamically via JS -->
+    </div>
+  </main>
+
+  <!-- Modal: Edit Shipping Address -->
+  <div id="edit-address-modal" class="modal-overlay" style="display: none;">
+    <article class="modal-dialog-box" style="max-width: 520px;">
+      <h2 class="modal-header-title">แก้ไขที่อยู่สำหรับจัดส่งกล่องสุ่ม</h2>
+      <form id="edit-address-form">
+        <div class="form-group">
+          <label for="edit-phone">หมายเลขโทรศัพท์ติดต่อ</label>
+          <input type="tel" id="edit-phone" required>
+        </div>
+        <div class="form-group">
+          <label for="edit-address">ที่อยู่จัดส่งใหม่</label>
+          <textarea id="edit-address" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="edit-note">หมายเหตุเพิ่มเติม</label>
+          <input type="text" id="edit-note">
+        </div>
+        <div class="modal-footer-actions">
+          <button type="button" class="btn-modal-cancel" id="btn-cancel-edit-addr">ยกเลิก</button>
+          <button type="submit" class="btn-modal-save">บันทึกที่อยู่ใหม่</button>
+        </div>
+      </form>
+    </article>
+  </div>
+
+  <!-- Footer -->
+  <footer id="main-footer" class="site-footer" style="margin-top: 60px;">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Art Toy Community. สงวนลิขสิทธิ์ทุกประการ</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const searchInput = document.getElementById("sub-search-input");
+      const searchBtn = document.getElementById("btn-sub-search");
+      const container = document.getElementById("sub-detail-container");
+
+      const editModal = document.getElementById("edit-address-modal");
+      const editForm = document.getElementById("edit-address-form");
+      const btnCancelEdit = document.getElementById("btn-cancel-edit-addr");
+
+      let currentSub = null;
+
+      function renderStatusBadge(status) {
+        if (status === 'Active') return '<span class="sub-status-badge sub-status-active">กำลังใช้งาน (Active)</span>';
+        if (status === 'Paused') return '<span class="sub-status-badge sub-status-paused">พักการรับกล่องชั่วคราว (Paused)</span>';
+        if (status === 'Canceled') return '<span class="sub-status-badge sub-status-canceled">ยกเลิกสมาชิกแล้ว (Canceled)</span>';
+        return `<span class="sub-status-badge">${status}</span>`;
+      }
+
+      function renderSubscription(sub) {
+        if (!sub) {
+          container.innerHTML = `
+            <div style="background: #ffffff; border: 1px solid var(--color-border-grey); border-radius: 12px; padding: 40px; text-align: center;">
+              <p style="font-family: var(--font-th); font-size: 16px; color: var(--color-muted-grey);">ไม่พบข้อมูลสมาชิกตามที่ระบุ</p>
+              <a href="subscription.html" class="btn-primary-action" style="display: inline-block; margin-top: 16px; padding: 10px 20px; font-size: 14px; text-decoration: none;">
+                ดูแพ็กเกจสมาชิกทั้งหมด
+              </a>
+            </div>
+          `;
+          return;
+        }
+
+        currentSub = sub;
+
+        let deliveriesHtml = "";
+        if (sub.deliveries && sub.deliveries.length > 0) {
+          deliveriesHtml = sub.deliveries.map(d => `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid #f0ede6; font-family: var(--font-th); font-size: 13px;">
+              <div>
+                <strong style="color: var(--color-dark);">${d.month}</strong> — <span>${d.theme}</span>
+                <div style="font-size: 12px; color: var(--color-muted-grey); margin-top: 2px;">
+                  ของในกล่อง: ${d.items ? d.items.join(", ") : "-"}
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <span style="font-size: 11px; padding: 2px 8px; border-radius: 10px; background: #e8f5e9; color: #2e7d32; font-weight: 600;">${d.status}</span>
+                <div style="font-size: 12px; font-family: var(--font-en); color: #76736d; margin-top: 2px;"><code>${d.trackingNumber}</code></div>
+              </div>
+            </div>
+          `).join("");
+        } else {
+          deliveriesHtml = `
+            <div style="padding: 16px; text-align: center; color: var(--color-muted-grey); font-family: var(--font-th); font-size: 13px;">
+              อยู่ระหว่างจัดเตรียมกล่องสุ่มงวดแรก (รอบจัดส่งวันที่ ${sub.nextDeliveryDate})
+            </div>
+          `;
+        }
+
+        // Action Buttons according to status
+        let actionButtonsHtml = "";
+        if (sub.status === 'Active') {
+          actionButtonsHtml = `
+            <button type="button" class="btn-portal-action btn-portal-pause" id="btn-action-pause">
+              พักสมาชิกชั่วคราว 1 เดือน (Pause)
+            </button>
+            <button type="button" class="btn-portal-action" id="btn-action-edit-addr">
+              แก้ไขที่อยู่จัดส่ง
+            </button>
+            <button type="button" class="btn-portal-action btn-portal-cancel" id="btn-action-cancel">
+              ยกเลิกสมาชิก
+            </button>
+          `;
+        } else if (sub.status === 'Paused') {
+          actionButtonsHtml = `
+            <button type="button" class="btn-portal-action btn-portal-resume" id="btn-action-resume">
+              เปิดใช้งานสมาชิกต่อ (Resume)
+            </button>
+            <button type="button" class="btn-portal-action" id="btn-action-edit-addr">
+              แก้ไขที่อยู่จัดส่ง
+            </button>
+            <button type="button" class="btn-portal-action btn-portal-cancel" id="btn-action-cancel">
+              ยกเลิกสมาชิก
+            </button>
+          `;
+        } else {
+          actionButtonsHtml = `
+            <a href="subscription.html" class="btn-primary-action" style="padding: 8px 18px; font-size: 13px; text-decoration: none;">
+              สมัครสมาชิกแพ็กเกจใหม่
+            </a>
+          `;
+        }
+
+        container.innerHTML = `
+          <article class="portal-status-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: gap; gap: 12px;">
+              <div>
+                <span style="font-family: var(--font-en); font-size: 13px; color: var(--color-muted-grey); font-weight: 600;">SUBSCRIPTION ID:</span>
+                <h2 style="font-family: var(--font-en); font-size: 22px; font-weight: 800; color: var(--color-dark); margin-top: 2px;">${sub.subId}</h2>
+              </div>
+              <div>
+                ${renderStatusBadge(sub.status)}
+              </div>
+            </div>
+
+            <!-- Details Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding: 16px; background: #faf9f6; border: 1px solid var(--color-border-grey); border-radius: 12px; margin-bottom: 24px; font-family: var(--font-th); font-size: 14px;">
+              <div>
+                <span style="color: var(--color-muted-grey); font-size: 12px;">แพ็กเกจสมาชิก</span>
+                <div style="font-weight: 700; color: var(--color-dark); font-size: 16px; margin-top: 2px;">${sub.planName}</div>
+                <small style="color: var(--color-muted-grey);">฿${Number(sub.price).toFixed(2)} / ${sub.cycle === 'quarterly' ? '3 เดือน' : 'เดือน'}</small>
+              </div>
+
+              <div>
+                <span style="color: var(--color-muted-grey); font-size: 12px;">รอบจัดส่งกล่องถัดไป</span>
+                <div style="font-weight: 700; color: #2b9348; font-size: 16px; margin-top: 2px;">${sub.status === 'Paused' ? 'พักรอบส่งชั่วคราว' : sub.nextDeliveryDate}</div>
+                <small style="color: var(--color-muted-grey);">รอบบิลถัดไป: ${sub.nextBillingDate}</small>
+              </div>
+
+              <div>
+                <span style="color: var(--color-muted-grey); font-size: 12px;">ช่องทางตัดรอบบิล</span>
+                <div style="font-weight: 600; color: var(--color-dark); margin-top: 2px;">${sub.paymentMethod}</div>
+                <small style="color: var(--color-muted-grey);">ตัดอัตโนมัติ</small>
+              </div>
+            </div>
+
+            <!-- Shipping Destination -->
+            <div style="margin-bottom: 24px; font-family: var(--font-th); font-size: 14px; line-height: 1.6;">
+              <strong style="color: var(--color-dark);">ที่อยู่สำหรับจัดส่งกล่องสุ่ม:</strong>
+              <div style="color: #4a403b; margin-top: 4px;">
+                <strong>${sub.customer.fullName}</strong> (${sub.customer.phone})<br>
+                ${sub.customer.address}
+                ${sub.customer.note ? `<br><small style="color: var(--color-muted-grey);">หมายเหตุ: ${sub.customer.note}</small>` : ''}
+              </div>
+            </div>
+
+            <!-- Past Deliveries -->
+            <div style="margin-bottom: 24px;">
+              <h3 style="font-family: var(--font-th); font-size: 16px; font-weight: 700; color: var(--color-dark); margin-bottom: 12px;">ประวัติการจัดส่งกล่องสุ่มที่ผ่านมา</h3>
+              <div style="border: 1px solid var(--color-border-grey); border-radius: 10px; overflow: hidden; background: #ffffff;">
+                ${deliveriesHtml}
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="portal-action-btns">
+              ${actionButtonsHtml}
+            </div>
+          </article>
+        `;
+
+        // Bind Action Events
+        const btnPause = document.getElementById("btn-action-pause");
+        if (btnPause) {
+          btnPause.addEventListener("click", function () {
+            if (confirm("คุณต้องการพักการรับกล่องสุ่มชั่วคราว 1 เดือนใช่หรือไม่? (ระบบจะไม่ตัดเงินในรอบบิลถัดไป)")) {
+              ApiService.updateSubscriptionStatus(sub.subId, 'Paused');
+              showToast("พักการรับกล่องสุ่มเรียบร้อยแล้ว", "info");
+              loadSub(sub.subId);
+            }
+          });
+        }
+
+        const btnResume = document.getElementById("btn-action-resume");
+        if (btnResume) {
+          btnResume.addEventListener("click", function () {
+            ApiService.updateSubscriptionStatus(sub.subId, 'Active');
+            showToast("เปิดใช้งานสมาชิกต่อเรียบร้อยแล้ว", "success");
+            loadSub(sub.subId);
+          });
+        }
+
+        const btnCancel = document.getElementById("btn-action-cancel");
+        if (btnCancel) {
+          btnCancel.addEventListener("click", function () {
+            if (confirm("คุณแน่ใจหรือไม่ว่าต้องการยกเลิกสมาชิก? สิทธิพิเศษทั้งหมดจะสิ้นสุดลง")) {
+              ApiService.updateSubscriptionStatus(sub.subId, 'Canceled');
+              showToast("ยกเลิกสมาชิกเรียบร้อยแล้ว", "error");
+              loadSub(sub.subId);
+            }
+          });
+        }
+
+        const btnEditAddr = document.getElementById("btn-action-edit-addr");
+        if (btnEditAddr) {
+          btnEditAddr.addEventListener("click", function () {
+            document.getElementById("edit-phone").value = sub.customer.phone || "";
+            document.getElementById("edit-address").value = sub.customer.address || "";
+            document.getElementById("edit-note").value = sub.customer.note || "";
+            editModal.style.display = "flex";
+          });
+        }
+      }
+
+      function loadSub(subId) {
+        if (!subId) return;
+        const sub = ApiService.getSubscriptionById(subId);
+        if (sub) {
+          searchInput.value = sub.subId;
+          renderSubscription(sub);
+        } else {
+          // Try search by phone
+          const all = ApiService.getSubscriptions({ search: subId });
+          if (all.length > 0) {
+            renderSubscription(all[0]);
+          } else {
+            renderSubscription(null);
+          }
+        }
+      }
+
+      // Check URL parameters for ?subId=...
+      const urlParams = new URLSearchParams(window.location.search);
+      const paramSubId = urlParams.get("subId");
+      if (paramSubId) {
+        loadSub(paramSubId);
+      } else {
+        // Default to first active sample
+        loadSub("SUB-202611-8842");
+      }
+
+      searchBtn.addEventListener("click", () => {
+        const val = searchInput.value.trim();
+        if (val) loadSub(val);
+      });
+
+      searchInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          const val = searchInput.value.trim();
+          if (val) loadSub(val);
+        }
+      });
+
+      document.querySelectorAll(".btn-sample-sub").forEach(btn => {
+        btn.addEventListener("click", function () {
+          loadSub(this.dataset.id);
+        });
+      });
+
+      // Edit Address Form
+      if (editForm) {
+        editForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!currentSub) return;
+          const phone = document.getElementById("edit-phone").value.trim();
+          const address = document.getElementById("edit-address").value.trim();
+          const note = document.getElementById("edit-note").value.trim();
+
+          ApiService.updateSubscriptionAddress(currentSub.subId, address, phone, note);
+          showToast("อัปเดตที่อยู่จัดส่งเรียบร้อยแล้ว", "success");
+          editModal.style.display = "none";
+          loadSub(currentSub.subId);
+        });
+      }
+
+      if (btnCancelEdit) {
+        btnCancelEdit.addEventListener("click", () => {
+          editModal.style.display = "none";
+        });
+      }
+    });
+  </script>
+</body>
+</html>

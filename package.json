@@ -1,0 +1,22 @@
+{
+  "name": "sec2_gr2_fe_src",
+  "version": "1.0.0",
+  "description": "Art Toy Community Front-End Store Prototype",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "keywords": [
+    "html5",
+    "css3",
+    "frontend",
+    "arttoy",
+    "ecommerce"
+  ],
+  "author": "Art Toy Community",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.14"
+  }
+}
