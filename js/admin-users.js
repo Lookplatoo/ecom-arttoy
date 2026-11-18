@@ -170,9 +170,9 @@ document.addEventListener("DOMContentLoaded", function () {
       summaryBox.innerHTML = `
         <div class="user-avatar-badge">${initial}</div>
         <div style="flex: 1;">
-          <p style="color: #ffffff; font-weight: 600; font-size: 15px; margin: 0 0 4px 0;">Username: ${user.username}</p>
-          <p style="color: #cccccc; font-size: 14px; margin: 0 0 4px 0;">Name: ${fName} ${lName}</p>
-          <p style="color: #999999; font-size: 13px; margin: 0;">Email: ${user.email} | Role: ${user.role}</p>
+          <p style="color: var(--color-dark); font-weight: 600; font-size: 15px; margin: 0 0 4px 0;">Username: ${user.username}</p>
+          <p style="color: var(--color-dark-grey); font-size: 14px; margin: 0 0 4px 0;">Name: ${fName} ${lName}</p>
+          <p style="color: var(--color-muted-grey); font-size: 13px; margin: 0;">Email: ${user.email} | Role: ${user.role}</p>
         </div>
       `;
     }

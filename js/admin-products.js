@@ -289,9 +289,9 @@ document.addEventListener("DOMContentLoaded", function () {
       summaryBox.innerHTML = `
         <img src="${product.image}" alt="${product.name}">
         <div>
-          <p style="color: #ffffff; font-weight: 600;">Product ID: ${product.id}</p>
-          <p style="color: #cccccc; font-size: 14px;">Name: ${product.name}</p>
-          <p style="color: #999999; font-size: 13px;">Status: ${product.status} | Price: ${Number(product.price).toFixed(2)} THB</p>
+          <p style="color: var(--color-dark); font-weight: 600;">Product ID: ${product.id}</p>
+          <p style="color: var(--color-dark-grey); font-size: 14px;">Name: ${product.name}</p>
+          <p style="color: var(--color-muted-grey); font-size: 13px;">Status: ${product.status} | Price: ${Number(product.price).toFixed(2)} THB</p>
         </div>
       `;
     }
