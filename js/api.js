@@ -251,12 +251,12 @@ const DEFAULT_SUBSCRIPTIONS = [
   },
   {
     subId: 'SUB-202611-1992',
-    planId: 'vip-annual',
-    planName: 'VIP Club (Founder Annual)',
-    cycle: 'annual',
-    price: 1990,
+    planId: 'vip-monthly',
+    planName: 'Art Toy VIP Club (Monthly)',
+    cycle: 'monthly',
+    price: 199,
     startDate: '2026-10-15',
-    nextBillingDate: '2027-10-15',
+    nextBillingDate: '2026-12-15',
     nextDeliveryDate: '2026-12-05',
     status: 'Active',
     paymentMethod: 'Credit Card (Visa •••• 4242)',
@@ -271,8 +271,8 @@ const DEFAULT_SUBSCRIPTIONS = [
     deliveries: [
       {
         month: 'พฤศจิกายน 2026',
-        theme: 'Founder Edition Collector Pack',
-        items: ['Chiikawa Gold Badge', 'Secret Special Postcard'],
+        theme: 'VIP Welcome Mystery Gift',
+        items: ['Chiikawa Gold Badge', 'VIP Member Sticker Pack'],
         status: 'Shipped',
         trackingNumber: 'FLASH-TH19920033',
         shippedDate: '2026-11-05'
@@ -371,12 +371,12 @@ const DEFAULT_SUBSCRIPTIONS = [
   },
   {
     subId: 'SUB-202611-9214',
-    planId: 'vip-annual',
-    planName: 'VIP Club (Founder Annual)',
-    cycle: 'annual',
-    price: 1990,
+    planId: 'vip-monthly',
+    planName: 'Art Toy VIP Club (Monthly)',
+    cycle: 'monthly',
+    price: 199,
     startDate: '2026-10-15',
-    nextBillingDate: '2027-01-15',
+    nextBillingDate: '2026-12-15',
     nextDeliveryDate: '2026-12-05',
     status: 'Active',
     paymentMethod: 'PromptPay Recurring',
@@ -922,15 +922,9 @@ const MockDB = {
     const dateStr = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`;
     const newSubId = `SUB-${dateStr}-${randomHex}`;
 
-    // คำนวณวันรอบบิลถัดไป (1 เดือน หรือ 3 เดือน หรือ 1 ปี)
+    // คำนวณวันรอบบิลถัดไป (รอบบิลรายเดือน 1 เดือน ตามรายงาน ITDS294)
     const nextBill = new Date(now);
-    if (subData.cycle === 'annual') {
-      nextBill.setFullYear(nextBill.getFullYear() + 1);
-    } else if (subData.cycle === 'quarterly') {
-      nextBill.setMonth(nextBill.getMonth() + 3);
-    } else {
-      nextBill.setMonth(nextBill.getMonth() + 1);
-    }
+    nextBill.setMonth(nextBill.getMonth() + 1);
 
     // วันจัดส่งกล่องรอบถัดไป (วันที่ 5 ของเดือนหน้า)
     const nextDelivery = new Date(now.getFullYear(), now.getMonth() + 1, 5);

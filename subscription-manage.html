@@ -92,10 +92,9 @@
       <!-- Quick sample accounts -->
       <div style="margin-top: 14px; font-family: var(--font-th); font-size: 12px; color: var(--color-muted-grey); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
         <span>ตัวอย่างสมาชิก VIP ในระบบ:</span>
-        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1991" style="padding: 4px 10px; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">SUB-202611-1991 (กิตติคุณ - VIP ฿199)</button>
-        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1992" style="padding: 4px 10px; background: #fef3c7; color: #92400e; border: 1px solid #fde68a; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">SUB-202611-1992 (ฐิตารีย์ - Founder Annual)</button>
-        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1993" style="padding: 4px 10px; background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-1993 (ธนกฤต - Paused)</button>
-        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1001" style="padding: 4px 10px; background: #f0ede6; border: 1px solid #e0ddd5; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-1001 (Starter)</button>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1991" style="padding: 4px 10px; background: var(--color-bg-alt); color: var(--color-dark); border: 1px solid var(--color-border-grey); border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">SUB-202611-1991 (กิตติคุณ - Active ฿199)</button>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1992" style="padding: 4px 10px; background: var(--color-bg-alt); color: var(--color-dark); border: 1px solid var(--color-border-grey); border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">SUB-202611-1992 (ฐิตารีย์ - Active ฿199)</button>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1993" style="padding: 4px 10px; background: var(--color-bg-alt); color: var(--color-muted-grey); border: 1px solid var(--color-border-grey); border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-1993 (ธนกฤต - Paused)</button>
       </div>
     </div>
 
@@ -285,7 +284,7 @@
         if (sub.status === 'Active') {
           actionButtonsHtml = `
             <button type="button" class="btn-portal-action" id="btn-open-line-oa" style="background: #06c755; color: #fff; border-color: #06c755; font-weight: 600;">
-              📱 การแจ้งเตือนผ่าน Line OA
+              การแจ้งเตือนผ่าน Line OA
             </button>
             <button type="button" class="btn-portal-action btn-portal-pause" id="btn-action-pause">
               พักสมาชิกชั่วคราว 1 เดือน (Pause)
@@ -300,7 +299,7 @@
         } else if (sub.status === 'Paused') {
           actionButtonsHtml = `
             <button type="button" class="btn-portal-action" id="btn-open-line-oa" style="background: #06c755; color: #fff; border-color: #06c755; font-weight: 600;">
-              📱 การแจ้งเตือนผ่าน Line OA
+              การแจ้งเตือนผ่าน Line OA
             </button>
             <button type="button" class="btn-portal-action btn-portal-resume" id="btn-action-resume">
               เปิดใช้งานสมาชิกต่อ (Resume)
@@ -332,7 +331,7 @@
               </div>
               <div style="display: flex; align-items: center; gap: 8px;">
                 <button type="button" id="btn-open-line-oa-top" style="background: #e8f9ee; color: #06c755; border: 1px solid #06c755; border-radius: 6px; padding: 4px 10px; font-family: var(--font-th); font-size: 12px; cursor: pointer; font-weight: 600;">
-                  📱 Line OA
+                  Line OA
                 </button>
                 ${renderStatusBadge(sub.status)}
               </div>
@@ -341,7 +340,7 @@
             <!-- Member Perks Store Integration Banner (Amazon Prime + Fan Club Model) -->
             <div class="portal-member-perks-banner">
               <div class="perks-banner-content">
-                <span class="perks-banner-crown">👑</span>
+                <span class="perks-banner-crown" style="font-weight: 800; font-size: 11px; background: var(--color-bg-alt); padding: 2px 7px; border-radius: 4px; border: 1px solid var(--color-border-grey); color: var(--color-dark);">VIP</span>
                 <div class="perks-banner-text">
                   <div class="perks-title">สิทธิประโยชน์พิเศษสำหรับสมาชิก <strong>${sub.planName}</strong></div>
                   <div class="perks-badges-row">
@@ -360,15 +359,15 @@
             <!-- Reward Points & Referral Program Cards (รายงาน ITDS294 หน้า 7, 8, 9, 14, 15) -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
               <!-- Points Balance -->
-              <div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; padding: 18px; font-family: var(--font-th);">
+              <div style="background: #ffffff; border: 1px solid var(--color-border-grey); border-radius: 12px; padding: 18px; font-family: var(--font-th); box-shadow: var(--shadow-subtle);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <span style="font-size: 13px; font-weight: 700; color: #1e40af;">🪙 แต้มสะสมของคุณ (Reward Points)</span>
-                  <span style="background: #2563eb; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;">10 บ. = 1 แต้ม</span>
+                  <span style="font-size: 13.5px; font-weight: 700; color: var(--color-dark);">แต้มสะสมของคุณ (Reward Points)</span>
+                  <span style="background: var(--color-bg-alt, #f4f3ef); color: #2563eb; border: 1px solid var(--color-border-grey); font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;">10 บ. = 1 แต้ม</span>
                 </div>
-                <div style="font-size: 28px; font-weight: 800; color: #1d4ed8; font-family: var(--font-en);">
-                  ${memberPoints} <span style="font-size: 14px; font-weight: 600; font-family: var(--font-th);">คะแนน</span>
+                <div style="font-size: 28px; font-weight: 800; color: #2563eb; font-family: var(--font-en);">
+                  ${memberPoints} <span style="font-size: 14px; font-weight: 600; font-family: var(--font-th); color: var(--color-dark);">คะแนน</span>
                 </div>
-                <div style="font-size: 12.5px; color: #1e40af; margin-top: 4px;">
+                <div style="font-size: 12.5px; color: var(--color-muted-grey); margin-top: 4px;">
                   มีมูลค่าเทียบเท่า <strong>฿${memberPoints}</strong> สามารถเลือกติ๊กใช้เป็นส่วนลดเงินสดในหน้า Checkout ได้ทันที!
                 </div>
               </div>
@@ -405,11 +404,11 @@
               <div>
                 <span style="color: var(--color-muted-grey); font-size: 12px;">แพ็กเกจสมาชิก</span>
                 <div style="font-weight: 700; color: var(--color-dark); font-size: 16px; margin-top: 2px;">${sub.planName}</div>
-                <small style="color: var(--color-muted-grey);">฿${Number(sub.price).toFixed(2)} / ${sub.cycle === 'annual' ? 'ปี' : (sub.cycle === 'quarterly' ? '3 เดือน' : 'เดือน')}</small>
+                <small style="color: var(--color-muted-grey);">฿${Number(sub.price).toFixed(2)} / เดือน</small>
               </div>
 
               <div>
-                <span style="color: var(--color-muted-grey); font-size: 12px;">รอบจัดส่งกล่องถัดไป</span>
+                <span style="color: var(--color-muted-grey); font-size: 12px;">รอบจัดส่งของขวัญ / รอบบิลถัดไป</span>
                 <div style="font-weight: 700; color: #2b9348; font-size: 16px; margin-top: 2px;">${sub.status === 'Paused' ? 'พักรอบส่งชั่วคราว' : sub.nextDeliveryDate}</div>
                 <small style="color: var(--color-muted-grey);">รอบบิลถัดไป: ${sub.nextBillingDate}</small>
               </div>
@@ -417,13 +416,13 @@
               <div>
                 <span style="color: var(--color-muted-grey); font-size: 12px;">ช่องทางตัดรอบบิล</span>
                 <div style="font-weight: 600; color: var(--color-dark); margin-top: 2px;">${sub.paymentMethod}</div>
-                <small style="color: var(--color-muted-grey);">ตัดอัตโนมัติ</small>
+                <small style="color: var(--color-muted-grey);">ตัดอัตโนมัติรายเดือน</small>
               </div>
             </div>
 
             <!-- Shipping Destination -->
             <div style="margin-bottom: 24px; font-family: var(--font-th); font-size: 14px; line-height: 1.6;">
-              <strong style="color: var(--color-dark);">ที่อยู่สำหรับจัดส่งกล่องสุ่ม:</strong>
+              <strong style="color: var(--color-dark);">ที่อยู่สำหรับจัดส่งของขวัญสมาชิกและพัสดุ:</strong>
               <div style="color: #4a403b; margin-top: 4px;">
                 <strong>${sub.customer.fullName}</strong> (${sub.customer.phone})<br>
                 ${sub.customer.address}
@@ -433,7 +432,7 @@
 
             <!-- Past Deliveries -->
             <div style="margin-bottom: 24px;">
-              <h3 style="font-family: var(--font-th); font-size: 16px; font-weight: 700; color: var(--color-dark); margin-bottom: 12px;">ประวัติการจัดส่งกล่องสุ่มที่ผ่านมา</h3>
+              <h3 style="font-family: var(--font-th); font-size: 16px; font-weight: 700; color: var(--color-dark); margin-bottom: 12px;">ประวัติการจัดส่งของขวัญสมาชิกที่ผ่านมา</h3>
               <div style="border: 1px solid var(--color-border-grey); border-radius: 10px; overflow: hidden; background: #ffffff;">
                 ${deliveriesHtml}
               </div>

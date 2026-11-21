@@ -78,14 +78,14 @@
           <a href="subscription.html" style="font-family: var(--font-th); font-size: 13px; color: var(--color-muted-grey); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; margin-bottom: 8px;">
             &larr; กลับไปเลือกแพ็กเกจ
           </a>
-          <h1 class="checkout-main-title">สมัครสมาชิกล่วงหน้า (Subscription Checkout)</h1>
-          <p class="checkout-step-desc">ระบุที่อยู่สำหรับจัดส่งกล่องสุ่มทุกวันที่ 5 ของเดือน และตั้งค่าช่องทางชำระเงินรอบบิลอัตโนมัติ</p>
+          <h1 class="checkout-main-title">สมัครสมาชิก Art Toy VIP Club (Subscription Checkout)</h1>
+          <p class="checkout-step-desc">ระบุที่อยู่สำหรับจัดส่งของขวัญต้อนรับสมาชิก (VIP Welcome Gift Pack) และตั้งค่าช่องทางชำระเงินรอบบิลอัตโนมัติ</p>
         </header>
 
         <form id="sub-checkout-form">
           <!-- Step 1: ที่อยู่จัดส่ง -->
           <div class="checkout-section-card">
-            <h2 class="checkout-card-heading">1. ที่อยู่สำหรับจัดส่งกล่องประจำเดือน</h2>
+            <h2 class="checkout-card-heading">1. ที่อยู่สำหรับจัดส่งของขวัญต้อนรับสมาชิก</h2>
             <div class="checkout-form-grid">
               <div class="form-group full-col">
                 <label for="sub-fullname">ชื่อ - นามสกุล ผู้รับ <span class="req">*</span></label>
@@ -195,16 +195,16 @@
 
           <div id="sub-summary-box" style="padding: 16px; background: #faf9f6; border-radius: 8px; border: 1px solid var(--color-border-grey); margin-bottom: 20px;">
             <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
-              <h3 id="summary-plan-name" style="font-family: var(--font-th); font-size: 18px; font-weight: 700; color: var(--color-dark);">Collector Box</h3>
-              <span id="summary-plan-cycle" class="sub-status-badge sub-status-active">รายเดือน</span>
+              <h3 id="summary-plan-name" style="font-family: var(--font-th); font-size: 18px; font-weight: 700; color: var(--color-dark);">Art Toy VIP Club</h3>
+              <span id="summary-plan-cycle" class="sub-status-badge sub-status-active">รายเดือน (฿199/ด.)</span>
             </div>
             <p id="summary-plan-desc" style="font-family: var(--font-th); font-size: 13px; color: var(--color-muted-grey); margin-bottom: 12px;">
-              2 กล่องสุ่มของแท้ 100% การันตีไม่ซ้ำรุ่นในรอบ 3 เดือน พร้อมของพรีเมียม Limited
+              ส่วนลด 10% ทุกชิ้นทั้งร้าน + สิทธิ์จอง Pre-Order ล่วงหน้า 24 ชม. + ส่งฟรี ฿0 ทุกออเดอร์ ไม่มีขั้นต่ำ
             </p>
 
             <div style="font-family: var(--font-th); font-size: 13px; color: #4a403b; line-height: 1.7; border-top: 1px solid var(--color-border-grey); padding-top: 10px;">
-              <div>รอบส่งงวดแรก: <strong>5 ธันวาคม 2026</strong></div>
-              <div>ค่าจัดส่ง: <strong>ฟรี (Flash Express)</strong></div>
+              <div>สิทธิประโยชน์หลัก: <strong>ลด 10% + ส่งฟรี ฿0 + โบนัส 100 แต้ม</strong></div>
+              <div>ของขวัญต้อนรับ: <strong>VIP Welcome Gift Pack (จัดส่งฟรี)</strong></div>
               <div>รอบตัดบิลถัดไป: <strong id="summary-next-bill">1 มกราคม 2027</strong></div>
             </div>
           </div>
@@ -254,45 +254,17 @@
   <script src="js/cart.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      // 1. Parse Query Parameters
-      const urlParams = new URLSearchParams(window.location.search);
-      let planParam = (urlParams.get("plan") || "vip-monthly").toLowerCase();
-      let cycleParam = (urlParams.get("cycle") || "monthly").toLowerCase();
-
-      // Normalize plan parameter
-      if (planParam === 'starter' || planParam === 'collector') planParam = 'vip-monthly';
-      if (planParam === 'secret-master') {
-        planParam = cycleParam === 'annual' ? 'vip-annual' : 'vip-quarterly';
-      }
-
-      const PLANS_CONFIG = {
-        'vip-monthly': {
-          id: 'vip-monthly',
-          name: 'VIP Club (Monthly)',
-          desc: 'ส่วนลด 10% ทุกชิ้นทั้งร้าน + สิทธิ์จอง Pre-Order ล่วงหน้า 24 ชม. + ส่งฟรี ฿0 ทุกออเดอร์',
-          price: 199,
-          bonusPoints: 100,
-          cycleText: 'รายเดือน'
-        },
-        'vip-quarterly': {
-          id: 'vip-quarterly',
-          name: 'VIP 3-Month Pass',
-          desc: 'สิทธิ์ VIP ครบครันตลอด 3 เดือนต่อเนื่อง + โควต้า Pre-Order การันตี 100% + โบนัส 200 แต้ม',
-          price: 549,
-          bonusPoints: 200,
-          cycleText: 'ราย 3 เดือน'
-        },
-        'vip-annual': {
-          id: 'vip-annual',
-          name: 'VIP Founder Annual',
-          desc: 'สิทธิ์ VIP รายปีสูงสุด + ฟรี กล่อง Secret Rare Master Box (฿1,200) + โบนัส 500 แต้ม',
-          price: 1990,
-          bonusPoints: 500,
-          cycleText: 'รายปี (Founder)'
-        }
+      // Single Plan Configuration (รายงาน ITDS294 หน้า 8, 10, 14: ฿199/เดือน ราคาเดียว)
+      const SINGLE_PLAN = {
+        id: 'vip-monthly',
+        name: 'Art Toy VIP Club (Monthly)',
+        desc: 'ส่วนลด 10% ทุกชิ้นทั้งร้าน + สิทธิ์จอง Pre-Order ล่วงหน้า 24 ชม. + ส่งฟรี ฿0 ทุกออเดอร์ ไม่มีขั้นต่ำ + สะสมแต้ม 10บ.=1แต้ม',
+        price: 199,
+        bonusPoints: 100,
+        cycleText: 'รายเดือน (฿199/ด.)'
       };
 
-      const selectedPlan = PLANS_CONFIG[planParam] || PLANS_CONFIG['vip-monthly'];
+      const selectedPlan = SINGLE_PLAN;
       let basePrice = selectedPlan.price;
       let appliedReferralDiscount = 0;
       let verifiedReferralCode = null;
@@ -320,13 +292,7 @@
 
       const now = new Date();
       const nextBillDate = new Date(now);
-      if (selectedPlan.id === 'vip-annual' || cycleParam === 'annual') {
-        nextBillDate.setFullYear(nextBillDate.getFullYear() + 1);
-      } else if (selectedPlan.id === 'vip-quarterly' || cycleParam === 'quarterly') {
-        nextBillDate.setMonth(nextBillDate.getMonth() + 3);
-      } else {
-        nextBillDate.setMonth(nextBillDate.getMonth() + 1);
-      }
+      nextBillDate.setMonth(nextBillDate.getMonth() + 1);
       document.getElementById("summary-next-bill").textContent = `${nextBillDate.getDate()} ${nextBillDate.toLocaleDateString('th-TH', { month: 'long', year: 'numeric' })}`;
 
       // 2. Referral Code Application (รายงาน ITDS294 หน้า 9, 15)
@@ -406,9 +372,9 @@
           const chargedPrice = Math.max(0, basePrice - appliedReferralDiscount);
 
           const subData = {
-            planId: selectedPlan.id,
-            planName: selectedPlan.name,
-            cycle: selectedPlan.id === 'vip-annual' ? 'annual' : (selectedPlan.id === 'vip-quarterly' ? 'quarterly' : 'monthly'),
+            planId: 'vip-monthly',
+            planName: 'Art Toy VIP Club (Monthly)',
+            cycle: 'monthly',
             price: chargedPrice,
             usedReferralCode: verifiedReferralCode,
             paymentMethod: paymentMethod,

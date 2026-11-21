@@ -124,9 +124,7 @@
 
         <select id="sub-plan-filter" class="admin-select-filter" aria-label="Plan Filter">
           <option value="">All Plans (ทุกแพ็กเกจ)</option>
-          <option value="starter">Starter Box</option>
-          <option value="collector">Collector Box</option>
-          <option value="secret-master">Secret Master</option>
+          <option value="vip-monthly">Art Toy VIP Club (฿199/ด.)</option>
         </select>
 
         <input type="text" id="sub-admin-search" class="admin-search-box" placeholder="ค้นหาตาม Subscription ID, ชื่อลูกค้า หรือเบอร์โทร" aria-label="ค้นหาตาม Subscription ID, ชื่อลูกค้า หรือเบอร์โทร">
@@ -245,11 +243,8 @@
         kpiActive.textContent = activeSubs.length;
         kpiPending.textContent = activeSubs.length;
 
-        // MRR estimate: monthly price + quarterly/3
-        const mrr = activeSubs.reduce((sum, s) => {
-          const monthlyEquiv = s.cycle === 'quarterly' ? s.price / 3 : s.price;
-          return sum + monthlyEquiv;
-        }, 0);
+        // MRR estimate: 199 THB per active monthly member (รายงาน ITDS294 หน้า 8, 10)
+        const mrr = activeSubs.reduce((sum, s) => sum + (Number(s.price) || 199), 0);
         kpiMrr.textContent = `฿${Math.round(mrr).toLocaleString()}`;
       }
 
@@ -297,7 +292,7 @@
             </td>
             <td>
               <div>${s.planName}</div>
-              <small style="color: #76736d;">${s.cycle === 'quarterly' ? 'รอบ 3 เดือน' : 'รายเดือน'}</small>
+              <small style="color: #76736d;">รายเดือน (฿199/ด.)</small>
             </td>
             <td><strong>฿${Number(s.price).toFixed(2)}</strong></td>
             <td>
@@ -357,7 +352,7 @@
                 <strong style="color: #76736d;">หมายเหตุ:</strong> ${sub.customer.note || "-"}
               </div>
               <div>
-                <strong style="color: #76736d;">แพ็กเกจ:</strong> ${sub.planName} (${sub.cycle === 'quarterly' ? '3 เดือน' : 'รายเดือน'})<br>
+                <strong style="color: #76736d;">แพ็กเกจ:</strong> ${sub.planName} (รายเดือน)<br>
                 <strong style="color: #76736d;">ยอดชำระ:</strong> ฿${Number(sub.price).toFixed(2)}<br>
                 <strong style="color: #76736d;">ช่องทางชำระ:</strong> ${sub.paymentMethod}<br>
                 <strong style="color: #76736d;">สถานะ:</strong> ${renderStatusBadge(sub.status)}
