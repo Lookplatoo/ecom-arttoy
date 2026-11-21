@@ -379,14 +379,6 @@ const CartManager = {
         this.submitMemberVerify(subId);
       }
 
-      // 2. Demo Logout to Guest
-      const demoLogoutChip = e.target.closest('#btn-demo-logout-chip');
-      if (demoLogoutChip) {
-        e.preventDefault();
-        this.logoutMember();
-        this.closeMemberModal();
-      }
-
       // 3. Quick Coupon Pill in Drawer
       const quickCouponPill = e.target.closest('#btn-quick-coupon-arttoy10');
       if (quickCouponPill && couponInput && applyCouponBtn) {

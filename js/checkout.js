@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const pointsBox = document.getElementById("checkout-points-redemption-box");
     const pointsAvailEl = document.getElementById("co-available-points");
     if (pointsBox) {
-      if (isMemberActive && availablePoints > 0) {
+      if (isMemberActive) {
         pointsBox.style.display = "block";
         if (pointsAvailEl) pointsAvailEl.textContent = `${availablePoints} แต้ม (ลดได้ ฿${availablePoints})`;
       } else {
@@ -233,10 +233,16 @@ document.addEventListener("DOMContentLoaded", function () {
     if (qrAmount) qrAmount.textContent = `฿${grandTotal.toFixed(2)}`;
 
     const flashLabel = document.getElementById("shipping-cost-label-flash");
+    const emsLabel = document.getElementById("shipping-cost-label-ems");
     if (flashLabel) {
       flashLabel.innerHTML = isFreeShipping 
         ? '<span style="color: #16a34a; font-weight: 700;">ฟรี ฿0.00</span> <small style="color: #76736d; font-size: 11px;">(สิทธิ์ VIP / ยอดครบ)</small>' 
         : "฿40.00";
+    }
+    if (emsLabel) {
+      emsLabel.innerHTML = isFreeShipping 
+        ? '<span style="color: #16a34a; font-weight: 700;">ฟรี ฿0.00</span> <small style="color: #76736d; font-size: 11px;">(สิทธิ์ VIP / ยอดครบ)</small>' 
+        : "฿60.00";
     }
 
     return { 

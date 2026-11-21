@@ -218,10 +218,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (typeof CartManager !== "undefined" && typeof CartManager.openMemberModal === "function") {
           CartManager.openMemberModal();
         } else {
-          const res = ApiService.verifyMember("SUB-202611-1991");
-          if (res && res.success) {
-            showToast(res.message, "success");
-            renderMemberPerks();
+          const query = prompt("กรุณาระบุ Subscription ID หรือเบอร์โทรศัพท์ที่ลงทะเบียนไว้:");
+          if (query) {
+            const res = ApiService.verifyMember(query);
+            if (res && res.success) {
+              showToast(res.message, "success");
+              renderMemberPerks();
+            } else {
+              showToast((res && res.message) || "ไม่พบข้อมูลสมาชิก", "error");
+            }
           }
         }
       });

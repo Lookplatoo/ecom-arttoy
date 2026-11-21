@@ -686,14 +686,14 @@ const MockDB = {
     const product = this.getProductById(productId);
     if (!product) return { success: false, message: 'ไม่พบสินค้า' };
 
-    // ตรวจสอบสิทธิ์เฉพาะสมาชิก Art Toy VIP Club
-    if (product.memberOnly) {
+    // ตรวจสอบสิทธิ์เฉพาะสมาชิก Art Toy VIP Club (Member Only หรือ VIP Pre-Order)
+    if (product.memberOnly || product.vipPreorder || product.status === 'VIP Pre-Order') {
       const activeMember = this.getActiveMember();
       if (!activeMember || activeMember.status !== 'Active') {
         return {
           success: false,
           memberRequired: true,
-          message: 'สินค้ารายการนี้สงวนสิทธิ์เฉพาะสมาชิก Art Toy VIP Club เท่านั้น กรุณายืนยันสิทธิ์สมาชิกก่อนสั่งซื้อ'
+          message: 'สินค้ารายการนี้สงวนสิทธิ์เฉพาะสมาชิก Art Toy VIP Club (VIP Pre-Order) กรุณายืนยันสิทธิ์สมาชิกก่อนสั่งซื้อ'
         };
       }
     }
