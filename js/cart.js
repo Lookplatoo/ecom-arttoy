@@ -113,7 +113,7 @@ const CartManager = {
           <div class="modal-header">
             <div class="modal-title-wrap">
               <span class="member-crown-icon">👑</span>
-              <h3 id="member-modal-title">ยืนยันสิทธิ์สมาชิก Mystery Box Club</h3>
+              <h3 id="member-modal-title">ยืนยันสิทธิ์สมาชิก Art Toy VIP Club</h3>
             </div>
             <button type="button" id="btn-close-member-modal" class="modal-close-btn" aria-label="ปิดหน้าต่างยืนยันสิทธิ์สมาชิก">&times;</button>
           </div>
@@ -194,7 +194,7 @@ const CartManager = {
       `;
     } else {
       slot.innerHTML = `
-        <button type="button" id="btn-header-member-login" class="btn-header-member-login" title="ยืนยันสิทธิ์สมาชิก Mystery Box Club">
+        <button type="button" id="btn-header-member-login" class="btn-header-member-login" title="ยืนยันสิทธิ์สมาชิก Art Toy VIP Club">
           <span class="member-login-icon">👑</span>
           <span class="member-login-text">สิทธิ์สมาชิก VIP</span>
         </button>

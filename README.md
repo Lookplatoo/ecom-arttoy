@@ -1,4 +1,4 @@
-# Art Toy Community — Online Store & Mystery Box Club Prototype
+# Art Toy Community — Online Store & VIP Membership Club Prototype
 
 [![GitHub Pages](https://img.shields.io/badge/Demo-GitHub%20Pages-brightgreen)](https://lookplatoo.github.io/ecom-arttoy/)
 [![Status](https://img.shields.io/badge/Status-Prototype%20Ready-blue)](https://lookplatoo.github.io/ecom-arttoy/)
@@ -6,7 +6,7 @@
 
 > **Live Demo Website:** [https://lookplatoo.github.io/ecom-arttoy/](https://lookplatoo.github.io/ecom-arttoy/)
 
-ต้นแบบเว็บไซต์ร้านค้าออนไลน์ (E-Commerce Store Prototype) สำหรับจำหน่ายอาร์ตทอยโมเดลสะสมของแท้ 100% พร้อมระบบสมาชิกกล่องสุ่มรายเดือน (Monthly Mystery Box Club)  
+ต้นแบบเว็บไซต์ร้านค้าออนไลน์ (E-Commerce Store Prototype) สำหรับจำหน่ายอาร์ตทอยโมเดลสะสมของแท้ 100% พร้อมระบบสมาชิก Art Toy VIP Club (Amazon Prime + Fan Club Model) รายวิชา ITDS294  
 ระบบทำงานแบบ **Standalone 100% บน Client-Side (HTML5, CSS3, Vanilla JavaScript)** ผ่าน MockDB (LocalStorage) โดยไม่ต้องพึ่งพาเซิร์ฟเวอร์ Backend หรือฐานข้อมูลภายนอก สามารถพรีวิว ทดลองสั่งซื้อ และจำลองการบริหารจัดการร้านค้าได้ทันที
 
 ---

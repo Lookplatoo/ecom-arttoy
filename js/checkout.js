@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       banner.innerHTML = `
         <div class="checkout-guest-banner-inner">
           <div class="guest-prompt-text">
-            <span>👑 <strong>คุณเป็นสมาชิก Mystery Box Club หรือไม่?</strong></span>
+            <span>👑 <strong>คุณเป็นสมาชิก Art Toy VIP Club หรือไม่?</strong></span>
             <p>กรอกรหัสสมาชิกหรือเบอร์โทรเพื่อรับส่วนลด 5-15% และสิทธิ์ส่งฟรีทันที</p>
           </div>
           <button type="button" id="btn-checkout-verify-member" class="btn-checkout-verify-link">

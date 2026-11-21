@@ -115,7 +115,7 @@ const DEFAULT_PRODUCTS = [
     category: 'Limited Edition',
     status: 'Available',
     price: 1290.00,
-    description: 'ฟิกเกอร์ Chiikawa ร่างทองคำพรีเมียมเคลือบเงาสุดหรู ผลิตจำนวนจำกัดเพียง 100 ชิ้นทั่วโลก สิทธิ์ในการสั่งซื้อสงวนไว้เป็นพิเศษเฉพาะสมาชิก Mystery Box Club เท่านั้น',
+    description: 'ฟิกเกอร์ Chiikawa ร่างทองคำพรีเมียมเคลือบเงาสุดหรู ผลิตจำนวนจำกัดเพียง 100 ชิ้นทั่วโลก สิทธิ์ในการสั่งซื้อสงวนไว้เป็นพิเศษเฉพาะสมาชิก Art Toy VIP Club เท่านั้น',
     image: 'assets/images/chiikawa.png',
     reference: 'https://chiikawa.fandom.com/wiki/Chiikawa',
     stock: 5,
@@ -160,6 +160,15 @@ const DEFAULT_REVIEWS = {
   ],
   'HACHI-01': [
     { id: 5, name: 'ธีรเดช บ.', rating: 5, date: '5 วันที่แล้ว', comment: 'น้องฮาจิวาเระตัวโปรด งานคุณภาพมาก ลิขสิทธิ์แท้แน่นอน จัดส่งรวดเร็วครับ', verified: true }
+  ],
+  'COLLAB-ARTIST-01': [
+    { id: 101, name: 'กิตติศักดิ์ ร. (VIP Founder)', rating: 5, date: '1 วันที่แล้ว', comment: 'ได้สิทธิ์ VIP Pre-order จองล่วงหน้า 24 ชม. สบายใจมาก ไม่ต้องไปแย่งกดกับบอทหรือซื้อรีเซลราคาพุ่ง 3,000+ บาท งาน Collaboration ละเอียดสวยสมการรอคอยครับ!', verified: true },
+    { id: 102, name: 'วริศรา น. (VIP Member)', rating: 5, date: '3 วันที่แล้ว', comment: 'แพ็กเกจส่งมาหนาแน่นมาก ห่อบับเบิ้ล 3 ชั้น กล่องคมกริบ 100% ถูกใจนักสะสมที่ซีเรียสเรื่องกล่องแบบเราที่สุด ได้ส่วนลด VIP 10% แถมส่งฟรีอีกด้วย คุ้มมากค่ะ', verified: true },
+    { id: 103, name: 'พีรพล ม. (VIP Member)', rating: 5, date: '5 วันที่แล้ว', comment: 'ของแท้ 100% มีใบรับรองและหมายเลขลิมิเต็ด ชวนเพื่อนมาสมัครด้วยกันได้ส่วนลดเพิ่มอีก 100 บาท ระบบสมาชิกแบบนี้ตอบโจทย์แฟนคลับตัวจริงมากครับ', verified: true }
+  ],
+  'SECRET-CHII-01': [
+    { id: 201, name: 'อภิสิทธิ์ ว. (VIP Member)', rating: 5, date: '4 วันที่แล้ว', comment: 'น้องร่างทองเคลือบเงางามมาก สมกับที่เป็นรุ่น Limited สำหรับสมาชิกเท่านั้น ตัวจริงสวยหรูสุดๆ ครับ', verified: true },
+    { id: 202, name: 'พิมพ์ลดา จ. (ผู้ซื้อจริง)', rating: 5, date: '1 สัปดาห์ที่แล้ว', comment: 'หายากมากกก โชคดีที่มีสิทธิ์สมาชิก VIP สั่งซื้อทัน ของแท้แน่นอน บริการจัดส่งไวมากค่ะ', verified: true }
   ]
 };
 
@@ -672,14 +681,14 @@ const MockDB = {
     const product = this.getProductById(productId);
     if (!product) return { success: false, message: 'ไม่พบสินค้า' };
 
-    // ตรวจสอบสิทธิ์เฉพาะสมาชิก Mystery Box Club
+    // ตรวจสอบสิทธิ์เฉพาะสมาชิก Art Toy VIP Club
     if (product.memberOnly) {
       const activeMember = this.getActiveMember();
       if (!activeMember || activeMember.status !== 'Active') {
         return {
           success: false,
           memberRequired: true,
-          message: 'สินค้ารายการนี้สงวนสิทธิ์เฉพาะสมาชิก Mystery Box Club เท่านั้น กรุณายืนยันสิทธิ์สมาชิกก่อนสั่งซื้อ'
+          message: 'สินค้ารายการนี้สงวนสิทธิ์เฉพาะสมาชิก Art Toy VIP Club เท่านั้น กรุณายืนยันสิทธิ์สมาชิกก่อนสั่งซื้อ'
         };
       }
     }
@@ -1015,7 +1024,7 @@ const MockDB = {
     if (!sub.deliveries) sub.deliveries = [];
     const newDelivery = {
       month: deliveryInfo.month || 'เดือนปัจจุบัน',
-      theme: deliveryInfo.theme || 'Mystery Box Collection',
+      theme: deliveryInfo.theme || 'Art Toy VIP Monthly Drop',
       items: deliveryInfo.items || ['Art Toy Mystery Figure'],
       status: deliveryInfo.status || 'Shipped',
       trackingNumber: deliveryInfo.trackingNumber || `FLASH-TH${Math.floor(10000000 + Math.random() * 90000000)}`,

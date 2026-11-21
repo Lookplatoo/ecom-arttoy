@@ -383,9 +383,9 @@
       if (btnSaveDispatch) {
         btnSaveDispatch.addEventListener("click", function () {
           if (!currentModalSubId) return;
-          const theme = document.getElementById("dispatch-theme").value.trim() || "Mystery Box Collection";
+          const theme = document.getElementById("dispatch-theme").value.trim() || "Art Toy VIP Monthly Drop";
           const itemsRaw = document.getElementById("dispatch-items").value.trim();
-          const items = itemsRaw ? itemsRaw.split(",").map(i => i.trim()) : ["Chiikawa Mystery Box Figure"];
+          const items = itemsRaw ? itemsRaw.split(",").map(i => i.trim()) : ["Exclusive Artist Collab Figure"];
           const tracking = document.getElementById("dispatch-tracking").value.trim();
 
           const now = new Date();
