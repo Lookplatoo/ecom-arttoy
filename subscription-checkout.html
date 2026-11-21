@@ -51,13 +51,6 @@
           </svg>
           <span>Tracking</span>
         </a>
-        <a href="team.html" class="nav-item">
-          <svg class="nav-icon" width="22" height="22" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M7.5 30V25C7.5 21.134 10.634 18 14.5 18H21.5C25.366 18 28.5 21.134 28.5 25V30"/>
-            <path d="M24 12C24 15.3137 21.3137 18 18 18C14.6863 18 12 15.3137 12 12C12 8.68629 14.6863 6 18 6C21.3137 6 24 8.68629 24 12Z"/>
-          </svg>
-          <span>About Us</span>
-        </a>
       </nav>
 
       <div id="nav-brand-group" class="header-actions-group">
@@ -162,9 +155,28 @@
               </div>
             </div>
 
+            <!-- Step 3: Referral Program Code Input (รายงาน ITDS294 หน้า 9, 15) -->
+            <div style="margin-top: 20px; padding: 16px; background: #fffdfa; border: 1px dashed #d97706; border-radius: 8px;">
+              <label for="sub-referral-input" style="display: block; font-family: var(--font-th); font-size: 14px; font-weight: 700; color: #b45309; margin-bottom: 6px;">
+                🎁 มีรหัสผู้แนะนำ (Referral Code) หรือไม่?
+              </label>
+              <div style="display: flex; gap: 8px;">
+                <input type="text" id="sub-referral-input" placeholder="เช่น VIP-KITTIKUN96 หรือ ARTTOY100" style="flex: 1; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-family: monospace; text-transform: uppercase;">
+                <button type="button" id="btn-apply-referral" class="btn-secondary-action" style="padding: 10px 16px; font-size: 13px; font-weight: 600; white-space: nowrap;">
+                  ใช้รหัส
+                </button>
+              </div>
+              <div id="referral-status-msg" style="margin-top: 6px; font-family: var(--font-th); font-size: 12.5px; display: none;"></div>
+            </div>
+
             <!-- Agreement -->
             <div style="margin-top: 20px; padding: 14px; background: #fdfbf7; border: 1px solid #e8e5dc; border-radius: 8px; font-family: var(--font-th); font-size: 13px; color: #5a544f; line-height: 1.6;">
               <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                <input type="checkbox" id="sub-agree-check" checked style="margin-top: 3px;">
+                <span>ฉันรับทราบและยอมรับเงื่อนไขการตัดรอบบิลอัตโนมัติตามระยะเวลาที่เลือก และสามารถปรับเปลี่ยนที่อยู่ พักรอบส่ง หรือยกเลิกสมาชิกได้ตลอดเวลา</span>
+              </label>
+            </div>
+          </div>
                 <input type="checkbox" id="sub-agree-check" checked style="margin-top: 3px;">
                 <span>ฉันรับทราบและยอมรับเงื่อนไขการตัดรอบบิลอัตโนมัติตามระยะเวลาที่เลือก และสามารถปรับเปลี่ยนที่อยู่ พักรอบส่ง หรือยกเลิกสมาชิกได้ตลอดเวลา</span>
               </label>
@@ -204,20 +216,28 @@
           <div class="summary-breakdown-list">
             <div class="summary-calc-row">
               <span>ค่าสมาชิกงวดแรก</span>
-              <span id="calc-first-charge">฿750.00</span>
+              <span id="calc-first-charge">฿199.00</span>
+            </div>
+            <div class="summary-calc-row" id="calc-referral-row" style="display: none; color: #b45309;">
+              <span>ส่วนลดรหัสผู้แนะนำ (Referral)</span>
+              <span id="calc-referral-discount">-฿100.00</span>
             </div>
             <div class="summary-calc-row">
               <span>ค่าจัดส่งพัสดุด่วน</span>
-              <span style="color: #2b9348; font-weight: 600;">ฟรี</span>
+              <span style="color: #2b9348; font-weight: 600;">ฟรี ฿0</span>
+            </div>
+            <div class="summary-calc-row" style="color: #2563eb;">
+              <span>Reward Points โบนัสเริ่มต้น</span>
+              <span id="calc-welcome-points" style="font-weight: 600;">+100 แต้ม</span>
             </div>
             <div class="summary-total-row" style="margin-top: 12px; padding-top: 12px; border-top: 2px solid var(--color-border-grey);">
               <span>ยอดชำระวันนี้</span>
-              <span class="summary-final-price" id="calc-final-price">฿750.00</span>
+              <span class="summary-final-price" id="calc-final-price">฿199.00</span>
             </div>
           </div>
 
           <div style="margin-top: 20px; font-family: var(--font-th); font-size: 12px; color: var(--color-muted-grey); line-height: 1.5; text-align: center;">
-            หลังสมัครสำเร็จ คุณจะได้รับรหัส Subscription ID สำหรับเข้าสู่หน้าจัดการสมาชิก
+            หลังสมัครสำเร็จ คุณจะได้รับรหัส VIP Subscription ID สำหรับใช้รับส่วนลด 10% และสิทธิ์สั่งจองได้ทันที
           </div>
         </div>
       </aside>
@@ -239,51 +259,117 @@
     document.addEventListener("DOMContentLoaded", function () {
       // 1. Parse Query Parameters
       const urlParams = new URLSearchParams(window.location.search);
-      const planParam = (urlParams.get("plan") || "collector").toLowerCase();
-      const cycleParam = (urlParams.get("cycle") || "monthly").toLowerCase();
+      let planParam = (urlParams.get("plan") || "vip-monthly").toLowerCase();
+      let cycleParam = (urlParams.get("cycle") || "monthly").toLowerCase();
+
+      // Normalize plan parameter
+      if (planParam === 'starter' || planParam === 'collector') planParam = 'vip-monthly';
+      if (planParam === 'secret-master') {
+        planParam = cycleParam === 'annual' ? 'vip-annual' : 'vip-quarterly';
+      }
 
       const PLANS_CONFIG = {
-        'starter': {
-          name: 'Starter Box',
-          desc: '1 กล่องสุ่มของแท้ 100% จากซีรีส์ยอดนิยม + คูปองส่วนลด 5% ทุกเดือน',
-          monthlyPrice: 390,
-          quarterlyPrice: 1090
+        'vip-monthly': {
+          id: 'vip-monthly',
+          name: 'VIP Club (Monthly)',
+          desc: 'ส่วนลด 10% ทุกชิ้นทั้งร้าน + สิทธิ์จอง Pre-Order ล่วงหน้า 24 ชม. + ส่งฟรี ฿0 ทุกออเดอร์',
+          price: 199,
+          bonusPoints: 100,
+          cycleText: 'รายเดือน'
         },
-        'collector': {
-          name: 'Collector Box',
-          desc: '2 กล่องสุ่มของแท้ 100% การันตีไม่ซ้ำรุ่น พร้อมของพรีเมียม Limited และคูปองลด 10%',
-          monthlyPrice: 750,
-          quarterlyPrice: 2090
+        'vip-quarterly': {
+          id: 'vip-quarterly',
+          name: 'VIP 3-Month Pass',
+          desc: 'สิทธิ์ VIP ครบครันตลอด 3 เดือนต่อเนื่อง + โควต้า Pre-Order การันตี 100% + โบนัส 200 แต้ม',
+          price: 540,
+          bonusPoints: 200,
+          cycleText: 'ราย 3 เดือน'
         },
-        'secret-master': {
-          name: 'Secret Master',
-          desc: '3-4 กล่องสุ่มของแท้ ลุ้น Secret Rare เพิ่ม 3 เท่า + สิทธิ์จอง Limited Edition ล่วงหน้า',
-          monthlyPrice: 1390,
-          quarterlyPrice: 3890
+        'vip-annual': {
+          id: 'vip-annual',
+          name: 'VIP Founder Annual',
+          desc: 'สิทธิ์ VIP รายปีสูงสุด + ฟรี กล่อง Secret Rare Master Box (฿1,200) + โบนัส 500 แต้ม',
+          price: 1990,
+          bonusPoints: 500,
+          cycleText: 'รายปี (Founder)'
         }
       };
 
-      const selectedPlan = PLANS_CONFIG[planParam] || PLANS_CONFIG['collector'];
-      const isQuarterly = cycleParam === 'quarterly';
-      const finalPrice = isQuarterly ? selectedPlan.quarterlyPrice : selectedPlan.monthlyPrice;
+      const selectedPlan = PLANS_CONFIG[planParam] || PLANS_CONFIG['vip-monthly'];
+      let basePrice = selectedPlan.price;
+      let appliedReferralDiscount = 0;
+      let verifiedReferralCode = null;
+
+      function renderPricing() {
+        const chargedPrice = Math.max(0, basePrice - appliedReferralDiscount);
+        document.getElementById("calc-first-charge").textContent = `฿${basePrice.toFixed(2)}`;
+        document.getElementById("calc-final-price").textContent = `฿${chargedPrice.toFixed(2)}`;
+
+        const referralRow = document.getElementById("calc-referral-row");
+        if (appliedReferralDiscount > 0) {
+          referralRow.style.display = "flex";
+          document.getElementById("calc-referral-discount").textContent = `-฿${appliedReferralDiscount.toFixed(2)}`;
+        } else {
+          referralRow.style.display = "none";
+        }
+      }
 
       // Update UI elements
       document.getElementById("summary-plan-name").textContent = selectedPlan.name;
-      document.getElementById("summary-plan-cycle").textContent = isQuarterly ? "ราย 3 เดือน" : "รายเดือน";
+      document.getElementById("summary-plan-cycle").textContent = selectedPlan.cycleText;
       document.getElementById("summary-plan-desc").textContent = selectedPlan.desc;
-      document.getElementById("calc-first-charge").textContent = `฿${finalPrice.toFixed(2)}`;
-      document.getElementById("calc-final-price").textContent = `฿${finalPrice.toFixed(2)}`;
+      document.getElementById("calc-welcome-points").textContent = `+${selectedPlan.bonusPoints} แต้ม`;
+      renderPricing();
 
       const now = new Date();
       const nextBillDate = new Date(now);
-      if (isQuarterly) {
+      if (selectedPlan.id === 'vip-annual' || cycleParam === 'annual') {
+        nextBillDate.setFullYear(nextBillDate.getFullYear() + 1);
+      } else if (selectedPlan.id === 'vip-quarterly' || cycleParam === 'quarterly') {
         nextBillDate.setMonth(nextBillDate.getMonth() + 3);
       } else {
         nextBillDate.setMonth(nextBillDate.getMonth() + 1);
       }
       document.getElementById("summary-next-bill").textContent = `${nextBillDate.getDate()} ${nextBillDate.toLocaleDateString('th-TH', { month: 'long', year: 'numeric' })}`;
 
-      // 2. Payment Method selection visual feedback
+      // 2. Referral Code Application (รายงาน ITDS294 หน้า 9, 15)
+      const btnApplyReferral = document.getElementById("btn-apply-referral");
+      const refInput = document.getElementById("sub-referral-input");
+      const refMsg = document.getElementById("referral-status-msg");
+
+      if (btnApplyReferral && refInput) {
+        btnApplyReferral.addEventListener("click", function () {
+          const codeVal = refInput.value.trim();
+          if (!codeVal) {
+            refMsg.style.display = "block";
+            refMsg.style.color = "#dc2626";
+            refMsg.textContent = "กรุณากรอกรหัสผู้แนะนำ";
+            return;
+          }
+
+          const verifyRes = ApiService.verifyReferralCode(codeVal);
+          refMsg.style.display = "block";
+          if (verifyRes.success) {
+            appliedReferralDiscount = verifyRes.discountAmount || 100;
+            verifiedReferralCode = verifyRes.code;
+            refMsg.style.color = "#16a34a";
+            refMsg.textContent = `✓ ${verifyRes.message} (จาก ${verifyRes.referrerName})`;
+            refInput.disabled = true;
+            btnApplyReferral.textContent = "ใช้แล้ว";
+            btnApplyReferral.disabled = true;
+            renderPricing();
+            showToast("ใช้รหัสผู้แนะนำสำเร็จ! ได้รับส่วนลด ฿100", "success");
+          } else {
+            appliedReferralDiscount = 0;
+            verifiedReferralCode = null;
+            refMsg.style.color = "#dc2626";
+            refMsg.textContent = `✕ ${verifyRes.message}`;
+            renderPricing();
+          }
+        });
+      }
+
+      // 3. Payment Method selection visual feedback
       const paymentItems = document.querySelectorAll(".payment-method-item");
       const cardBox = document.getElementById("sub-credit-card-box");
       paymentItems.forEach(item => {
@@ -300,7 +386,7 @@
         });
       });
 
-      // 3. Form Submission
+      // 4. Form Submission
       const form = document.getElementById("sub-checkout-form");
       if (form) {
         form.addEventListener("submit", function (e) {
@@ -320,11 +406,14 @@
           const selectedPaymentRadio = document.querySelector("input[name='sub_payment']:checked");
           const paymentMethod = selectedPaymentRadio ? selectedPaymentRadio.value : "Credit Card";
 
+          const chargedPrice = Math.max(0, basePrice - appliedReferralDiscount);
+
           const subData = {
-            planId: planParam,
+            planId: selectedPlan.id,
             planName: selectedPlan.name,
-            cycle: isQuarterly ? 'quarterly' : 'monthly',
-            price: finalPrice,
+            cycle: selectedPlan.id === 'vip-annual' ? 'annual' : (selectedPlan.id === 'vip-quarterly' ? 'quarterly' : 'monthly'),
+            price: chargedPrice,
+            usedReferralCode: verifiedReferralCode,
             paymentMethod: paymentMethod,
             customer: {
               fullName: fullName,
@@ -336,7 +425,7 @@
 
           const res = ApiService.createSubscription(subData);
           if (res && res.success) {
-            showToast(`สมัครสมาชิกสำเร็จ! รหัสของคุณ: ${res.subscription.subId}`, "success");
+            showToast(`สมัครสมาชิก VIP สำเร็จ! รหัสของคุณ: ${res.subscription.subId}`, "success");
             setTimeout(() => {
               window.location.href = `subscription-manage.html?subId=${encodeURIComponent(res.subscription.subId)}&new=1`;
             }, 800);
@@ -346,6 +435,7 @@
         });
       }
     });
+  </script>
   </script>
 </body>
 </html>

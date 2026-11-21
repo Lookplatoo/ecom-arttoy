@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let selectedShippingCost = 40;
   let selectedShippingMethod = "Flash Express";
   let selectedPaymentMethod = "PromptPay QR";
+  let redeemedPoints = 0; // แต้มสะสมที่เลือกใช้ลดราคา (Reward Points)
 
   // Auto-fill ข้อมูลสมาชิกหากมี session ล็อกอินอยู่
   function autoFillMemberInfo() {
@@ -139,13 +140,39 @@ document.addEventListener("DOMContentLoaded", function () {
       couponDiscountAmount = (subtotal * appliedCoupon.discountPercent) / 100;
     }
 
-    const totalDiscount = memberDiscountAmount + couponDiscountAmount;
+    // ส่วนลดแต้ม Reward Points (1 แต้ม = 1 บาท ตามรายงาน ITDS294 หน้า 7, 10, 14, 15)
+    let pointsDiscountAmount = 0;
+    const availablePoints = isMemberActive ? (activeMember.points !== undefined ? Number(activeMember.points) : ApiService.getMemberPoints(activeMember.subId)) : 0;
+    
+    const pointsBox = document.getElementById("checkout-points-redemption-box");
+    const pointsAvailEl = document.getElementById("co-available-points");
+    if (pointsBox) {
+      if (isMemberActive && availablePoints > 0) {
+        pointsBox.style.display = "block";
+        if (pointsAvailEl) pointsAvailEl.textContent = `${availablePoints} แต้ม (ลดได้ ฿${availablePoints})`;
+      } else {
+        pointsBox.style.display = "none";
+      }
+    }
+
+    if (redeemedPoints > 0) {
+      const maxApplicable = Math.max(0, subtotal - memberDiscountAmount - couponDiscountAmount);
+      pointsDiscountAmount = Math.min(redeemedPoints, availablePoints, maxApplicable);
+    }
+
+    const totalDiscount = memberDiscountAmount + couponDiscountAmount + pointsDiscountAmount;
     const grandTotal = Math.max(0, subtotal - totalDiscount + finalShippingCost);
+    const earnedPoints = Math.floor(grandTotal / 10); // ทุก 10 บาทที่จ่ายจริง ได้รับ 1 แต้มสะสม
 
     const subtotalEl = document.getElementById("co-subtotal-val");
     const memberDiscountRow = document.getElementById("co-member-discount-row");
     const memberDiscountLabel = document.getElementById("co-member-discount-label");
     const memberDiscountVal = document.getElementById("co-member-discount-val");
+
+    const pointsRow = document.getElementById("co-points-discount-row");
+    const pointsUsedCount = document.getElementById("co-points-used-count");
+    const pointsVal = document.getElementById("co-points-discount-val");
+    const earnedPointsEl = document.getElementById("co-earned-points-val");
 
     const discountRow = document.getElementById("co-discount-row");
     const discountVal = document.getElementById("co-discount-val");
@@ -164,6 +191,22 @@ document.addEventListener("DOMContentLoaded", function () {
       } else {
         memberDiscountRow.style.display = "none";
       }
+    }
+
+    // Points Discount Display
+    if (pointsRow) {
+      if (pointsDiscountAmount > 0) {
+        pointsRow.style.display = "flex";
+        if (pointsUsedCount) pointsUsedCount.textContent = pointsDiscountAmount;
+        if (pointsVal) pointsVal.textContent = `-฿${pointsDiscountAmount.toFixed(2)}`;
+      } else {
+        pointsRow.style.display = "none";
+      }
+    }
+
+    // Earned Points Display
+    if (earnedPointsEl) {
+      earnedPointsEl.textContent = `+${earnedPoints} แต้ม`;
     }
 
     // Coupon Display
@@ -198,9 +241,11 @@ document.addEventListener("DOMContentLoaded", function () {
       subtotal, 
       memberDiscountAmount, 
       couponDiscountAmount, 
+      pointsDiscountAmount,
       totalDiscount, 
       finalShippingCost, 
-      grandTotal, 
+      grandTotal,
+      earnedPoints,
       currentCart 
     };
   }
@@ -292,6 +337,45 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // จัดการแลกแต้ม Reward Points (1 แต้ม = 1 บาท)
+  const btnApplyPoints = document.getElementById("btn-apply-points");
+  const inputPoints = document.getElementById("input-points-redeem");
+  const pointsMsg = document.getElementById("points-status-msg");
+
+  if (btnApplyPoints && inputPoints) {
+    btnApplyPoints.addEventListener("click", () => {
+      const activeMember = ApiService.getActiveMember();
+      if (!activeMember) {
+        showToast("กรุณายืนยันสิทธิ์สมาชิกก่อนใช้แต้ม", "error");
+        return;
+      }
+      const available = activeMember.points !== undefined ? Number(activeMember.points) : ApiService.getMemberPoints(activeMember.subId);
+      const requested = parseInt(inputPoints.value, 10);
+      if (isNaN(requested) || requested <= 0) {
+        redeemedPoints = 0;
+        if (pointsMsg) pointsMsg.style.display = "none";
+        renderCheckoutSummary();
+        return;
+      }
+      if (requested > available) {
+        if (pointsMsg) {
+          pointsMsg.style.display = "block";
+          pointsMsg.style.color = "#dc2626";
+          pointsMsg.textContent = `คุณมีแต้มสะสมเพียง ${available} แต้ม`;
+        }
+        return;
+      }
+      redeemedPoints = requested;
+      if (pointsMsg) {
+        pointsMsg.style.display = "block";
+        pointsMsg.style.color = "#16a34a";
+        pointsMsg.textContent = `✓ ใช้ ${redeemedPoints} แต้ม ลด ฿${redeemedPoints}.00 สำเร็จ`;
+      }
+      renderCheckoutSummary();
+      showToast(`ใช้แต้มสะสม ${redeemedPoints} แต้ม แลกส่วนลด ฿${redeemedPoints}`, "success");
+    });
+  }
+
   // ยืนยันการสั่งซื้อ
   const form = document.getElementById("checkout-main-form");
   if (form) {
@@ -348,10 +432,14 @@ document.addEventListener("DOMContentLoaded", function () {
         shippingCost: amounts.finalShippingCost,
         discountAmount: amounts.totalDiscount,
         memberDiscountAmount: amounts.memberDiscountAmount || 0,
+        pointsRedeemed: redeemedPoints,
+        earnedPoints: amounts.earnedPoints,
         couponCode: appliedCoupon ? appliedCoupon.code : "",
         memberId: activeMember ? activeMember.subId : null,
+        memberSubId: activeMember ? activeMember.subId : null,
         memberPlan: activeMember ? activeMember.planName : null,
         totalAmount: amounts.grandTotal,
+        finalTotal: amounts.grandTotal,
         paymentMethod: selectedPaymentMethod
       };
 

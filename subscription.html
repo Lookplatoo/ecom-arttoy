@@ -51,13 +51,6 @@
           </svg>
           <span>Tracking</span>
         </a>
-        <a href="team.html" class="nav-item">
-          <svg class="nav-icon" width="22" height="22" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M7.5 30V25C7.5 21.134 10.634 18 14.5 18H21.5C25.366 18 28.5 21.134 28.5 25V30"/>
-            <path d="M24 12C24 15.3137 21.3137 18 18 18C14.6863 18 12 15.3137 12 12C12 8.68629 14.6863 6 18 6C21.3137 6 24 8.68629 24 12Z"/>
-          </svg>
-          <span>About Us</span>
-        </a>
       </nav>
 
       <div id="nav-brand-group" class="header-actions-group">
@@ -77,10 +70,10 @@
   <main>
     <!-- Hero Section -->
     <section class="sub-hero-section">
-      <span class="sub-hero-badge">Mystery Box Club</span>
-      <h1 class="sub-hero-title">กล่องสุ่มโมเดลของแท้ ส่งตรงถึงบ้านคุณทุกเดือน</h1>
+      <span class="sub-hero-badge">Art Toy VIP Membership Club</span>
+      <h1 class="sub-hero-title">ระบบสมาชิก VIP โมเดลอาร์ตทอย (Amazon Prime + Fan Club Model)</h1>
       <p class="sub-hero-subtitle">
-        เปิดประสบการณ์สะสมสุดพิเศษ ลุ้น Secret Rare รับไอเทม Limited Edition เฉพาะสมาชิก พร้อมรับส่วนลดพิเศษและส่งฟรีทุกรอบ ไม่มีข้อผูกมัด สามารถพักหรือยกเลิกได้ตลอดเวลา
+        รับส่วนลด 10% ทุกชิ้นทั้งร้าน การันตีสิทธิ์สั่งจองสินค้าลิมิเต็ด (VIP Pre-Order) 100% ล่วงหน้า 24 ชม. ไม่ต้องแย่งกับบอท ไม่โดนรีเซลโก่งราคา พร้อมส่งฟรี ฿0 ทุกออเดอร์ไม่มีขั้นต่ำ และสะสมแต้ม Reward Points แลกรับส่วนลดเพิ่ม
       </p>
 
       <!-- Billing Cycle Switcher -->
@@ -88,155 +81,235 @@
         <button type="button" id="btn-cycle-monthly" class="btn-cycle-toggle active" data-cycle="monthly">รายเดือน (Monthly)</button>
         <button type="button" id="btn-cycle-quarterly" class="btn-cycle-toggle" data-cycle="quarterly">
           ราย 3 เดือน (Quarterly)
-          <span class="cycle-save-tag">ประหยัด 7%</span>
+          <span class="cycle-save-tag">ประหยัด 10%</span>
+        </button>
+        <button type="button" id="btn-cycle-annual" class="btn-cycle-toggle" data-cycle="annual">
+          รายปี Founder (Annual)
+          <span class="cycle-save-tag">ประหยัด 20%</span>
         </button>
       </div>
 
       <div style="margin-top: 10px;">
         <a href="subscription-manage.html" style="font-family: var(--font-th); font-size: 13px; color: var(--color-muted-grey); text-decoration: underline;">
-          เป็นสมาชิกอยู่แล้ว? เข้าสู่ระบบจัดการสมาชิกของคุณ
+          เป็นสมาชิกอยู่แล้ว? ตรวจสอบสิทธิ์ สะสมแต้ม และแชร์รหัสชวนเพื่อนในพอร์ทัลสมาชิก
         </a>
       </div>
     </section>
 
     <!-- Pricing Grid -->
     <section class="pricing-grid">
-      <!-- Tier 1: Starter Box -->
-      <article class="pricing-card" data-plan="starter">
-        <h2 class="plan-name">Starter Box</h2>
-        <p class="plan-desc">เหมาะสำหรับผู้เริ่มต้นสะสมที่ต้องการลุ้นโมเดลของแท้คุณภาพสูงเป็นประจำทุกเดือน</p>
+      <!-- Tier 1: VIP Monthly (Featured / Recommended) -->
+      <article class="pricing-card featured" data-plan="vip-monthly">
+        <div class="pricing-badge-popular">คุ้มค่าตั้งแต่ออเดอร์แรก (ยอดนิยม)</div>
+        <h2 class="plan-name">VIP Club (Monthly)</h2>
+        <p class="plan-desc">โมเดล Prime + Fan Club รับส่วนลด 10% และส่งฟรีทุกออเดอร์ ประหยัดทันทีตั้งแต่ออเดอร์แรก</p>
         
         <div class="plan-price-wrap">
-          <span class="plan-price" id="price-starter">฿390</span>
+          <span class="plan-price" id="price-starter">฿199</span>
           <span class="plan-period" id="period-starter">/ เดือน</span>
         </div>
 
         <ul class="plan-features-list">
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>1 กล่องสุ่มของแท้ 100%</strong> จากซีรีส์ยอดนิยม (Chiikawa / Pop Mart)</span>
+            <span><strong>ส่วนลด 10% ทุกชิ้น</strong> ทุกหมวดหมู่ในร้านตลอดอายุสมาชิก</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>จัดส่งฟรีพัสดุด่วนทุกรอบส่ง (วันที่ 5 ของเดือน)</span>
+            <span><strong>การันตีสิทธิ์สั่งจอง (VIP Pre-Order) 100%</strong> ล่วงหน้า 24 ชม. ไม่ต้องแย่งกับบอท</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>คูปองส่วนลด 5% ประจำเดือน สำหรับซื้อสินค้าในร้าน</span>
+            <span><strong>จัดส่งฟรี ฿0 ทุกคำสั่งซื้อ</strong> ไม่มีขั้นต่ำ (EMS / Flash Express)</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>พักหรือยกเลิกสมาชิกได้ตลอดเวลา</span>
+            <span><strong>Reward Points สะสมแต้ม</strong> ทุก ฿10 = 1 แต้ม (50 แต้ม = ฿50)</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span><strong>รับโบนัส 100 แต้มทันที</strong> เมื่อสมัครสมาชิก</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>รหัสชวนเพื่อน (Referral Code) รับคูปอง ฿100 ทั้งคุณและเพื่อน</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>แจ้งเตือนสิทธิ์และสถานะจัดส่งผ่าน Line OA อัตโนมัติ</span>
           </li>
         </ul>
 
-        <a href="subscription-checkout.html?plan=starter&cycle=monthly" class="btn-subscribe-plan" id="btn-sub-starter">สมัคร Starter Box</a>
+        <a href="subscription-checkout.html?plan=vip-monthly&cycle=monthly" class="btn-subscribe-plan" id="btn-sub-starter">สมัครสมาชิก VIP Club (฿199/ด.)</a>
       </article>
 
-      <!-- Tier 2: Collector Box (Featured) -->
-      <article class="pricing-card featured" data-plan="collector">
-        <div class="pricing-badge-popular">ยอดนิยมสำหรับนักสะสม</div>
-        <h2 class="plan-name">Collector Box</h2>
-        <p class="plan-desc">กล่องสุ่มระดับพรีเมียม การันตีไม่ซ้ำรุ่น พร้อมของแถมพิเศษเฉพาะสมาชิก</p>
+      <!-- Tier 2: VIP 3-Month Pass -->
+      <article class="pricing-card" data-plan="vip-quarterly">
+        <h2 class="plan-name">VIP 3-Month Pass</h2>
+        <p class="plan-desc">สำหรับนักสะสมตัวจริง การันตีโควต้าสินค้าลิมิเต็ดตลอด 3 เดือนต่อเนื่อง</p>
         
         <div class="plan-price-wrap">
-          <span class="plan-price" id="price-collector">฿750</span>
-          <span class="plan-period" id="period-collector">/ เดือน</span>
+          <span class="plan-price" id="price-collector">฿540</span>
+          <span class="plan-period" id="period-collector">/ 3 เดือน (เฉลี่ย 180฿/ด.)</span>
         </div>
 
         <ul class="plan-features-list">
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>2 กล่องสุ่มของแท้ 100%</strong> คัดสรรโมเดลยอดนิยมประจำเดือน</span>
+            <span><strong>รับสิทธิ์สมาชิก VIP ครบทุกประการ</strong> (ลด 10% + ส่งฟรี ฿0)</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>การันตีไม่ซ้ำรุ่น</strong> ในรอบบิล 3 เดือน</span>
+            <span><strong>รับโบนัส Reward Points 200 แต้ม</strong> เข้าบัญชีทันที</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>รับของพรีเมียมพิเศษ (Hologram Sticker / Limited Pin)</span>
+            <span>สิทธิ์ Pre-Order สินค้าพิเศษจำนวนจำกัด 3 คอลเลกชันต่อเนื่อง</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>สิทธิ์พรีออเดอร์สินค้าใหม่ล่วงหน้า 24 ชม.</span>
+            <span>รับของขวัญพรีเมียม VIP Sticker Pack และ Card ประจำรุ่น</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>คูปองส่วนลด 10% ทุกเดือน + ส่งด่วนฟรีทุกรอบ</span>
+            <span>พักหรือต่ออายุสมาชิกได้ตลอดเวลา</span>
           </li>
         </ul>
 
-        <a href="subscription-checkout.html?plan=collector&cycle=monthly" class="btn-subscribe-plan" id="btn-sub-collector">สมัคร Collector Box</a>
+        <a href="subscription-checkout.html?plan=vip-quarterly&cycle=quarterly" class="btn-subscribe-plan" id="btn-sub-collector">สมัครแพ็กเกจ 3 เดือน (฿540)</a>
       </article>
 
-      <!-- Tier 3: Secret Master -->
-      <article class="pricing-card" data-plan="secret-master">
-        <h2 class="plan-name">Secret Master</h2>
-        <p class="plan-desc">สำหรับสายล่าตัวซีเคร็ทและลิมิเต็ด รับกล่องยกเซ็ตพร้อมไอเทมระดับ Master Rare</p>
+      <!-- Tier 3: VIP Founder Annual -->
+      <article class="pricing-card" data-plan="vip-annual">
+        <h2 class="plan-name">VIP Founder Annual</h2>
+        <p class="plan-desc">แพ็กเกจสมาชิกรายปีระดับสูงสุด รับสิทธิพิเศษพร้อมของพรีเมียมระดับ Collector Box</p>
         
         <div class="plan-price-wrap">
-          <span class="plan-price" id="price-secret">฿1,390</span>
-          <span class="plan-period" id="period-secret">/ เดือน</span>
+          <span class="plan-price" id="price-secret">฿1,990</span>
+          <span class="plan-period" id="period-secret">/ ปี (เฉลี่ย 165฿/ด.)</span>
         </div>
 
         <ul class="plan-features-list">
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>3-4 กล่องสุ่มของแท้</strong> ลิขสิทธิ์แท้พร้อมฟิกเกอร์สเปเชียลนำเข้า</span>
+            <span><strong>รับฟรี! กล่อง Secret Rare Collector Pack</strong> มูลค่า ฿1,200 ทันที</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span><strong>โอกาสลุ้น Secret Rare เพิ่ม 3 เท่า</strong> ในทุกกล่อง</span>
+            <span><strong>รับโบนัส Reward Points 500 แต้ม</strong> (แลกส่วนลดได้ ฿500)</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>สิทธิ์ซื้อสินค้า Limited Edition เป็นกลุ่มแรก (Priority Access)</span>
+            <span>ลด 10% ทุกออเดอร์ + ส่งด่วนฟรี ฿0 ตลอดทั้ง 365 วัน</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>รับของขวัญวันเกิดพิเศษเฉพาะสมาชิก Master</span>
+            <span>สิทธิ์ VIP Pre-Order ลำดับต้น การันตีสินค้า Limited ไม่ตกหล่น 100%</span>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            <span>คูปองส่วนลด 15% ตลอดอายุสมาชิก + ส่งด่วนพิเศษฟรี</span>
+            <span>ของขวัญเซอร์ไพรส์วันเกิด Exclusive Art Toy จัดส่งตรงถึงบ้าน</span>
           </li>
         </ul>
 
-        <a href="subscription-checkout.html?plan=secret-master&cycle=monthly" class="btn-subscribe-plan" id="btn-sub-secret">สมัคร Secret Master</a>
+        <a href="subscription-checkout.html?plan=vip-annual&cycle=annual" class="btn-subscribe-plan" id="btn-sub-secret">สมัคร Founder รายปี (฿1,990)</a>
       </article>
+    </section>
+
+    <!-- Break-Even Comparison Section (รายงาน ITDS294 หน้า 14) -->
+    <section class="breakeven-section" style="max-width: 1000px; margin: 40px auto; padding: 0 16px;">
+      <div style="background: linear-gradient(135deg, #1f2937, #111827); color: #fff; border-radius: 16px; padding: 32px 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+        <div style="text-align: center; margin-bottom: 24px;">
+          <span style="background: #e65100; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px;">
+            Value Proposition • ตารางพิสูจน์ความคุ้มค่า (รายงาน ITDS294 หน้า 14)
+          </span>
+          <h2 style="font-family: var(--font-th); font-size: 24px; font-weight: 700; margin-top: 10px; color: #fff;">
+            ซื้อเพียง 1 ชิ้น ก็ประหยัดคุ้มค่าสมาชิก ฿199 ทันที!
+          </h2>
+          <p style="font-family: var(--font-th); font-size: 14px; color: #9ca3af; margin-top: 6px;">
+            เปรียบเทียบการสั่งจองสินค้าลิมิเต็ด "น้องฮาจิวาเระ x Artist Collab" (ราคาปกติ ฿1,500) ระหว่างรอบปกติ/ตลาดรีเซล กับ สมาชิก VIP Club
+          </p>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; font-family: var(--font-th); font-size: 14px; text-align: left;">
+            <thead>
+              <tr style="border-bottom: 2px solid #374151; color: #e5e7eb;">
+                <th style="padding: 12px 16px;">รายการเปรียบเทียบ</th>
+                <th style="padding: 12px 16px; color: #f87171;">ลูกค้าทั่วไป / ตลาดรีเซล</th>
+                <th style="padding: 12px 16px; color: #34d399; background: rgba(52, 211, 153, 0.1); border-radius: 8px 8px 0 0;">
+                  ★ สมาชิก VIP Club (฿199/ด.)
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #374151;">
+                <td style="padding: 12px 16px; font-weight: 600;">ราคาสินค้า Limited Collab</td>
+                <td style="padding: 12px 16px; color: #fca5a5;">฿1,500 (หรือรีเซลโก่งราคา ฿2,200)</td>
+                <td style="padding: 12px 16px; color: #6ee7b7; font-weight: 700; background: rgba(52, 211, 153, 0.05);">฿1,350 (ลด 10% ทันที ฿150)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #374151;">
+                <td style="padding: 12px 16px; font-weight: 600;">ค่าจัดส่งพัสดุด่วน</td>
+                <td style="padding: 12px 16px; color: #fca5a5;">฿50</td>
+                <td style="padding: 12px 16px; color: #6ee7b7; font-weight: 700; background: rgba(52, 211, 153, 0.05);">฿0 (ส่งฟรีทุกออเดอร์)</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #374151;">
+                <td style="padding: 12px 16px; font-weight: 600;">การันตีสิทธิ์สั่งจอง (Pre-Order)</td>
+                <td style="padding: 12px 16px; color: #fca5a5;">ไม่การันตี (ของหมดใน 3 วินาที)</td>
+                <td style="padding: 12px 16px; color: #6ee7b7; font-weight: 700; background: rgba(52, 211, 153, 0.05);">การันตีได้ 100% สิทธิ์ก่อนใคร 24 ชม.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #374151;">
+                <td style="padding: 12px 16px; font-weight: 600;">แต้มสะสม Reward Points</td>
+                <td style="padding: 12px 16px; color: #9ca3af;">0 แต้ม</td>
+                <td style="padding: 12px 16px; color: #6ee7b7; font-weight: 700; background: rgba(52, 211, 153, 0.05);">ได้รับ 135 แต้ม (มูลค่า ฿135)</td>
+              </tr>
+              <tr style="border-bottom: 2px solid #374151; font-size: 15px;">
+                <td style="padding: 14px 16px; font-weight: 700;">ยอดเงินสุทธิที่จ่าย</td>
+                <td style="padding: 14px 16px; color: #f87171; font-weight: 700;">฿1,550 - ฿2,250</td>
+                <td style="padding: 14px 16px; color: #10b981; font-weight: 800; font-size: 17px; background: rgba(52, 211, 153, 0.15);">
+                  ฿1,350
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="margin-top: 18px; padding: 14px 18px; background: rgba(230, 81, 0, 0.15); border-left: 4px solid #e65100; border-radius: 8px; font-family: var(--font-th); font-size: 13.5px; line-height: 1.6; color: #fed7aa;">
+          <strong>สรุปผลลัพธ์:</strong> สั่งซื้อเพียงชิ้นเดียว คุณประหยัดเงินทันที <strong>฿200</strong> (ส่วนลด ฿150 + ส่งฟรี ฿50) ซึ่ง<strong>มากกว่าค่าสมาชิก VIP ฿199</strong> ตั้งแต่ออเดอร์แรก และยังได้แต้มสะสม 135 คะแนนสำหรับใช้แทนเงินสดในการสั่งซื้อครั้งต่อไป!
+        </div>
+      </div>
     </section>
 
     <!-- How It Works Section -->
     <section class="steps-section">
       <div style="text-align: center; margin-bottom: 24px;">
-        <h2 style="font-family: var(--font-th); font-size: 26px; font-weight: 700;">ขั้นตอนการรับกล่องสุ่มรายเดือน</h2>
-        <p style="font-family: var(--font-th); font-size: 15px; color: var(--color-muted-grey); margin-top: 6px;">สะดวก ง่ายดาย และไม่มีข้อผูกมัดระยะยาว</p>
+        <h2 style="font-family: var(--font-th); font-size: 26px; font-weight: 700;">ขั้นตอนการสมัครและรับสิทธิ์ VIP Club</h2>
+        <p style="font-family: var(--font-th); font-size: 15px; color: var(--color-muted-grey); margin-top: 6px;">สะดวก รวดเร็ว และเริ่มใช้สิทธิ์ลด 10% ได้ทันที</p>
       </div>
 
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-number">1</div>
           <h3 class="step-title">เลือกแพ็กเกจ</h3>
-          <p class="step-desc">เลือกแพ็กเกจที่เหมาะกับคุณ ทั้งแบบ 1 กล่อง, 2 กล่อง หรือระดับ Secret Master</p>
+          <p class="step-desc">เลือกแพ็กเกจ VIP Club เริ่มต้นเพียง ฿199/เดือน หรือสมัครราย 3 เดือน / รายปี เพื่อรับโบนัสแต้มพิเศษ</p>
         </div>
 
         <div class="step-card">
           <div class="step-number">2</div>
-          <h3 class="step-title">ระบุที่อยู่จัดส่ง</h3>
-          <p class="step-desc">กรอกที่อยู่สำหรับรับพัสดุและตั้งค่าช่องทางชำระเงินรอบบิลอัตโนมัติ</p>
+          <h3 class="step-title">ชำระเงินและรับรหัส</h3>
+          <p class="step-desc">ชำระผ่าน PromptPay QR หรือบัตรเครดิต รับรหัสสมาชิก VIP และรับโบนัส 100 Reward Points ทันที</p>
         </div>
 
         <div class="step-card">
           <div class="step-number">3</div>
-          <h3 class="step-title">จัดส่งทุกวันที่ 5</h3>
-          <p class="step-desc">ทีมงานแพ็คบับเบิ้ล 3 ชั้นอย่างแน่นหนาและจัดส่งพัสดุด่วนถึงบ้านคุณทุกวันที่ 5 ของเดือน</p>
+          <h3 class="step-title">ช้อปลด 10% + ส่งฟรี ฿0</h3>
+          <p class="step-desc">สั่งซื้อสินค้าในร้านพร้อมส่วนลด 10% อัตโนมัติ ส่งฟรีทุกคำสั่งซื้อ และจองสินค้า Pre-Order ได้ก่อนใคร</p>
         </div>
 
         <div class="step-card">
           <div class="step-number">4</div>
-          <h3 class="step-title">จัดการได้ตลอดเวลา</h3>
-          <p class="step-desc">ต้องการพักรอบส่ง 1 เดือน หรือยกเลิกสมาชิก สามารถทำได้ด้วยตนเองในพอร์ทัลสมาชิก</p>
+          <h3 class="step-title">ชวนเพื่อนรับ ฿100</h3>
+          <p class="step-desc">แชร์รหัสผู้แนะนำของคุณให้เพื่อน เมื่อเพื่อนสมัคร สมาชิกทั้งคู่จะได้รับคูปองส่วนลด ฿100 ทันที</p>
         </div>
       </div>
     </section>
@@ -244,7 +317,7 @@
     <!-- Feature Comparison Table -->
     <section class="comparison-section">
       <div style="text-align: center; margin-bottom: 24px;">
-        <h2 style="font-family: var(--font-th); font-size: 26px; font-weight: 700;">ตารางเปรียบเทียบสิทธิประโยชน์</h2>
+        <h2 style="font-family: var(--font-th); font-size: 26px; font-weight: 700;">ตารางเปรียบเทียบสิทธิประโยชน์แพ็กเกจ</h2>
       </div>
 
       <div class="comparison-table-wrap">
@@ -252,59 +325,68 @@
           <thead>
             <tr>
               <th>สิทธิประโยชน์</th>
-              <th>Starter Box</th>
-              <th>Collector Box</th>
-              <th>Secret Master</th>
+              <th>ลูกค้าทั่วไป</th>
+              <th>VIP Monthly (฿199)</th>
+              <th>VIP 3-Month (฿540)</th>
+              <th>VIP Annual (฿1,990)</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>จำนวนกล่องสุ่มต่อเดือน</td>
-              <td>1 กล่อง</td>
-              <td>2 กล่อง</td>
-              <td>3-4 กล่อง</td>
+              <td>ส่วนลดสินค้าทุกชิ้นในร้าน</td>
+              <td>ราคาปกติ</td>
+              <td><strong>ลด 10% ทุกชิ้น</strong></td>
+              <td><strong>ลด 10% ทุกชิ้น</strong></td>
+              <td><strong>ลด 10% ทุกชิ้น</strong></td>
             </tr>
             <tr>
-              <td>การันตีโมเดลของแท้ 100%</td>
+              <td>ค่าจัดส่งพัสดุ</td>
+              <td>฿50 ต่อออเดอร์</td>
+              <td><strong>ฟรี ฿0 ทุกออเดอร์</strong></td>
+              <td><strong>ฟรี ฿0 ทุกออเดอร์</strong></td>
+              <td><strong>ฟรี ฿0 ทุกออเดอร์</strong></td>
+            </tr>
+            <tr>
+              <td>สิทธิ์จองสินค้าลิมิเต็ด (VIP Pre-Order)</td>
+              <td>ไม่การันตีสิทธิ์</td>
+              <td>การันตีสิทธิ์ ล่วงหน้า 24 ชม.</td>
+              <td>การันตีสิทธิ์ ล่วงหน้า 24 ชม.</td>
+              <td>การันตีสิทธิ์ Priority อันดับหนึ่ง</td>
+            </tr>
+            <tr>
+              <td>Reward Points สะสมแต้ม</td>
+              <td>-</td>
+              <td>ทุก ฿10 = 1 แต้ม</td>
+              <td>ทุก ฿10 = 1 แต้ม</td>
+              <td>ทุก ฿10 = 1 แต้ม</td>
+            </tr>
+            <tr>
+              <td>แต้มโบนัสเริ่มต้น</td>
+              <td>-</td>
+              <td>100 แต้ม</td>
+              <td>200 แต้ม</td>
+              <td>500 แต้ม</td>
+            </tr>
+            <tr>
+              <td>รหัสชวนเพื่อนรับคูปอง ฿100</td>
+              <td>-</td>
               <td>รองรับ</td>
               <td>รองรับ</td>
               <td>รองรับ</td>
             </tr>
             <tr>
-              <td>การันตีไม่ซ้ำรุ่น</td>
+              <td>กล่องของขวัญ Mystery Welcome Pack</td>
               <td>-</td>
-              <td>ไม่ซ้ำใน 3 เดือน</td>
-              <td>ไม่ซ้ำซีรีส์ตลอดชีพ</td>
+              <td>VIP Acrylic & Card</td>
+              <td>VIP Special Sticker Pack</td>
+              <td>Secret Rare Master Box (฿1,200)</td>
             </tr>
             <tr>
-              <td>โอกาสลุ้น Secret Rare</td>
-              <td>ปกติ (1:72)</td>
-              <td>ปกติ (1:72)</td>
-              <td><strong>เพิ่ม 3 เท่า (3:72)</strong></td>
-            </tr>
-            <tr>
-              <td>ของพรีเมียม Limited ประจำรอบ</td>
+              <td>การแจ้งเตือนสิทธิ์ผ่าน Line OA</td>
               <td>-</td>
-              <td>มี</td>
-              <td>มี (ระดับ Exclusive)</td>
-            </tr>
-            <tr>
-              <td>สิทธิ์สั่งจองสินค้าใหม่ล่วงหน้า</td>
-              <td>-</td>
-              <td>24 ชม. ล่วงหน้า</td>
-              <td>48 ชม. ล่วงหน้า + Priority</td>
-            </tr>
-            <tr>
-              <td>คูปองส่วนลดซื้อในร้าน</td>
-              <td>5% ทุกเดือน</td>
-              <td>10% ทุกเดือน</td>
-              <td>15% ตลอดอายุสมาชิก</td>
-            </tr>
-            <tr>
-              <td>ค่าจัดส่ง</td>
-              <td>ฟรี Flash Express</td>
-              <td>ฟรี Flash Express</td>
-              <td>ฟรี บริการด่วนพิเศษ</td>
+              <td>รองรับ</td>
+              <td>รองรับ</td>
+              <td>รองรับ</td>
             </tr>
           </tbody>
         </table>
@@ -318,23 +400,23 @@
       </div>
 
       <div class="faq-card">
-        <h3 class="faq-q">รอบตัดเงินและจัดส่งสินค้าเกิดขึ้นวันไหน?</h3>
-        <p class="faq-a">ระบบจะทำการตัดเงินรอบบิลในวันที่ 1 ของทุกเดือน (หรือตามรอบ 3 เดือน) และจัดส่งกล่องสุ่มออกจากคลังสินค้าในวันที่ 5 ของทุกเดือน พร้อมส่งเลขพัสดุให้คุณติดตามได้ทันที</p>
+        <h3 class="faq-q">ส่วนลด 10% และส่งฟรี ฿0 ใช้ในการซื้อสินค้าได้อย่างไร?</h3>
+        <p class="faq-a">เมื่อคุณเป็นสมาชิก VIP ระบบจะจำลองสิทธิ์ของคุณอัตโนมัติ หรือคุณสามารถกรอก Subscription ID หรือเบอร์โทรศัพท์ที่ลงทะเบียนไว้ในหน้าตะกร้าสินค้าหรือหน้าเช็คเอาท์ (Checkout) ระบบจะคำนวณส่วนลด 10% และปรับค่าจัดส่งเป็น ฿0 ทันที</p>
       </div>
 
       <div class="faq-card">
-        <h3 class="faq-q">ถ้าเดือนไหนไม่อยู่บ้าน สามารถพักรอบส่งชั่วคราวได้หรือไม่?</h3>
-        <p class="faq-a">ได้แน่นอนครับ คุณสามารถเข้าสู่หน้า "จัดการสมาชิก (subscription-manage.html)" แล้วกดปุ่ม "พักสมาชิกชั่วคราว (Pause)" ระบบจะไม่ตัดเงินและจะเลื่อนรอบส่งให้คุณอัตโนมัติ</p>
+        <h3 class="faq-q">สิทธิ์ VIP Pre-Order 24 ชั่วโมง คืออะไร ทำงานอย่างไร?</h3>
+        <p class="faq-a">สำหรับสินค้า Collaboration หรือโมเดลพิเศษจำนวนจำกัด ทางร้านจะเปิดรอบ Pre-Order ให้เฉพาะสมาชิก VIP สั่งจองก่อนเปิดขายรอบสาธารณะ 24 ชั่วโมง ทำให้สมาชิกมั่นใจได้ 100% ว่าจะได้สินค้าของแท้ในราคาป้าย ไม่ต้องต่อคิวแย่งกับโปรแกรมบอท และไม่ต้องซื้อต่อจากพ่อค้าคนกลางในราคารีเซล</p>
       </div>
 
       <div class="faq-card">
-        <h3 class="faq-q">ยกเลิกสมาชิกได้ตลอดเวลาหรือไม่ มีค่าธรรมเนียมไหม?</h3>
-        <p class="faq-a">ไม่มีค่าธรรมเนียมและไม่มีข้อผูกมัดใดๆ ทั้งสิ้น คุณสามารถกดยกเลิกสมาชิกได้ด้วยตนเองตลอดเวลาผ่านหน้าจัดการสมาชิก</p>
+        <h3 class="faq-q">ระบบ Reward Points ทำงานอย่างไร แลกส่วนลดได้อย่างไร?</h3>
+        <p class="faq-a">ทุกคำสั่งซื้อที่คุณชำระเงิน ทุกๆ 10 บาทจะได้รับ 1 แต้ม (เช่น ซื้อ 1,500 บาท ได้รับ 150 แต้ม) สมาชิกสามารถนำแต้มมาใช้เป็นส่วนลดเงินสดได้ในหน้า Checkout (เช่น 50 แต้ม = ลด ฿50, 100 แต้ม = ลด ฿100) โดยไม่มีวันหมดอายุตราบใดที่ยังเป็นสมาชิก</p>
       </div>
 
       <div class="faq-card">
-        <h3 class="faq-q">สินค้าในกล่องเป็นของแท้แน่นอนหรือไม่?</h3>
-        <p class="faq-a">สินค้าทุกชิ้นในกล่อง Mystery Box เป็นสินค้าลิขสิทธิ์แท้ 100% นำเข้าอย่างเป็นทางการ กล่องคมกริบ พร้อมการ์ดและการตรวจสอบสภาพทุกชิ้นก่อนจัดส่ง</p>
+        <h3 class="faq-q">โปรแกรมชวนเพื่อน (Referral Program) ใช้งานอย่างไร?</h3>
+        <p class="faq-a">สมาชิกแต่ละท่านจะมีรหัสผู้แนะนำประจำตัว (เช่น VIP-KITTIKUN96) ในหน้าจัดการสมาชิก คุณสามารถคัดลอกส่งให้เพื่อน เมื่อเพื่อนนำรหัสดังกล่าวไปกรอกขณะสมัครสมาชิก VIP เพื่อนจะได้รับส่วนลดค่าสมัคร ฿100 ทันที และคุณจะได้รับคูปองส่วนลด ฿100 สำหรับการสั่งซื้อครั้งถัดไปเช่นกัน</p>
       </div>
     </section>
   </main>
@@ -357,9 +439,8 @@
         </ul>
       </div>
       <div class="footer-col">
-        <div class="footer-heading">เกี่ยวกับเรา</div>
+        <div class="footer-heading">ระบบผู้ดูแล</div>
         <ul class="footer-links">
-          <li><a href="team.html">ผู้ก่อตั้งและทีมงาน</a></li>
           <li><a href="login.html">เข้าสู่ระบบแอดมิน</a></li>
         </ul>
       </div>
@@ -373,59 +454,43 @@
   <script src="js/api.js"></script>
   <script src="js/cart.js"></script>
   <script>
-    // Toggle Monthly vs Quarterly Billing Cycle
+    // Toggle Billing Cycle (Monthly / Quarterly / Annual)
     document.addEventListener("DOMContentLoaded", function () {
       const btnMonthly = document.getElementById("btn-cycle-monthly");
       const btnQuarterly = document.getElementById("btn-cycle-quarterly");
+      const btnAnnual = document.getElementById("btn-cycle-annual");
 
       const priceStarter = document.getElementById("price-starter");
       const periodStarter = document.getElementById("period-starter");
       const btnSubStarter = document.getElementById("btn-sub-starter");
 
-      const priceCollector = document.getElementById("price-collector");
-      const periodCollector = document.getElementById("period-collector");
-      const btnSubCollector = document.getElementById("btn-sub-collector");
-
-      const priceSecret = document.getElementById("price-secret");
-      const periodSecret = document.getElementById("period-secret");
-      const btnSubSecret = document.getElementById("btn-sub-secret");
-
       function setCycle(cycle) {
-        if (cycle === 'quarterly') {
-          btnMonthly.classList.remove("active");
-          btnQuarterly.classList.add("active");
+        [btnMonthly, btnQuarterly, btnAnnual].forEach(b => b && b.classList.remove("active"));
 
-          priceStarter.textContent = "฿1,090";
-          periodStarter.textContent = "/ 3 เดือน (เฉลี่ย 363฿/ด.)";
-          btnSubStarter.href = "subscription-checkout.html?plan=starter&cycle=quarterly";
-
-          priceCollector.textContent = "฿2,090";
-          periodCollector.textContent = "/ 3 เดือน (เฉลี่ย 696฿/ด.)";
-          btnSubCollector.href = "subscription-checkout.html?plan=collector&cycle=quarterly";
-
-          priceSecret.textContent = "฿3,890";
-          periodSecret.textContent = "/ 3 เดือน (เฉลี่ย 1,296฿/ด.)";
-          btnSubSecret.href = "subscription-checkout.html?plan=secret-master&cycle=quarterly";
+        if (cycle === 'annual') {
+          if (btnAnnual) btnAnnual.classList.add("active");
+          priceStarter.textContent = "฿1,990";
+          periodStarter.textContent = "/ ปี (เฉลี่ย 165฿/ด.)";
+          btnSubStarter.textContent = "สมัคร Founder รายปี (฿1,990)";
+          btnSubStarter.href = "subscription-checkout.html?plan=vip-annual&cycle=annual";
+        } else if (cycle === 'quarterly') {
+          if (btnQuarterly) btnQuarterly.classList.add("active");
+          priceStarter.textContent = "฿540";
+          periodStarter.textContent = "/ 3 เดือน (เฉลี่ย 180฿/ด.)";
+          btnSubStarter.textContent = "สมัครสมาชิก 3 เดือน (฿540)";
+          btnSubStarter.href = "subscription-checkout.html?plan=vip-quarterly&cycle=quarterly";
         } else {
-          btnMonthly.classList.add("active");
-          btnQuarterly.classList.remove("active");
-
-          priceStarter.textContent = "฿390";
+          if (btnMonthly) btnMonthly.classList.add("active");
+          priceStarter.textContent = "฿199";
           periodStarter.textContent = "/ เดือน";
-          btnSubStarter.href = "subscription-checkout.html?plan=starter&cycle=monthly";
-
-          priceCollector.textContent = "฿750";
-          periodCollector.textContent = "/ เดือน";
-          btnSubCollector.href = "subscription-checkout.html?plan=collector&cycle=monthly";
-
-          priceSecret.textContent = "฿1,390";
-          periodSecret.textContent = "/ เดือน";
-          btnSubSecret.href = "subscription-checkout.html?plan=secret-master&cycle=monthly";
+          btnSubStarter.textContent = "สมัครสมาชิก VIP Club (฿199/ด.)";
+          btnSubStarter.href = "subscription-checkout.html?plan=vip-monthly&cycle=monthly";
         }
       }
 
       if (btnMonthly) btnMonthly.addEventListener("click", () => setCycle("monthly"));
       if (btnQuarterly) btnQuarterly.addEventListener("click", () => setCycle("quarterly"));
+      if (btnAnnual) btnAnnual.addEventListener("click", () => setCycle("annual"));
     });
   </script>
 </body>

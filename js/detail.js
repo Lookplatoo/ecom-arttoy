@@ -65,42 +65,53 @@ document.addEventListener("DOMContentLoaded", async function () {
     priceElement.textContent = `฿${Number(product.price).toFixed(2)}`;
   }
 
-  // 5.1 อัปเดตราคาสมาชิกและสถานะ Member Exclusive Drop
+  // 5.1 อัปเดตราคาสมาชิกและสถานะ Member Exclusive Drop / VIP Pre-Order (รายงาน ITDS294 หน้า 5, 7, 13, 14, 15)
   function renderMemberPerks() {
     const memberPriceBox = document.getElementById("detail-member-price-box");
     const lockContainer = document.getElementById("detail-member-lock-container");
     const actionButtonsWrap = document.getElementById("detail-action-buttons-wrap") || document.querySelector(".detail-action-buttons");
+    const btnAddCart = document.getElementById("btn-add-cart-detail");
+    const btnBuyNow = document.getElementById("btn-buy-now-detail");
     const activeMember = ApiService.getActiveMember();
     const isMemberActive = activeMember && activeMember.status === 'Active';
     const basePrice = Number(product.price) || 0;
+    const isVipPreorder = product.vipPreorder || product.status === 'VIP Pre-Order';
 
     if (memberPriceBox) {
       if (isMemberActive) {
-        const discountedPrice = basePrice * (1 - activeMember.discountPercent / 100);
-        const saveAmt = basePrice * (activeMember.discountPercent / 100);
+        const discountPercent = activeMember.discountPercent || 10;
+        const discountedPrice = basePrice * (1 - discountPercent / 100);
+        const saveAmt = basePrice * (discountPercent / 100);
+        const earnedPoints = Math.floor(discountedPrice / 10);
         memberPriceBox.innerHTML = `
-          <div class="member-price-active-card">
+          <div class="member-price-active-card" style="${isVipPreorder ? 'border-left: 4px solid #e65100;' : ''}">
             <span class="member-price-crown">👑</span>
             <div class="member-price-info">
-              <span class="member-price-tag">ราคาสมาชิกของคุณ (${activeMember.planName} ลด ${activeMember.discountPercent}%)</span>
+              <span class="member-price-tag">${isVipPreorder ? '★ สิทธิ์ VIP Pre-Order Priority (รับส่วนลด VIP 10%)' : `ราคาสมาชิกของคุณ (${activeMember.planName} ลด ${discountPercent}%)`}</span>
               <div class="member-price-row">
                 <span class="member-price-amount">฿${discountedPrice.toFixed(2)}</span>
                 <span class="member-price-savings">ประหยัด ฿${saveAmt.toFixed(2)} + ส่งฟรี ฿0</span>
+              </div>
+              <div style="font-size: 12px; color: #16a34a; font-weight: 600; margin-top: 4px;">
+                🎁 ได้รับแต้มสะสม <strong>+${earnedPoints} Reward Points</strong> เมื่อสั่งซื้อออเดอร์นี้
               </div>
             </div>
           </div>
         `;
       } else {
-        const p15 = basePrice * 0.85;
-        const p5 = basePrice * 0.95;
+        const vipPrice = basePrice * 0.9;
+        const guestPoints = Math.floor(basePrice / 10);
         memberPriceBox.innerHTML = `
           <div class="member-price-guest-card">
             <span class="member-price-crown">👑</span>
             <div class="member-price-info">
-              <span class="member-price-tag">ราคาสมาชิก Mystery Box Club (ลด 5% - 15%)</span>
+              <span class="member-price-tag">ราคาสมาชิก Art Toy VIP Club (ลดทันที 10%)</span>
               <div class="member-price-row">
-                <span class="member-price-amount">฿${p15.toFixed(2)} - ฿${p5.toFixed(2)}</span>
-                <span class="member-price-savings">+ จัดส่งพัสดุด่วนฟรีทุกคำสั่งซื้อ</span>
+                <span class="member-price-amount">฿${vipPrice.toFixed(2)}</span>
+                <span class="member-price-savings">+ จัดส่งฟรี ฿0 ทุกออเดอร์ไม่มีขั้นต่ำ</span>
+              </div>
+              <div style="font-size: 12px; color: #2563eb; margin-top: 4px;">
+                🪙 สะสม Reward Points ได้ <strong>+${guestPoints} แต้ม</strong> (ทุก 10 บาท = 1 แต้ม)
               </div>
             </div>
           </div>
@@ -108,9 +119,53 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     }
 
-    // จัดการสิทธิ์การสั่งซื้อสำหรับสินค้าเฉพาะสมาชิก (Member Only)
+    // จัดการสิทธิ์การสั่งซื้อสำหรับสินค้าเฉพาะสมาชิก (Member Only) หรือ VIP Pre-Order 24h
     if (lockContainer && actionButtonsWrap) {
-      if (product.memberOnly) {
+      if (isVipPreorder) {
+        if (isMemberActive) {
+          actionButtonsWrap.style.display = "flex";
+          if (btnAddCart) {
+            const span = btnAddCart.querySelector("span");
+            if (span) span.textContent = "จองล่วงหน้า (VIP Pre-Order)";
+          }
+          if (btnBuyNow) {
+            const span = btnBuyNow.querySelector("span");
+            if (span) span.textContent = "สั่งจองสิทธิ์ VIP ทันที";
+          }
+          lockContainer.innerHTML = `
+            <div class="member-access-unlocked-pill" style="background: #fff7ed; border-color: #fed7aa; color: #c2410c;">
+              <span class="unlocked-icon">✓</span>
+              <span>คุณได้รับสิทธิ์ <strong>VIP Pre-Order 24h ก่อนใคร</strong> ในฐานะสมาชิก ${activeMember.planName} (การันตีสินค้า 100% ในราคา ฿${(basePrice * 0.9).toFixed(2)})</span>
+            </div>
+          `;
+        } else {
+          actionButtonsWrap.style.display = "none";
+          lockContainer.innerHTML = `
+            <div class="detail-member-lock-card" style="border-top: 4px solid #e65100;">
+              <div class="lock-header">
+                <span class="lock-icon">🔒</span>
+                <h4 style="color: #c2410c;">VIP Pre-Order Priority (สิทธิ์จองพิเศษเฉพาะสมาชิก VIP)</h4>
+              </div>
+              <div style="background: #fef2f2; border: 1px solid #fee2e2; border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-family: var(--font-th); font-size: 13px; color: #991b1b; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                <span>⏳ นับถอยหลังเปิดขายรอบปกติทั่วไป:</span>
+                <strong style="font-family: monospace; font-size: 14px; color: #dc2626;">23 ชม. 45 นาที (สมาชิก VIP จองได้ทันที)</strong>
+              </div>
+              <p class="lock-desc">
+                ผลงาน Collaboration ผลิตจำนวนจำกัดเพียง 200 ชิ้นทั่วโลก เปิดสิทธิ์ Pre-Order ให้สมาชิก VIP Club จองก่อนรอบปกติ 24 ชั่วโมง การันตีได้สินค้า 100% ในราคาลด 10% (เหลือ ฿${(basePrice * 0.9).toFixed(2)}) ไม่ต้องแย่งกับบอท ไม่โดนรีเซลโก่งราคา
+              </p>
+              <div class="lock-actions">
+                <a href="subscription.html" class="btn-unlock-subscribe" style="background: #e65100; border-color: #e65100;">
+                  สมัครสมาชิก VIP เพื่อสั่งจองทันที (฿199/ด.)
+                </a>
+                <button type="button" id="btn-login-member-detail" class="btn-unlock-login">
+                  ยืนยันรหัสสมาชิก VIP
+                </button>
+              </div>
+            </div>
+          `;
+          bindMemberLoginPrompt();
+        }
+      } else if (product.memberOnly) {
         if (isMemberActive) {
           actionButtonsWrap.style.display = "flex";
           lockContainer.innerHTML = `
@@ -125,14 +180,14 @@ document.addEventListener("DOMContentLoaded", async function () {
             <div class="detail-member-lock-card">
               <div class="lock-header">
                 <span class="lock-icon">🔒</span>
-                <h4>สิทธิ์การสั่งซื้อเฉพาะสมาชิก Mystery Box Club</h4>
+                <h4>สิทธิ์การสั่งซื้อเฉพาะสมาชิก VIP Club</h4>
               </div>
               <p class="lock-desc">
-                สินค้ารุ่นพิเศษนี้ผลิตจำนวนจำกัดเพียง 100 ชิ้น สงวนสิทธิ์การสั่งซื้อเฉพาะสมาชิกแพ็กเกจกล่องสุ่มเท่านั้น สมัครสมาชิกเพื่อปลดล็อคสิทธิ์สั่งซื้อพร้อมรับส่วนลดและส่งฟรีทันที
+                สินค้ารุ่นพิเศษนี้ผลิตจำนวนจำกัด สงวนสิทธิ์การสั่งซื้อเฉพาะสมาชิก VIP เท่านั้น สมัครสมาชิกเพื่อปลดล็อคสิทธิ์สั่งซื้อพร้อมรับส่วนลด 10% และส่งฟรีทันที
               </p>
               <div class="lock-actions">
                 <a href="subscription.html" class="btn-unlock-subscribe">
-                  สมัครสมาชิกเพื่อปลดล็อคสิทธิ์
+                  สมัครสมาชิกเพื่อปลดล็อคสิทธิ์ (฿199/ด.)
                 </a>
                 <button type="button" id="btn-login-member-detail" class="btn-unlock-login">
                   ยืนยันรหัสสมาชิก (เข้าสู่ระบบ)
@@ -140,11 +195,30 @@ document.addEventListener("DOMContentLoaded", async function () {
               </div>
             </div>
           `;
+          bindMemberLoginPrompt();
         }
       } else {
         actionButtonsWrap.style.display = "flex";
         lockContainer.innerHTML = "";
       }
+    }
+  }
+
+  function bindMemberLoginPrompt() {
+    const btn = document.getElementById("btn-login-member-detail");
+    if (btn) {
+      btn.addEventListener("click", () => {
+        const query = prompt("กรุณากรอก Subscription ID (เช่น SUB-202611-1991) หรือเบอร์โทรศัพท์ที่ลงทะเบียนไว้:");
+        if (query) {
+          const res = ApiService.verifyMember(query);
+          if (res && res.success) {
+            showToast(res.message, "success");
+            renderMemberPerks();
+          } else {
+            showToast((res && res.message) || "ไม่พบข้อมูลสมาชิก", "error");
+          }
+        }
+      });
     }
   }
 

@@ -124,6 +124,22 @@ const DEFAULT_PRODUCTS = [
     badge: 'Member Only',
     memberOnly: true,
     isFeatured: true
+  },
+  {
+    id: 'COLLAB-ARTIST-01',
+    name: 'น้องฮาจิวาเระ x Artist Collaboration (Limited Pre-Order)',
+    category: 'Limited Edition',
+    status: 'VIP Pre-Order',
+    price: 1500.00,
+    description: 'ผลงาน Collaboration พิเศษระหว่างศิลปินชื่อดังและทางร้าน ผลิตจำนวนจำกัดเพียง 200 ชิ้นทั่วโลก เปิดสิทธิ์จองล่วงหน้า (Pre-order) 100% สำหรับสมาชิก VIP ก่อนเปิดขายรอบปกติ 24 ชั่วโมง การันตีได้สินค้าของแท้ 100% ไม่ต้องต่อคิว ไม่โดนรีเซลโก่งราคา',
+    image: 'assets/images/hachiware.png',
+    reference: 'https://chiikawa.fandom.com/wiki/Hachiware',
+    stock: 20,
+    rating: 5.0,
+    reviewCount: 31,
+    badge: 'VIP Pre-Order',
+    vipPreorder: true,
+    isFeatured: true
   }
 ];
 
@@ -195,16 +211,108 @@ const DEFAULT_ORDERS = [
 
 const DEFAULT_SUBSCRIPTIONS = [
   {
-    subId: 'SUB-202611-1001',
-    planId: 'starter',
-    planName: 'Starter Box',
+    subId: 'SUB-202611-1991',
+    planId: 'vip-monthly',
+    planName: 'VIP Club (Monthly)',
     cycle: 'monthly',
-    price: 390,
+    price: 199,
     startDate: '2026-11-01',
     nextBillingDate: '2026-12-01',
     nextDeliveryDate: '2026-12-05',
     status: 'Active',
     paymentMethod: 'PromptPay QR',
+    points: 150,
+    referralCode: 'VIP-KITTIKUN96',
+    customer: {
+      fullName: 'คุณกิตติคุณ อำนาคะ',
+      phone: '081-234-5678',
+      address: '999 ถนนพุทธมณฑลสาย 4 ตำบลศาลายา อำเภอพุทธมณฑล จังหวัดนครปฐม 73170',
+      note: 'โทรแจ้งล่วงหน้าก่อนส่ง'
+    },
+    deliveries: [
+      {
+        month: 'พฤศจิกายน 2026',
+        theme: 'VIP Welcome Mystery Gift',
+        items: ['Hachiware Exclusive Acrylic Stand', 'VIP Member Sticker Pack'],
+        status: 'Delivered',
+        trackingNumber: 'FLASH-TH19910022',
+        shippedDate: '2026-11-05'
+      }
+    ]
+  },
+  {
+    subId: 'SUB-202611-1992',
+    planId: 'vip-annual',
+    planName: 'VIP Club (Founder Annual)',
+    cycle: 'annual',
+    price: 1990,
+    startDate: '2026-10-15',
+    nextBillingDate: '2027-10-15',
+    nextDeliveryDate: '2026-12-05',
+    status: 'Active',
+    paymentMethod: 'Credit Card (Visa •••• 4242)',
+    points: 350,
+    referralCode: 'VIP-THITAREE98',
+    customer: {
+      fullName: 'คุณฐิตารีย์ ชัยชนะ',
+      phone: '082-345-6789',
+      address: '456/78 ถนนพหลโยธิน แขวงสามเสนใน เขตพญาไท กรุงเทพมหานคร 10400',
+      note: 'วางไว้ในตู้รับพัสดุหน้าบ้าน'
+    },
+    deliveries: [
+      {
+        month: 'พฤศจิกายน 2026',
+        theme: 'Founder Edition Collector Pack',
+        items: ['Chiikawa Gold Badge', 'Secret Special Postcard'],
+        status: 'Shipped',
+        trackingNumber: 'FLASH-TH19920033',
+        shippedDate: '2026-11-05'
+      }
+    ]
+  },
+  {
+    subId: 'SUB-202611-1993',
+    planId: 'vip-monthly',
+    planName: 'VIP Club (Monthly)',
+    cycle: 'monthly',
+    price: 199,
+    startDate: '2026-09-01',
+    nextBillingDate: '2026-12-01',
+    nextDeliveryDate: '2026-12-05',
+    status: 'Paused',
+    paymentMethod: 'TrueMoney Auto-Debit',
+    points: 40,
+    referralCode: 'VIP-TANAKRIT22',
+    customer: {
+      fullName: 'คุณธนกฤต ศรีมงคล',
+      phone: '089-876-5432',
+      address: '77 อาคารเอสวีซิตี้ ถนนพระราม 3 แขวงบางโพงพาง เขตยานนาวา กรุงเทพฯ 10120',
+      note: 'ฝากที่นิติบุคคลคอนโด'
+    },
+    deliveries: [
+      {
+        month: 'ตุลาคม 2026',
+        theme: 'Autumn Special',
+        items: ['Chiikawa Keychain'],
+        status: 'Delivered',
+        trackingNumber: 'FLASH-TH19930044',
+        shippedDate: '2026-10-05'
+      }
+    ]
+  },
+  {
+    subId: 'SUB-202611-1001',
+    planId: 'vip-monthly',
+    planName: 'VIP Club (Monthly)',
+    cycle: 'monthly',
+    price: 199,
+    startDate: '2026-11-01',
+    nextBillingDate: '2026-12-01',
+    nextDeliveryDate: '2026-12-05',
+    status: 'Active',
+    paymentMethod: 'PromptPay QR',
+    points: 150,
+    referralCode: 'VIP-KITTIKUN96',
     customer: {
       fullName: 'คุณกิตติคุณ อำนาคะ',
       phone: '081-234-5678',
@@ -224,15 +332,17 @@ const DEFAULT_SUBSCRIPTIONS = [
   },
   {
     subId: 'SUB-202611-8842',
-    planId: 'collector',
-    planName: 'Collector Box',
+    planId: 'vip-monthly',
+    planName: 'VIP Club (Monthly)',
     cycle: 'monthly',
-    price: 750,
+    price: 199,
     startDate: '2026-11-01',
     nextBillingDate: '2026-12-01',
     nextDeliveryDate: '2026-12-05',
     status: 'Active',
     paymentMethod: 'Credit Card (Visa •••• 4242)',
+    points: 200,
+    referralCode: 'VIP-PIMMADA88',
     customer: {
       fullName: 'คุณพิมพ์มาดา รัตนกุล',
       phone: '082-345-6789',
@@ -252,15 +362,17 @@ const DEFAULT_SUBSCRIPTIONS = [
   },
   {
     subId: 'SUB-202611-9214',
-    planId: 'secret-master',
-    planName: 'Secret Master',
-    cycle: 'quarterly',
-    price: 3890,
+    planId: 'vip-annual',
+    planName: 'VIP Club (Founder Annual)',
+    cycle: 'annual',
+    price: 1990,
     startDate: '2026-10-15',
     nextBillingDate: '2027-01-15',
     nextDeliveryDate: '2026-12-05',
     status: 'Active',
     paymentMethod: 'PromptPay Recurring',
+    points: 380,
+    referralCode: 'VIP-WORAWUT92',
     customer: {
       fullName: 'คุณวรวุฒิ ศรีสวัสดิ์',
       phone: '089-876-5432',
@@ -288,15 +400,17 @@ const DEFAULT_SUBSCRIPTIONS = [
   },
   {
     subId: 'SUB-202611-7301',
-    planId: 'starter',
-    planName: 'Starter Box',
+    planId: 'vip-monthly',
+    planName: 'VIP Club (Monthly)',
     cycle: 'monthly',
-    price: 390,
+    price: 199,
     startDate: '2026-09-01',
     nextBillingDate: '2026-12-01',
     nextDeliveryDate: '2026-12-05',
     status: 'Paused',
     paymentMethod: 'TrueMoney Auto-Debit',
+    points: 40,
+    referralCode: 'VIP-PIYATHIDA73',
     customer: {
       fullName: 'คุณปิยะธิดา เมธีกุล',
       phone: '085-111-2233',
@@ -346,13 +460,21 @@ const MockDB = {
       localStorage.setItem(STORAGE_KEYS.CART, JSON.stringify([]));
     }
 
-    // Auto-migrate สินค้าพิเศษเฉพาะสมาชิกเข้า localStorage หากยังไม่มี
+    // Auto-migrate สินค้าพิเศษเฉพาะสมาชิก และสินค้า VIP Pre-Order เข้า localStorage หากยังไม่มี
     try {
       let storedProds = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS) || '[]');
-      if (storedProds.length > 0 && !storedProds.some(p => p.id === 'SECRET-CHII-01')) {
-        const secretP = DEFAULT_PRODUCTS.find(p => p.id === 'SECRET-CHII-01');
-        if (secretP) {
-          storedProds.push(secretP);
+      if (storedProds.length > 0) {
+        let changed = false;
+        ['SECRET-CHII-01', 'COLLAB-ARTIST-01'].forEach(prodId => {
+          if (!storedProds.some(p => p.id === prodId)) {
+            const p = DEFAULT_PRODUCTS.find(item => item.id === prodId);
+            if (p) {
+              storedProds.push(p);
+              changed = true;
+            }
+          }
+        });
+        if (changed) {
           localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(storedProds));
         }
       }
@@ -361,10 +483,15 @@ const MockDB = {
     // Auto-migrate สมาชิกรหัสเริ่มต้นหากยังไม่มี
     try {
       let storedSubs = JSON.parse(localStorage.getItem(STORAGE_KEYS.SUBSCRIPTIONS) || '[]');
-      if (storedSubs.length > 0 && !storedSubs.some(s => s.subId === 'SUB-202611-1001')) {
-        const starterS = DEFAULT_SUBSCRIPTIONS.find(s => s.subId === 'SUB-202611-1001');
-        if (starterS) {
-          storedSubs.unshift(starterS);
+      if (storedSubs.length > 0) {
+        let changed = false;
+        DEFAULT_SUBSCRIPTIONS.forEach(defaultSub => {
+          if (!storedSubs.some(s => s.subId === defaultSub.subId)) {
+            storedSubs.unshift(defaultSub);
+            changed = true;
+          }
+        });
+        if (changed) {
           localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(storedSubs));
         }
       }
@@ -636,13 +763,43 @@ const MockDB = {
     const dateStr = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
     const newOrderId = `AT-${dateStr}-${randomHex}`;
 
+    // คำนวณแต้มสะสมที่ได้รับ (1 แต้ม ต่อทุกๆ 10 บาท ตามรายงาน ITDS294 หน้า 7, 10, 14)
+    const orderFinalTotal = Number(orderData.finalTotal) || Number(orderData.total) || 0;
+    const earnedPoints = Math.floor(orderFinalTotal / 10);
+    const pointsRedeemed = Number(orderData.pointsRedeemed) || 0;
+
     const newOrder = {
       orderId: newOrderId,
       createdAt: `${now.toISOString().slice(0, 10)} ${now.toTimeString().slice(0, 5)}`,
       ...orderData,
+      earnedPoints: earnedPoints,
+      pointsRedeemed: pointsRedeemed,
       status: orderData.paymentMethod === 'Cash on Delivery' ? 'Processing' : 'Paid',
       trackingNumber: '-'
     };
+
+    // อัปเดตแต้มสมาชิกหากมีข้อมูลสมาชิก
+    const memberSubId = orderData.memberSubId || (orderData.member && orderData.member.subId);
+    if (memberSubId) {
+      let subs = this.getSubscriptions();
+      const subIndex = subs.findIndex(s => s.subId.toLowerCase() === memberSubId.toLowerCase());
+      if (subIndex !== -1) {
+        let currentPts = Number(subs[subIndex].points) || 0;
+        if (pointsRedeemed > 0) {
+          currentPts = Math.max(0, currentPts - pointsRedeemed);
+        }
+        currentPts += earnedPoints;
+        subs[subIndex].points = currentPts;
+        localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(subs));
+
+        // ซิงค์แต้มกับ activeMember session
+        const activeMember = this.getActiveMember();
+        if (activeMember && activeMember.subId === subs[subIndex].subId) {
+          activeMember.points = currentPts;
+          this.setActiveMember(activeMember);
+        }
+      }
+    }
 
     // Deduct stock from products in storage
     if (Array.isArray(orderData.items) && orderData.items.length > 0) {
@@ -751,9 +908,11 @@ const MockDB = {
     const dateStr = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}`;
     const newSubId = `SUB-${dateStr}-${randomHex}`;
 
-    // คำนวณวันรอบบิลถัดไป (1 เดือน หรือ 3 เดือน)
+    // คำนวณวันรอบบิลถัดไป (1 เดือน หรือ 3 เดือน หรือ 1 ปี)
     const nextBill = new Date(now);
-    if (subData.cycle === 'quarterly') {
+    if (subData.cycle === 'annual') {
+      nextBill.setFullYear(nextBill.getFullYear() + 1);
+    } else if (subData.cycle === 'quarterly') {
       nextBill.setMonth(nextBill.getMonth() + 3);
     } else {
       nextBill.setMonth(nextBill.getMonth() + 1);
@@ -762,32 +921,48 @@ const MockDB = {
     // วันจัดส่งกล่องรอบถัดไป (วันที่ 5 ของเดือนหน้า)
     const nextDelivery = new Date(now.getFullYear(), now.getMonth() + 1, 5);
 
+    // รหัส Referral ประจำตัวสมาชิก (สำหรับชวนเพื่อน รับคูปอง ฿100 ทั้งคู่)
+    const personalReferral = `VIP-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+
     const newSub = {
       subId: newSubId,
-      planId: subData.planId,
-      planName: subData.planName,
+      planId: subData.planId || 'vip-monthly',
+      planName: subData.planName || 'Art Toy VIP Membership Club',
       cycle: subData.cycle || 'monthly',
-      price: Number(subData.price) || 0,
+      price: Number(subData.price) || 199,
       startDate: now.toISOString().slice(0, 10),
       nextBillingDate: nextBill.toISOString().slice(0, 10),
       nextDeliveryDate: nextDelivery.toISOString().slice(0, 10),
       status: 'Active',
       paymentMethod: subData.paymentMethod || 'Credit Card',
+      points: 100, // สมาชิกใหม่รับโบนัส 100 แต้มทันที (Reward Points System)
+      referralCode: personalReferral,
+      usedReferralCode: subData.usedReferralCode || null,
       customer: subData.customer || {},
-      deliveries: []
+      deliveries: [
+        {
+          month: 'พฤศจิกายน 2026',
+          theme: 'VIP Welcome Mystery Gift',
+          items: ['Art Toy Exclusive VIP Keychain', 'VIP Collector Card'],
+          status: 'Processing',
+          trackingNumber: '-',
+          shippedDate: '-'
+        }
+      ]
     };
 
     subs.unshift(newSub);
     localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(subs));
 
-    // ล็อกอินสถานะสมาชิกให้อัตโนมัติทันที
-    const discountPercent = newSub.planId === 'secret-master' ? 15 : (newSub.planId === 'collector' ? 10 : 5);
+    // ล็อกอินสถานะสมาชิกให้อัตโนมัติทันที พร้อมรับสิทธิ์ VIP 10% และส่งฟรี
     const memberSession = {
       subId: newSub.subId,
       planId: newSub.planId,
       planName: newSub.planName,
       cycle: newSub.cycle,
-      discountPercent: discountPercent,
+      discountPercent: 10, // ส่วนลด 10% ทุกรายการตามรายงาน ITDS294
+      points: newSub.points,
+      referralCode: newSub.referralCode,
       customer: newSub.customer || {},
       status: newSub.status
     };
@@ -877,14 +1052,10 @@ const MockDB = {
       };
     }
 
-    let discountPercent = 5;
-    if (found.planId === 'secret-master') {
-      discountPercent = 15;
-    } else if (found.planId === 'collector') {
-      discountPercent = 10;
-    } else {
-      discountPercent = 5;
-    }
+    // สมาชิก VIP ทุกคนรับสิทธิ์ส่วนลด 10% และสิทธิ์ส่งฟรี ฿0 ทุกออเดอร์ (ตามรายงาน ITDS294 หน้า 5, 7, 8, 14)
+    const discountPercent = 10;
+    const memberPoints = found.points !== undefined ? Number(found.points) : 100;
+    const memberReferral = found.referralCode || `VIP-${found.subId.slice(-6)}`;
 
     const memberData = {
       subId: found.subId,
@@ -892,6 +1063,8 @@ const MockDB = {
       planName: found.planName,
       cycle: found.cycle,
       discountPercent: discountPercent,
+      points: memberPoints,
+      referralCode: memberReferral,
       customer: found.customer || {},
       status: found.status
     };
@@ -900,8 +1073,83 @@ const MockDB = {
 
     return {
       success: true,
-      message: `ยืนยันสิทธิ์สมาชิก ${found.planName} สำเร็จ (รับส่วนลด ${discountPercent}% และส่งฟรีทุกออเดอร์)`,
+      message: `ยืนยันสิทธิ์สมาชิก ${found.planName} สำเร็จ (รับส่วนลด VIP 10%, สิทธิ์ Pre-Order ก่อนใคร 24 ชม., ส่งฟรี ฿0, และสะสมแต้ม Reward Points)`,
       member: memberData
+    };
+  },
+
+  // 12. ระบบ Reward Points & Referral Program (ตามรายงาน ITDS294 หน้า 7, 8, 9, 14, 15)
+  getMemberPoints: function (subId) {
+    this.init();
+    const sub = this.getSubscriptionById(subId);
+    return sub && sub.points !== undefined ? Number(sub.points) : 0;
+  },
+
+  addMemberPoints: function (subId, points) {
+    this.init();
+    let subs = this.getSubscriptions();
+    const idx = subs.findIndex(s => s.subId.toLowerCase() === subId.toLowerCase());
+    if (idx === -1) return { success: false, message: 'ไม่พบสมาชิก' };
+
+    subs[idx].points = (Number(subs[idx].points) || 0) + Number(points);
+    localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(subs));
+
+    const activeMember = this.getActiveMember();
+    if (activeMember && activeMember.subId === subs[idx].subId) {
+      activeMember.points = subs[idx].points;
+      this.setActiveMember(activeMember);
+    }
+    return { success: true, points: subs[idx].points };
+  },
+
+  redeemMemberPoints: function (subId, points) {
+    this.init();
+    let subs = this.getSubscriptions();
+    const idx = subs.findIndex(s => s.subId.toLowerCase() === subId.toLowerCase());
+    if (idx === -1) return { success: false, message: 'ไม่พบสมาชิก' };
+
+    const current = Number(subs[idx].points) || 0;
+    if (current < points) {
+      return { success: false, message: 'แต้มสะสมไม่เพียงพอ' };
+    }
+
+    subs[idx].points = current - points;
+    localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(subs));
+
+    const activeMember = this.getActiveMember();
+    if (activeMember && activeMember.subId === subs[idx].subId) {
+      activeMember.points = subs[idx].points;
+      this.setActiveMember(activeMember);
+    }
+    return { success: true, points: subs[idx].points, discount: points };
+  },
+
+  verifyReferralCode: function (code) {
+    this.init();
+    if (!code || typeof code !== 'string') {
+      return { success: false, message: 'กรุณากรอกรหัสผู้แนะนำ' };
+    }
+    const cleanCode = code.trim().toUpperCase();
+    if (!cleanCode) return { success: false, message: 'กรุณากรอกรหัสผู้แนะนำ' };
+
+    // รหัสโค้ดมาตรฐาน หรือรหัสของสมาชิกท่านใดก็ได้
+    const subs = this.getSubscriptions();
+    const matchedSub = subs.find(s => s.referralCode && s.referralCode.toUpperCase() === cleanCode);
+    const standardCodes = ['VIP-FRIEND100', 'ARTTOY100', 'ITDS294', 'PRIME2026'];
+
+    if (matchedSub || standardCodes.includes(cleanCode)) {
+      return {
+        success: true,
+        code: cleanCode,
+        discountAmount: 100, // คูปองส่วนลด ฿100 ทั้งผู้ชวนและเพื่อน ตามรายงาน หน้า 9, 15
+        referrerName: matchedSub ? (matchedSub.customer ? matchedSub.customer.fullName : 'สมาชิก VIP') : 'เพื่อนสมาชิก VIP Club',
+        message: 'ใช้รหัสผู้แนะนำสำเร็จ! คุณได้รับส่วนลดค่าสมัคร ฿100 ทันที'
+      };
+    }
+
+    return {
+      success: false,
+      message: 'ไม่พบรหัสผู้แนะนำนี้ในระบบ หรือรหัสหมดอายุ'
     };
   },
 
@@ -1140,6 +1388,20 @@ const ApiService = {
   },
   clearActiveMember: function () {
     return MockDB.clearActiveMember();
+  },
+
+  // 9. ระบบ Reward Points & Referral (ตามรายงาน ITDS294)
+  getMemberPoints: function (subId) {
+    return MockDB.getMemberPoints(subId);
+  },
+  addMemberPoints: function (subId, points) {
+    return MockDB.addMemberPoints(subId, points);
+  },
+  redeemMemberPoints: function (subId, points) {
+    return MockDB.redeemMemberPoints(subId, points);
+  },
+  verifyReferralCode: function (code) {
+    return MockDB.verifyReferralCode(code);
   }
 };
 

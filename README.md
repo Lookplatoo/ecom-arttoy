@@ -22,13 +22,17 @@
 * **หน้าใบเสร็จสั่งซื้อ ([order-success.html](order-success.html))**: สรุปยอดและรายละเอียดคำสั่งซื้อ พร้อมฟังก์ชันสั่งพิมพ์ใบเสร็จ A4 ขาว-ดำ ผ่าน Print Stylesheet
 * **ระบบติดตามพัสดุ ([order-tracking.html](order-tracking.html))**: Stepper แสดงความคืบหน้า 5 ขั้นตอน (สั่งซื้อ &rarr; ชำระเงิน &rarr; กำลังแพ็ค &rarr; กำลังจัดส่ง &rarr; จัดส่งสำเร็จ) พร้อมไทม์ไลน์บันทึกประวัติการส่งของ
 
-### 2. ระบบสมาชิกกล่องสุ่มรายเดือน (Mystery Box Club Subscription)
+### 2. ระบบสมาชิก VIP Club (Amazon Prime + Fan Club Model)
 * **หน้าแนะนำแพ็กเกจ ([subscription.html](subscription.html))**: 
-  * 3 แพ็กเกจ: **Starter Box** (390฿/ด.), **Collector Box** (750฿/ด. - แนะนำ), และ **Secret Master** (1,390฿/ด.)
-  * สลับรอบบิลรายเดือนหรือราย 3 เดือน (รับส่วนลด 7%)
-  * ตารางเปรียบเทียบสิทธิประโยชน์ และคำถามที่พบบ่อย (FAQ)
-* **หน้าชำระเงินสมาชิก ([subscription-checkout.html](subscription-checkout.html))**: กรอกที่อยู่จัดส่งประจำเดือน และผูกช่องทางตัดรอบบิลอัตโนมัติ
-* **พอร์ทัลจัดการสมาชิกสำหรับลูกค้า ([subscription-manage.html](subscription-manage.html))**: ตรวจสอบรอบส่งถัดไป (วันที่ 5 ของเดือน), พักสมาชิกชั่วคราว (Pause), เปิดใช้งานต่อ (Resume), แก้ไขที่อยู่จัดส่ง, หรือยกเลิกสมาชิกได้ด้วยตนเอง
+  * โมเดลสมาชิกรายเดือน **Art Toy VIP Membership Club (฿199 / เดือน)**, ราย 3 เดือน (฿540), และรายปี Founder (฿1,990)
+  * ส่วนลด 10% ทุกชิ้นทั้งร้านตลอดอายุสมาชิก และจัดส่งฟรี ฿0 ทุกคำสั่งซื้อไม่มีขั้นต่ำ
+  * **สิทธิ์สั่งจองสินค้าลิมิเต็ดล่วงหน้า 24 ชม. (VIP Pre-Order Priority)** การันตีได้สินค้าของแท้ 100% ไม่ต้องแย่งกับบอท
+  * **ตารางพิสูจน์ความคุ้มค่า (Break-Even Value Proposition)** ตามรายงาน ITDS294 หน้า 14 แสดงผลประหยัด ฿200 ทันทีตั้งแต่ออเดอร์แรก
+* **หน้าชำระเงินสมาชิก ([subscription-checkout.html](subscription-checkout.html))**: กรอกที่อยู่จัดส่ง และช่องทางตัดรอบบิลอัตโนมัติ พร้อมช่องใส่ **รหัสผู้แนะนำ (Referral Code)** รับส่วนลด ฿100 ทันที
+* **พอร์ทัลจัดการสมาชิกสำหรับลูกค้า ([subscription-manage.html](subscription-manage.html))**: 
+  * ตรวจสอบสิทธิ์ VIP, ยอดแต้มสะสม **Reward Points** (แลกส่วนลดเงินสดในหน้า Checkout ได้)
+  * **แคมเปญชวนเพื่อน (Referral Program)**: รหัสแนะนำประจำตัว พร้อมปุ่มคัดลอกลิงก์ 1-Click Copy และแชร์ลง TikTok, Line, Facebook
+  * **Line Official Account Simulator**: จำลองหน้าต่างแชทแจ้งเตือนสิทธิ์ VIP 24h, แจ้งเลขพัสดุ และของขวัญวันเกิดผ่าน Line OA ตามรายงาน
 
 ### 3. ระบบผู้ดูแลระบบหลังบ้าน (Admin Management Portal)
 * **หน้าล็อกอิน ([login.html](login.html))**: บัญชีทดสอบแอดมินพร้อมปุ่มกรอกข้อมูลอัตโนมัติ (`Admin` / `1234`)
@@ -42,12 +46,13 @@
 ## สถาปัตยกรรมและการเก็บข้อมูล (Data Architecture)
 
 ระบบใช้ **MockDB (`js/api.js`)** ทำหน้าที่เป็น Local Database จำลองผ่าน Web Storage API (`localStorage`):
-* `arttoy_products_v2`: ข้อมูลแค็ตตาล็อกสินค้าและสต็อกคงเหลือ
+* `arttoy_products_v2`: ข้อมูลแค็ตตาล็อกสินค้าและสต็อกคงเหลือ (รวมสินค้า VIP Pre-Order Collab)
 * `arttoy_cart_v2`: รายการสินค้าในตะกร้าปัจจุบัน
-* `arttoy_orders_v2`: ประวัติคำสั่งซื้อของลูกค้า
-* `arttoy_subscriptions_v2`: ข้อมูลสมาชิกระบบ Subscription และประวัติการรับกล่อง
+* `arttoy_orders_v2`: ประวัติคำสั่งซื้อของลูกค้า พร้อมบันทึกแต้มสะสมที่ได้รับและแต้มที่ใช้
+* `arttoy_subscriptions_v2`: ข้อมูลสมาชิก VIP Club, แต้มสะสม Reward Points, และรหัส Referral
 * `arttoy_reviews_v2`: รีวิวและคะแนนความพึงพอใจของสินค้า
 * `arttoy_admins_v2`: บัญชีผู้ดูแลระบบ
+* `arttoy_member_session`: ข้อมูลสมาชิกที่กำลังล็อกอินใช้งานสิทธิ์ในหน้าเว็บ
 
 ---
 
@@ -59,10 +64,12 @@
   * Password: `1234`
 * **โค้ดส่วนลดร้านค้า (Promo Coupon)**:
   * ใส่โค้ด: `ARTTOY10` (รับส่วนลด 10% ทันทีในหน้าตะกร้าหรือ Checkout)
-* **รหัสสมาชิก Subscription ตัวอย่าง**:
-  * `SUB-202611-8842` (Collector Box - สถานะ Active)
-  * `SUB-202611-9214` (Secret Master - สถานะ Active)
-  * `SUB-202611-7301` (Starter Box - สถานะ Paused)
+* **รหัสสมาชิก VIP Subscription ตัวอย่าง (ตามรายงาน ITDS294)**:
+  * `SUB-202611-1991` (กิตติคุณ อำนาคะ - VIP Monthly ฿199, 150 แต้ม, รหัสชวนเพื่อน: `VIP-KITTIKUN96`)
+  * `SUB-202611-1992` (ฐิตารีย์ ชัยชนะ - VIP Founder Annual ฿1,990, 350 แต้ม, รหัสชวนเพื่อน: `VIP-THITAREE98`)
+  * `SUB-202611-1993` (ธนกฤต ศรีมงคล - VIP Monthly ฿199, สถานะ Paused)
+* **รหัสผู้แนะนำสำหรับสมัครสมาชิก (Referral Code)**:
+  * `VIP-KITTIKUN96` หรือ `ARTTOY100` (รับส่วนลดค่าสมัครสมาชิกทันที ฿100)
 
 ---
 
@@ -70,16 +77,15 @@
 
 ```text
 .
-├── index.html                   # หน้าแรกร้านค้า (Home Page)
-├── search.html                  # หน้ารวมสินค้าและค้นหา (Shop Catalog)
-├── detail.html                  # หน้ารายละเอียดสินค้า (Product Detail)
-├── checkout.html                # หน้าชำระเงินสินค้า (Store Checkout)
-├── order-success.html           # หน้าใบเสร็จยืนยันคำสั่งซื้อ (Receipt)
+├── index.html                   # หน้าแรกร้านค้า (Home Page พร้อมแบนเนอร์ VIP Prime)
+├── search.html                  # หน้ารวมสินค้าและค้นหา (Shop Catalog & VIP Pre-Order)
+├── detail.html                  # หน้ารายละเอียดสินค้า (รองรับ VIP Pre-Order 24h)
+├── checkout.html                # หน้าชำระเงินสินค้า (ระบบแลกแต้ม Reward Points)
+├── order-success.html           # หน้าใบเสร็จยืนยันคำสั่งซื้อ (สรุปสิทธิ์ VIP และแต้มที่ได้)
 ├── order-tracking.html          # หน้าติดตามสถานะพัสดุ 5 ขั้นตอน (Tracking)
-├── subscription.html            # หน้าแพ็กเกจสมาชิกกล่องสุ่มรายเดือน (Club Plans)
-├── subscription-checkout.html   # หน้าชำระเงินและผูกรอบบิลสมาชิก (Sub Checkout)
-├── subscription-manage.html     # พอร์ทัลจัดการสมาชิกสำหรับลูกค้า (Member Portal)
-├── team.html                    # หน้าเกี่ยวกับเราและทีมผู้คัดสรร (About Us)
+├── subscription.html            # หน้าแพ็กเกจสมาชิก VIP Club (Amazon Prime + Fan Club Model)
+├── subscription-checkout.html   # หน้าชำระเงินสมาชิกและใส่รหัส Referral รับส่วนลด ฿100
+├── subscription-manage.html     # พอร์ทัลสมาชิก, แลกแต้ม, แชร์รหัสชวนเพื่อน, Line OA
 ├── login.html                   # หน้าเข้าสู่ระบบผู้ดูแลระบบ (Admin Login)
 ├── admin-products.html          # จัดการสินค้าและสต็อก (Product Management)
 ├── admin-orders.html            # จัดการคำสั่งซื้อลูกค้า (Order Management)
@@ -88,11 +94,11 @@
 ├── css/
 │   └── style.css                # ดีไซน์ Warm Nordic Palette พร้อม Print Stylesheet
 ├── js/
-│   ├── api.js                   # MockDB (LocalStorage) พร้อม Offline Fallback
+│   ├── api.js                   # MockDB พร้อมระบบ VIP, Reward Points, Referral
 │   ├── cart.js                  # ระบบตะกร้าสินค้า Slide-over Drawer
-│   ├── checkout.js              # ตรวจสอบฟอร์มสั่งซื้อและคำนวณยอด
+│   ├── checkout.js              # ตรวจสอบฟอร์มสั่งซื้อ คำนวณส่วนลด VIP และแต้มสะสม
 │   ├── search.js                # ระบบค้นหาและตัวกรองตาม URL Parameters
-│   ├── detail.js                # ควบคุมสต็อกและระบบรีวิวสินค้า
+│   ├── detail.js                # ควบคุมสต็อก, สิทธิ์ VIP Pre-Order และรีวิวสินค้า
 │   ├── admin-products.js        # CRUD สินค้าและปรับสต็อก
 │   ├── admin-orders.js          # จัดการออเดอร์และออกเลขพัสดุ
 │   └── admin-users.js           # จัดการบัญชีผู้ใช้แอดมิน

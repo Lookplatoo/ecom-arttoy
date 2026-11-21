@@ -51,13 +51,6 @@
           </svg>
           <span>Tracking</span>
         </a>
-        <a href="team.html" class="nav-item">
-          <svg class="nav-icon" width="22" height="22" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M7.5 30V25C7.5 21.134 10.634 18 14.5 18H21.5C25.366 18 28.5 21.134 28.5 25V30"/>
-            <path d="M24 12C24 15.3137 21.3137 18 18 18C14.6863 18 12 15.3137 12 12C12 8.68629 14.6863 6 18 6C21.3137 6 24 8.68629 24 12Z"/>
-          </svg>
-          <span>About Us</span>
-        </a>
       </nav>
 
       <div id="nav-brand-group" class="header-actions-group">
@@ -96,10 +89,11 @@
 
       <!-- Quick sample accounts -->
       <div style="margin-top: 14px; font-family: var(--font-th); font-size: 12px; color: var(--color-muted-grey); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <span>ตัวอย่างสมาชิกในระบบ:</span>
-        <button type="button" class="btn-sample-sub" data-id="SUB-202611-8842" style="padding: 4px 10px; background: #f0ede6; border: 1px solid #e0ddd5; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-8842 (Collector Box - Active)</button>
-        <button type="button" class="btn-sample-sub" data-id="SUB-202611-9214" style="padding: 4px 10px; background: #f0ede6; border: 1px solid #e0ddd5; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-9214 (Secret Master - Active)</button>
-        <button type="button" class="btn-sample-sub" data-id="SUB-202611-7301" style="padding: 4px 10px; background: #f0ede6; border: 1px solid #e0ddd5; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-7301 (Starter - Paused)</button>
+        <span>ตัวอย่างสมาชิก VIP ในระบบ:</span>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1991" style="padding: 4px 10px; background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">SUB-202611-1991 (กิตติคุณ - VIP ฿199)</button>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1992" style="padding: 4px 10px; background: #fef3c7; color: #92400e; border: 1px solid #fde68a; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600;">SUB-202611-1992 (ฐิตารีย์ - Founder Annual)</button>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1993" style="padding: 4px 10px; background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-1993 (ธนกฤต - Paused)</button>
+        <button type="button" class="btn-sample-sub" data-id="SUB-202611-1001" style="padding: 4px 10px; background: #f0ede6; border: 1px solid #e0ddd5; border-radius: 6px; cursor: pointer; font-size: 12px;">SUB-202611-1001 (Starter)</button>
       </div>
     </div>
 
@@ -131,6 +125,67 @@
           <button type="submit" class="btn-modal-save">บันทึกที่อยู่ใหม่</button>
         </div>
       </form>
+    </article>
+  </div>
+
+  <!-- Modal: Line Official Account Simulator (รายงาน ITDS294 หน้า 7, 13, 15) -->
+  <div id="line-oa-modal" class="modal-overlay">
+    <article class="modal-dialog-box" style="max-width: 440px; padding: 0; overflow: hidden; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.25);">
+      <!-- Line OA Chat Header -->
+      <div style="background: #06c755; color: #fff; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+            🧸
+          </div>
+          <div>
+            <div style="font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 6px;">
+              Art Toy VIP Club
+              <span style="background: #fff; color: #06c755; font-size: 9.5px; font-weight: 800; padding: 1px 5px; border-radius: 4px;">VERIFIED</span>
+            </div>
+            <div style="font-size: 11px; opacity: 0.9;">Line OA Member Assistant</div>
+          </div>
+        </div>
+        <button type="button" id="btn-close-line-modal" style="background: transparent; border: none; color: #fff; font-size: 24px; cursor: pointer; line-height: 1;">&times;</button>
+      </div>
+
+      <!-- Line OA Chat Body -->
+      <div style="background: #849ebf; padding: 16px; min-height: 380px; max-height: 480px; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; font-family: var(--font-th);">
+        <div style="text-align: center; margin-bottom: 2px;">
+          <span style="background: rgba(0,0,0,0.25); color: #fff; font-size: 11px; padding: 3px 10px; border-radius: 12px;">การแจ้งเตือนสิทธิ์เฉพาะคุณ</span>
+        </div>
+
+        <!-- Bubble 1: Welcome & Membership -->
+        <div style="background: #ffffff; border-radius: 14px 14px 14px 2px; padding: 12px 14px; max-width: 90%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 13px; line-height: 1.5;">
+          <strong style="color: #06c755;">🌟 ยินดีต้อนรับสู่ Art Toy VIP Club!</strong><br>
+          สวัสดีคุณ <span id="line-user-name" style="font-weight: 600;">สมาชิก VIP</span> ขอบคุณที่ร่วมเป็นครอบครัว VIP Club รหัสสมาชิกของคุณคือ <strong id="line-sub-id" style="font-family: monospace; color: #1e3a8a;">-</strong><br>
+          🎁 ได้รับโบนัสต้อนรับ <strong>100 Reward Points</strong> พร้อมรับสิทธิ์ส่วนลด 10% และสิทธิ์ส่งฟรี ฿0 ทุกชิ้นค่ะ!
+        </div>
+
+        <!-- Bubble 2: 24h Priority Pre-Order Alert -->
+        <div style="background: #ffffff; border-radius: 14px 14px 14px 2px; padding: 12px 14px; max-width: 90%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 13px; line-height: 1.5; border-left: 4px solid #e65100;">
+          <div style="font-weight: 700; color: #e65100; font-size: 13.5px; margin-bottom: 4px;">
+            ⏰ [VIP Priority 24h] สิทธิ์จองก่อนใคร การันตี 100%!
+          </div>
+          เปิดจองสินค้า Limited Collab <strong>"น้องฮาจิวาเระ x Artist Collaboration"</strong> เฉพาะสมาชิก VIP ก่อนรอบทั่วไป 24 ชั่วโมง!<br>
+          • ราคาพิเศษ VIP: <strong>฿1,350</strong> (ปกติ ฿1,500)<br>
+          • ส่งฟรี ฿0 ไม่ต้องแย่งกับบอท การันตีได้สินค้า 100%<br>
+          <a href="detail.html?id=COLLAB-ARTIST-01" style="display: inline-block; margin-top: 8px; background: #e65100; color: #fff; padding: 6px 14px; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 12px;">สั่งจองสิทธิ์ VIP ทันที &rarr;</a>
+        </div>
+
+        <!-- Bubble 3: Shipping Update -->
+        <div style="background: #ffffff; border-radius: 14px 14px 14px 2px; padding: 12px 14px; max-width: 90%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 13px; line-height: 1.5;">
+          <strong style="color: #2563eb;">📦 อัปเดตสถานะจัดส่งกล่อง VIP</strong><br>
+          กล่องของขวัญประจำรอบของคุณถูกจัดส่งออกจากคลังเรียบร้อยแล้ว<br>
+          ขนส่ง: Flash Express • เลขพัสดุ: <code id="line-tracking-no" style="font-weight: bold; color: #1e40af;">FLASH-TH19910022</code><br>
+          <a href="order-tracking.html" style="color: #2563eb; text-decoration: underline; font-size: 12px;">คลิกเพื่อติดตามพัสดุ</a>
+        </div>
+      </div>
+
+      <!-- Line OA Footer -->
+      <div style="background: #f4f4f4; padding: 12px 16px; border-top: 1px solid #e5e5e5; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #666; font-family: var(--font-th);">
+        <span>จำลองระบบเชื่อมต่อ Line OA API ตามรายงาน</span>
+        <button type="button" class="btn-primary-action" id="btn-line-modal-ok" style="padding: 6px 16px; font-size: 12px;">ปิดหน้าต่าง</button>
+      </div>
     </article>
   </div>
 
@@ -180,13 +235,15 @@
 
         // ซิงค์สถานะสมาชิกลงใน Session ของร้านค้า
         if (sub.status === 'Active') {
-          const discountPercent = sub.planId === 'secret-master' ? 15 : (sub.planId === 'collector' ? 10 : 5);
+          const discountPercent = 10; // สมาชิก VIP รับส่วนลด 10% ทุกรายการตามรายงาน ITDS294
           ApiService.setActiveMember({
             subId: sub.subId,
             planId: sub.planId,
             planName: sub.planName,
             cycle: sub.cycle,
             discountPercent: discountPercent,
+            points: sub.points !== undefined ? Number(sub.points) : 100,
+            referralCode: sub.referralCode || ('VIP-' + sub.subId.slice(-6)),
             customer: sub.customer || {},
             status: sub.status
           });
@@ -225,6 +282,9 @@
         let actionButtonsHtml = "";
         if (sub.status === 'Active') {
           actionButtonsHtml = `
+            <button type="button" class="btn-portal-action" id="btn-open-line-oa" style="background: #06c755; color: #fff; border-color: #06c755; font-weight: 600;">
+              📱 การแจ้งเตือนผ่าน Line OA
+            </button>
             <button type="button" class="btn-portal-action btn-portal-pause" id="btn-action-pause">
               พักสมาชิกชั่วคราว 1 เดือน (Pause)
             </button>
@@ -237,6 +297,9 @@
           `;
         } else if (sub.status === 'Paused') {
           actionButtonsHtml = `
+            <button type="button" class="btn-portal-action" id="btn-open-line-oa" style="background: #06c755; color: #fff; border-color: #06c755; font-weight: 600;">
+              📱 การแจ้งเตือนผ่าน Line OA
+            </button>
             <button type="button" class="btn-portal-action btn-portal-resume" id="btn-action-resume">
               เปิดใช้งานสมาชิกต่อ (Resume)
             </button>
@@ -255,6 +318,9 @@
           `;
         }
 
+        const memberPoints = sub.points !== undefined ? sub.points : 100;
+        const memberRefCode = sub.referralCode || ('VIP-' + sub.subId.slice(-6));
+
         container.innerHTML = `
           <article class="portal-status-card">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
@@ -262,27 +328,74 @@
                 <span style="font-family: var(--font-en); font-size: 13px; color: var(--color-muted-grey); font-weight: 600;">SUBSCRIPTION ID:</span>
                 <h2 style="font-family: var(--font-en); font-size: 22px; font-weight: 800; color: var(--color-dark); margin-top: 2px;">${sub.subId}</h2>
               </div>
-              <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <button type="button" id="btn-open-line-oa-top" style="background: #e8f9ee; color: #06c755; border: 1px solid #06c755; border-radius: 6px; padding: 4px 10px; font-family: var(--font-th); font-size: 12px; cursor: pointer; font-weight: 600;">
+                  📱 Line OA
+                </button>
                 ${renderStatusBadge(sub.status)}
               </div>
             </div>
 
-            <!-- Member Perks Store Integration Banner -->
+            <!-- Member Perks Store Integration Banner (Amazon Prime + Fan Club Model) -->
             <div class="portal-member-perks-banner">
               <div class="perks-banner-content">
                 <span class="perks-banner-crown">👑</span>
                 <div class="perks-banner-text">
                   <div class="perks-title">สิทธิประโยชน์พิเศษสำหรับสมาชิก <strong>${sub.planName}</strong></div>
                   <div class="perks-badges-row">
-                    <span class="perk-tag">✓ ส่วนลด ${sub.planId === 'secret-master' ? '15%' : (sub.planId === 'collector' ? '10%' : '5%')} ทุกออเดอร์</span>
-                    <span class="perk-tag">✓ ส่งฟรีทุกชิ้น (฿0)</span>
-                    <span class="perk-tag">✓ ปลดล็อคสินค้า Secret Drop</span>
+                    <span class="perk-tag">✓ ส่วนลด VIP 10% ทุกออเดอร์</span>
+                    <span class="perk-tag">✓ ส่งฟรีทุกชิ้น ฿0 ไม่มีขั้นต่ำ</span>
+                    <span class="perk-tag">✓ สิทธิ์ Pre-Order สินค้า Limited ก่อนใคร 24 ชม.</span>
+                    <span class="perk-tag">✓ สะสมแต้ม Reward Points (10บ. = 1แต้ม)</span>
                   </div>
                 </div>
               </div>
               <a href="search.html" class="btn-perks-shop-now">
-                ไปช้อปปิ้งใช้สิทธิ์พิเศษ
+                ไปช้อปปิ้งใช้สิทธิ์ VIP
               </a>
+            </div>
+
+            <!-- Reward Points & Referral Program Cards (รายงาน ITDS294 หน้า 7, 8, 9, 14, 15) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 24px;">
+              <!-- Points Balance -->
+              <div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 12px; padding: 18px; font-family: var(--font-th);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 700; color: #1e40af;">🪙 แต้มสะสมของคุณ (Reward Points)</span>
+                  <span style="background: #2563eb; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;">10 บ. = 1 แต้ม</span>
+                </div>
+                <div style="font-size: 28px; font-weight: 800; color: #1d4ed8; font-family: var(--font-en);">
+                  ${memberPoints} <span style="font-size: 14px; font-weight: 600; font-family: var(--font-th);">คะแนน</span>
+                </div>
+                <div style="font-size: 12.5px; color: #1e40af; margin-top: 4px;">
+                  มีมูลค่าเทียบเท่า <strong>฿${memberPoints}</strong> สามารถเลือกติ๊กใช้เป็นส่วนลดเงินสดในหน้า Checkout ได้ทันที!
+                </div>
+              </div>
+
+              <!-- Referral Program -->
+              <div style="background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 1px solid #fde68a; border-radius: 12px; padding: 18px; font-family: var(--font-th);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-size: 13px; font-weight: 700; color: #92400e;">🎁 แคมเปญชวนเพื่อน (Referral Program)</span>
+                  <span style="background: #d97706; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;">รับคนละ ฿100</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; margin: 8px 0;">
+                  <span style="font-size: 18px; font-weight: 800; font-family: monospace; color: #78350f; background: #fff; padding: 4px 10px; border-radius: 6px; border: 1px dashed #d97706;">
+                    ${memberRefCode}
+                  </span>
+                  <button type="button" class="btn-copy-ref-code" data-code="${memberRefCode}" style="padding: 6px 12px; font-size: 12px; background: #d97706; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                    คัดลอกรหัส
+                  </button>
+                </div>
+                <div style="font-size: 12px; color: #b45309; line-height: 1.4;">
+                  เพื่อนได้ลดค่าสมัคร ฿100 ทันที / คุณได้รับคูปอง ฿100 เมื่อเพื่อนสมัครสำเร็จ
+                </div>
+                <!-- 1-Click Share Buttons -->
+                <div style="display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;">
+                  <button type="button" class="btn-share-social" data-platform="link" data-code="${memberRefCode}" style="padding: 4px 10px; font-size: 11.5px; border: 1px solid #d97706; background: #fff; color: #b45309; border-radius: 4px; cursor: pointer;">📋 คัดลอกลิงก์</button>
+                  <button type="button" class="btn-share-social" data-platform="tiktok" data-code="${memberRefCode}" style="padding: 4px 10px; font-size: 11.5px; border: 1px solid #111; background: #000; color: #fff; border-radius: 4px; cursor: pointer;">TikTok</button>
+                  <button type="button" class="btn-share-social" data-platform="line" data-code="${memberRefCode}" style="padding: 4px 10px; font-size: 11.5px; border: 1px solid #06c755; background: #06c755; color: #fff; border-radius: 4px; cursor: pointer;">Line</button>
+                  <button type="button" class="btn-share-social" data-platform="facebook" data-code="${memberRefCode}" style="padding: 4px 10px; font-size: 11.5px; border: 1px solid #1877f2; background: #1877f2; color: #fff; border-radius: 4px; cursor: pointer;">Facebook</button>
+                </div>
+              </div>
             </div>
 
             <!-- Details Grid -->
@@ -290,7 +403,7 @@
               <div>
                 <span style="color: var(--color-muted-grey); font-size: 12px;">แพ็กเกจสมาชิก</span>
                 <div style="font-weight: 700; color: var(--color-dark); font-size: 16px; margin-top: 2px;">${sub.planName}</div>
-                <small style="color: var(--color-muted-grey);">฿${Number(sub.price).toFixed(2)} / ${sub.cycle === 'quarterly' ? '3 เดือน' : 'เดือน'}</small>
+                <small style="color: var(--color-muted-grey);">฿${Number(sub.price).toFixed(2)} / ${sub.cycle === 'annual' ? 'ปี' : (sub.cycle === 'quarterly' ? '3 เดือน' : 'เดือน')}</small>
               </div>
 
               <div>
@@ -330,6 +443,67 @@
             </div>
           </article>
         `;
+
+        // Bind Line OA Modal open buttons
+        const openLineBtn = document.getElementById("btn-open-line-oa");
+        const openLineBtnTop = document.getElementById("btn-open-line-oa-top");
+        const lineModal = document.getElementById("line-oa-modal");
+        const closeLineBtn = document.getElementById("btn-close-line-modal");
+        const okLineBtn = document.getElementById("btn-line-modal-ok");
+
+        function openLineOA() {
+          if (lineModal) {
+            document.getElementById("line-user-name").textContent = sub.customer.fullName || "สมาชิก VIP";
+            document.getElementById("line-sub-id").textContent = sub.subId;
+            const trackingElem = document.getElementById("line-tracking-no");
+            if (sub.deliveries && sub.deliveries[0] && sub.deliveries[0].trackingNumber) {
+              trackingElem.textContent = sub.deliveries[0].trackingNumber;
+            } else {
+              trackingElem.textContent = "FLASH-TH19910022";
+            }
+            lineModal.classList.add("active");
+          }
+        }
+
+        if (openLineBtn) openLineBtn.addEventListener("click", openLineOA);
+        if (openLineBtnTop) openLineBtnTop.addEventListener("click", openLineOA);
+        if (closeLineBtn) closeLineBtn.addEventListener("click", () => lineModal.classList.remove("active"));
+        if (okLineBtn) okLineBtn.addEventListener("click", () => lineModal.classList.remove("active"));
+
+        // Copy referral code button
+        const copyBtn = container.querySelector(".btn-copy-ref-code");
+        if (copyBtn) {
+          copyBtn.addEventListener("click", function () {
+            const code = this.dataset.code;
+            navigator.clipboard.writeText(code).then(() => {
+              showToast(`คัดลอกรหัสชวนเพื่อน "${code}" แล้ว!`, "success");
+            }).catch(() => {
+              showToast(`รหัสของคุณคือ: ${code}`, "info");
+            });
+          });
+        }
+
+        // Social share buttons
+        container.querySelectorAll(".btn-share-social").forEach(btn => {
+          btn.addEventListener("click", function () {
+            const platform = this.dataset.platform;
+            const code = this.dataset.code;
+            const shareUrl = `${window.location.origin}${window.location.pathname.replace('subscription-manage.html', '')}subscription-checkout.html?ref=${encodeURIComponent(code)}`;
+            if (platform === 'link') {
+              navigator.clipboard.writeText(shareUrl).then(() => {
+                showToast("คัดลอกลิงก์ชวนเพื่อนเรียบร้อยแล้ว!", "success");
+              });
+            } else if (platform === 'tiktok') {
+              navigator.clipboard.writeText(`สมัครสมาชิก Art Toy VIP Club รับส่วนลดทันที ฿100 ด้วยรหัส: ${code} ${shareUrl}`).then(() => {
+                showToast("คัดลอกข้อความและลิงก์สำหรับใส่ใน TikTok Bio / แคปชั่นแล้ว!", "success");
+              });
+            } else if (platform === 'line') {
+              window.open(`https://line.me/R/msg/text/?${encodeURIComponent(`สมัครสมาชิก Art Toy VIP Club รับส่วนลดทันที ฿100! ใช้รหัส ${code} ได้ที่นี่: ${shareUrl}`)}`, '_blank');
+            } else if (platform === 'facebook') {
+              window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`, '_blank');
+            }
+          });
+        });
 
         // Bind Action Events
         const btnPause = document.getElementById("btn-action-pause");
@@ -397,8 +571,8 @@
       if (paramSubId) {
         loadSub(paramSubId);
       } else {
-        // Default to first active sample
-        loadSub("SUB-202611-8842");
+        // Default to first active VIP sample
+        loadSub("SUB-202611-1991");
       }
 
       searchBtn.addEventListener("click", () => {

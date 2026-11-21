@@ -51,13 +51,6 @@
           </svg>
           <span>Tracking</span>
         </a>
-        <a href="team.html" class="nav-item">
-          <svg class="nav-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M7.5 30V25C7.5 21.134 10.634 18 14.5 18H21.5C25.366 18 28.5 21.134 28.5 25V30" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M24 12C24 15.3137 21.3137 18 18 18C14.6863 18 12 15.3137 12 12C12 8.68629 14.6863 6 18 6C21.3137 6 24 8.68629 24 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span>About Us</span>
-        </a>
       </nav>
 
       <div id="nav-brand-group" class="header-actions-group">
@@ -137,6 +130,34 @@
         <div class="trust-info">
           <h3>ระบบติดตามสถานะคำสั่งซื้อ</h3>
           <p>ตรวจสอบความคืบหน้าของพัสดุได้ตลอด 24 ชั่วโมง</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIP Membership Banner (Amazon Prime + Fan Club Model ตามรายงาน ITDS294) -->
+    <section class="home-vip-prime-banner" style="max-width: 1200px; margin: 30px auto; padding: 0 16px;">
+      <div style="background: linear-gradient(135deg, #18181b, #27272a); border: 1px solid #3f3f46; border-radius: 16px; padding: 28px 24px; color: #fff; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.12);">
+        <div style="max-width: 650px;">
+          <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(230, 81, 0, 0.2); border: 1px solid #ea580c; color: #fb923c; font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-bottom: 10px;">
+            <span>👑 PRIME + FAN CLUB MODEL</span>
+            <span>&bull;</span>
+            <span>฿199 / เดือน</span>
+          </div>
+          <h2 style="font-family: var(--font-th); font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px;">
+            Art Toy VIP Membership Club — รับส่วนลด 10% และส่งฟรี ฿0 ทุกออเดอร์
+          </h2>
+          <p style="font-family: var(--font-th); font-size: 13.5px; color: #a1a1aa; line-height: 1.6; margin: 0;">
+            การันตีสิทธิ์สั่งจอง (VIP Pre-Order) 100% ล่วงหน้า 24 ชม. ไม่ต้องแย่งกับบอท ไม่โดนรีเซลโก่งราคา พร้อมสะสมแต้ม Reward Points (10 บาท = 1 แต้ม) และรับคูปอง ฿100 เมื่อชวนเพื่อน
+          </p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <a href="subscription.html" class="btn-primary-action" style="background: #ea580c; border: none; padding: 12px 22px; font-size: 14px; font-weight: 700; border-radius: 8px; text-decoration: none; color: #fff; display: inline-flex; align-items: center; gap: 6px;">
+            <span>สมัครสมาชิก VIP Club</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="subscription-manage.html" class="btn-secondary-action" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 12px 18px; font-size: 14px; font-weight: 600; border-radius: 8px; text-decoration: none; color: #fff;">
+            ตรวจสอบสิทธิ์ VIP
+          </a>
         </div>
       </div>
     </section>
@@ -267,7 +288,8 @@
       const products = await ApiService.getProducts();
       if (!products || products.length === 0) return;
 
-      const featured = products.slice(0, 4);
+      const featuredList = products.filter(p => p.isFeatured);
+      const featured = featuredList.length > 0 ? featuredList.slice(0, 4) : products.slice(0, 4);
       grid.innerHTML = "";
 
       featured.forEach(product => {

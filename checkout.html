@@ -51,13 +51,6 @@
           </svg>
           <span>Tracking</span>
         </a>
-        <a href="team.html" class="nav-item">
-          <svg class="nav-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M7.5 30V25C7.5 21.134 10.634 18 14.5 18H21.5C25.366 18 28.5 21.134 28.5 25V30"/>
-            <path d="M24 12C24 15.3137 21.3137 18 18 18C14.6863 18 12 15.3137 12 12C12 8.68629 14.6863 6 18 6C21.3137 6 24 8.68629 24 12Z"/>
-          </svg>
-          <span>About Us</span>
-        </a>
       </nav>
 
       <div id="nav-brand-group" class="header-actions-group">
@@ -290,6 +283,22 @@
           <button type="button" id="btn-checkout-remove-coupon" class="btn-remove-coupon">&times;</button>
         </div>
 
+        <!-- Reward Points Redemption Box (รายงาน ITDS294 หน้า 7, 8, 10, 14, 15) -->
+        <div id="checkout-points-redemption-box" style="margin-top: 14px; padding: 14px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; font-family: var(--font-th); display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <span style="font-size: 13px; font-weight: 700; color: #1e40af;">🪙 ใช้แต้มสะสมแลกส่วนลด</span>
+            <span id="co-available-points" style="font-size: 12px; font-weight: 700; color: #2563eb;">0 แต้ม</span>
+          </div>
+          <div style="font-size: 12px; color: #3b82f6; margin-bottom: 8px;">
+            1 แต้ม = ส่วนลด ฿1.00 (ทุก 10 บาทที่ซื้อได้รับ 1 แต้ม)
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <input type="number" id="input-points-redeem" min="0" placeholder="ระบุจำนวนแต้ม" style="flex: 1; padding: 8px 10px; border: 1px solid #93c5fd; border-radius: 6px; font-size: 13px;">
+            <button type="button" id="btn-apply-points" class="btn-coupon" style="background: #2563eb; color: #fff; padding: 8px 12px; font-size: 13px; white-space: nowrap;">ใช้แต้ม</button>
+          </div>
+          <div id="points-status-msg" style="font-size: 12px; margin-top: 6px; display: none;"></div>
+        </div>
+
         <!-- รายละเอียดราคาสุทธิ -->
         <div class="cart-summary-breakdown" style="margin-top: 16px;">
           <div class="summary-line">
@@ -300,6 +309,10 @@
             <span id="co-member-discount-label">ส่วนลดสมาชิก</span>
             <span id="co-member-discount-val">-฿0.00</span>
           </div>
+          <div class="summary-line discount-line" id="co-points-discount-row" style="display: none; color: #2563eb;">
+            <span>ส่วนลดแต้ม Reward Points (<span id="co-points-used-count">0</span> แต้ม)</span>
+            <span id="co-points-discount-val">-฿0.00</span>
+          </div>
           <div class="summary-line discount-line" id="co-discount-row" style="display: none;">
             <span>ส่วนลดคูปอง</span>
             <span id="co-discount-val">-฿0.00</span>
@@ -307,6 +320,10 @@
           <div class="summary-line">
             <span>ค่าจัดส่ง</span>
             <span id="co-shipping-val">฿40.00</span>
+          </div>
+          <div class="summary-line" style="color: #16a34a; font-weight: 600; font-size: 12.5px;">
+            <span>แต้มที่จะได้รับจากคำสั่งซื้อนี้</span>
+            <span id="co-earned-points-val">+0 แต้ม</span>
           </div>
           <div class="summary-line total-line">
             <span>ยอดชำระสุทธิ</span>

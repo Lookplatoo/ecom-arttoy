@@ -51,13 +51,6 @@
           </svg>
           <span>Tracking</span>
         </a>
-        <a href="team.html" class="nav-item">
-          <svg class="nav-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M7.5 30V25C7.5 21.134 10.634 18 14.5 18H21.5C25.366 18 28.5 21.134 28.5 25V30"/>
-            <path d="M24 12C24 15.3137 21.3137 18 18 18C14.6863 18 12 15.3137 12 12C12 8.68629 14.6863 6 18 6C21.3137 6 24 8.68629 24 12Z"/>
-          </svg>
-          <span>About Us</span>
-        </a>
       </nav>
 
       <div id="nav-brand-group" class="header-actions-group">
@@ -118,6 +111,18 @@
             <td>
               <span class="admin-order-status-badge status-paid" id="confirmed-status">ชำระเงินเรียบร้อย</span>
             </td>
+          </tr>
+          <tr id="confirmed-member-row" style="display: none;">
+            <td>สิทธิพิเศษ VIP</td>
+            <td id="confirmed-member-val" style="color: #d97706; font-weight: 600;">-</td>
+          </tr>
+          <tr id="confirmed-points-used-row" style="display: none;">
+            <td>แต้มสะสมที่ใช้ลดราคา</td>
+            <td id="confirmed-points-used-val" style="color: #2563eb; font-weight: 600;">-</td>
+          </tr>
+          <tr id="confirmed-points-earned-row" style="display: none;">
+            <td>Reward Points ที่ได้รับ</td>
+            <td id="confirmed-points-earned-val" style="color: #16a34a; font-weight: 700;">-</td>
           </tr>
           <tr>
             <td>ยอดรวมทั้งสิ้น</td>
@@ -190,9 +195,40 @@
       document.getElementById("confirmed-date").textContent = order.createdAt;
       document.getElementById("confirmed-customer").textContent = `${order.customer.fullName} (${order.customer.phone})`;
       document.getElementById("confirmed-address").textContent = order.customer.address;
-      document.getElementById("confirmed-shipping").textContent = `${order.shippingMethod} (ค่าส่ง ฿${order.shippingCost.toFixed(2)})`;
+      document.getElementById("confirmed-shipping").textContent = `${order.shippingMethod} (ค่าส่ง ฿${Number(order.shippingCost || 0).toFixed(2)})`;
       document.getElementById("confirmed-payment").textContent = order.paymentMethod;
-      document.getElementById("confirmed-total").textContent = `฿${Number(order.totalAmount).toFixed(2)}`;
+      document.getElementById("confirmed-total").textContent = `฿${Number(order.totalAmount || order.finalTotal || 0).toFixed(2)}`;
+
+      // Member Benefits Row
+      if (order.memberPlan || order.memberId || order.memberSubId) {
+        const memRow = document.getElementById("confirmed-member-row");
+        const memVal = document.getElementById("confirmed-member-val");
+        if (memRow && memVal) {
+          memRow.style.display = "table-row";
+          memVal.textContent = `👑 สมาชิก ${order.memberPlan || 'VIP Club'} (ลด 10% + ส่งฟรี ฿0)`;
+        }
+      }
+
+      // Points Used Row
+      if (order.pointsRedeemed && Number(order.pointsRedeemed) > 0) {
+        const ptsUsedRow = document.getElementById("confirmed-points-used-row");
+        const ptsUsedVal = document.getElementById("confirmed-points-used-val");
+        if (ptsUsedRow && ptsUsedVal) {
+          ptsUsedRow.style.display = "table-row";
+          ptsUsedVal.textContent = `-฿${Number(order.pointsRedeemed).toFixed(2)} (ใช้ ${order.pointsRedeemed} แต้ม)`;
+        }
+      }
+
+      // Points Earned Row
+      const earned = order.earnedPoints !== undefined ? Number(order.earnedPoints) : Math.floor(Number(order.totalAmount || 0) / 10);
+      if (earned > 0) {
+        const ptsEarnedRow = document.getElementById("confirmed-points-earned-row");
+        const ptsEarnedVal = document.getElementById("confirmed-points-earned-val");
+        if (ptsEarnedRow && ptsEarnedVal) {
+          ptsEarnedRow.style.display = "table-row";
+          ptsEarnedVal.textContent = `+${earned} Reward Points (สะสมเข้าบัญชีสมาชิกแล้ว)`;
+        }
+      }
 
       const trackBtn = document.getElementById("btn-track-this-order");
       if (trackBtn) {
