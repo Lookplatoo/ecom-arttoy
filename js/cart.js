@@ -119,20 +119,20 @@ const CartManager = {
           </div>
           <div class="modal-body">
             <p class="member-modal-desc">
-              กรอก <strong>Subscription ID</strong> (เช่น <code>SUB-202611-8842</code>) หรือ <strong>เบอร์โทรศัพท์</strong> ที่ลงทะเบียนไว้ เพื่อรับส่วนลดประจำระดับ (5-15%) และสิทธิ์ส่งฟรี ฿0 ทุกคำสั่งซื้อ
+              กรอก <strong>Subscription ID</strong> (เช่น <code>SUB-202611-1991</code>) หรือ <strong>เบอร์โทรศัพท์</strong> ที่ลงทะเบียนไว้ เพื่อรับส่วนลดสมาชิก VIP 10% และสิทธิ์ส่งฟรี ฿0 ทุกคำสั่งซื้อ
             </p>
             <div class="member-modal-input-wrap">
               <input type="text" id="input-member-verify" class="form-input member-input" placeholder="ระบุ Subscription ID หรือ เบอร์โทร เช่น 0812345678" aria-label="ระบุ Subscription ID หรือเบอร์โทรศัพท์" autocomplete="off">
             </div>
             <div class="member-quick-hint">
-              <span>ตัวอย่างรหัสทดสอบ: <code>SUB-202611-1001</code> (Starter 5%), <code>0823456789</code> (Collector 10%), <code>0898765432</code> (Secret Master 15%)</span>
+              <span>ตัวอย่างรหัสทดสอบ: <code>SUB-202611-1991</code> (VIP 10%), <code>0812345678</code> (คุณกิตติคุณ), <code>SUB-202611-1992</code> (Founder Annual)</span>
             </div>
             <button type="button" id="btn-submit-member-verify" class="btn-modal-primary btn-member-action">
               ยืนยันสิทธิ์สมาชิก
             </button>
             <div class="member-modal-signup-link">
               <span>ยังไม่มีแพ็กเกจสมาชิก?</span>
-              <a href="subscription.html">สมัคร Mystery Box Club เริ่มต้นเพียง ฿390/เดือน</a>
+              <a href="subscription.html">สมัครสมาชิก VIP Club เริ่มต้นเพียง ฿199/เดือน</a>
             </div>
           </div>
         </div>
@@ -507,9 +507,9 @@ const CartManager = {
       } else {
         memberPerkBox.innerHTML = `
           <div class="cart-member-login-callout">
-            <span>สมาชิก Mystery Box Club?</span>
+            <span>สมาชิก VIP Club?</span>
             <button type="button" id="btn-cart-open-member-login" class="btn-cart-member-link">
-              ยืนยันสิทธิ์สมาชิก (ลด 5-15%)
+              ยืนยันสิทธิ์สมาชิก (ลด 10% + ส่งฟรี ฿0)
             </button>
           </div>
         `;

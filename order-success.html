@@ -139,6 +139,24 @@
         <div id="confirmed-items-list" style="display: flex; flex-direction: column; gap: 8px;"></div>
       </div>
 
+      <!-- Line OA Order Confirmation Simulation (รายงาน ITDS294 หน้า 7, 13, 15) -->
+      <div id="line-oa-order-banner" style="margin-bottom: 28px; padding: 16px; background: #eefbf1; border: 1.5px solid #06c755; border-radius: 12px; font-family: var(--font-th); text-align: left;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 20px;">💬</span>
+            <strong style="color: #06c755; font-size: 14px;">แจ้งเตือนผ่าน Line Official Account (Line OA)</strong>
+          </div>
+          <span style="background: #06c755; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px;">ส่งแจ้งเตือนสำเร็จ</span>
+        </div>
+        <div style="background: #ffffff; padding: 12px 14px; border-radius: 8px; border: 1px solid #d1fae5; font-size: 13px; line-height: 1.6; color: #1f2937;">
+          <div>📦 <strong>ยืนยันคำสั่งซื้อ:</strong> <span id="line-order-id-label">-</span></div>
+          <div>👤 <strong>ผู้รับ:</strong> <span id="line-customer-label">-</span></div>
+          <div>💰 <strong>ยอดชำระ:</strong> <span id="line-total-label">-</span></div>
+          <div id="line-points-earned-label" style="color: #16a34a; font-weight: 600;"></div>
+          <div style="color: #6b7280; font-size: 12px; margin-top: 6px;">ระบบจะส่งแจ้งเตือนเลขพัสดุและสถานะจัดส่งผ่าน Line OA ให้คุณอัตโนมัติ</div>
+        </div>
+      </div>
+
       <!-- Action Buttons -->
       <div class="success-action-btns">
         <a id="btn-track-this-order" href="order-tracking.html" class="btn-hero-primary">
@@ -230,6 +248,18 @@
           ptsEarnedRow.style.display = "table-row";
           ptsEarnedVal.textContent = `+${earned} Reward Points (สะสมเข้าบัญชีสมาชิกแล้ว)`;
         }
+      }
+
+      // Populate Line OA Simulation Card
+      const lineOrderId = document.getElementById("line-order-id-label");
+      const lineCustomer = document.getElementById("line-customer-label");
+      const lineTotal = document.getElementById("line-total-label");
+      const linePoints = document.getElementById("line-points-earned-label");
+      if (lineOrderId) lineOrderId.textContent = order.orderId;
+      if (lineCustomer) lineCustomer.textContent = order.customer.fullName;
+      if (lineTotal) lineTotal.textContent = `฿${Number(order.totalAmount || order.finalTotal || 0).toFixed(2)}`;
+      if (linePoints && earned > 0) {
+        linePoints.textContent = `🪙 ได้รับแต้มสะสม +${earned} Reward Points`;
       }
 
       const trackBtn = document.getElementById("btn-track-this-order");

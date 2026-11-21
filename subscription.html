@@ -69,7 +69,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- Hero Section -->
     <section class="sub-hero-section">
       <span class="sub-hero-badge">Art Toy VIP Membership Club</span>
@@ -151,8 +151,8 @@
         <p class="plan-desc">สำหรับนักสะสมตัวจริง การันตีโควต้าสินค้าลิมิเต็ดตลอด 3 เดือนต่อเนื่อง</p>
         
         <div class="plan-price-wrap">
-          <span class="plan-price" id="price-collector">฿540</span>
-          <span class="plan-period" id="period-collector">/ 3 เดือน (เฉลี่ย 180฿/ด.)</span>
+          <span class="plan-price" id="price-collector">฿549</span>
+          <span class="plan-period" id="period-collector">/ 3 เดือน (เฉลี่ย 183฿/ด.)</span>
         </div>
 
         <ul class="plan-features-list">
@@ -178,7 +178,7 @@
           </li>
         </ul>
 
-        <a href="subscription-checkout.html?plan=vip-quarterly&cycle=quarterly" class="btn-subscribe-plan" id="btn-sub-collector">สมัครแพ็กเกจ 3 เดือน (฿540)</a>
+        <a href="subscription-checkout.html?plan=vip-quarterly&cycle=quarterly" class="btn-subscribe-plan" id="btn-sub-collector">สมัครแพ็กเกจ 3 เดือน (฿549)</a>
       </article>
 
       <!-- Tier 3: VIP Founder Annual -->
@@ -329,7 +329,7 @@
               <th>สิทธิประโยชน์</th>
               <th>ลูกค้าทั่วไป</th>
               <th>VIP Monthly (฿199)</th>
-              <th>VIP 3-Month (฿540)</th>
+              <th>VIP 3-Month (฿549)</th>
               <th>VIP Annual (฿1,990)</th>
             </tr>
           </thead>
@@ -477,9 +477,9 @@
           btnSubStarter.href = "subscription-checkout.html?plan=vip-annual&cycle=annual";
         } else if (cycle === 'quarterly') {
           if (btnQuarterly) btnQuarterly.classList.add("active");
-          priceStarter.textContent = "฿540";
-          periodStarter.textContent = "/ 3 เดือน (เฉลี่ย 180฿/ด.)";
-          btnSubStarter.textContent = "สมัครสมาชิก 3 เดือน (฿540)";
+          priceStarter.textContent = "฿549";
+          periodStarter.textContent = "/ 3 เดือน (เฉลี่ย 183฿/ด.)";
+          btnSubStarter.textContent = "สมัครสมาชิก 3 เดือน (฿549)";
           btnSubStarter.href = "subscription-checkout.html?plan=vip-quarterly&cycle=quarterly";
         } else {
           if (btnMonthly) btnMonthly.classList.add("active");

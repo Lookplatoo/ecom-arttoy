@@ -954,6 +954,15 @@ const MockDB = {
     subs.unshift(newSub);
     localStorage.setItem(STORAGE_KEYS.SUBSCRIPTIONS, JSON.stringify(subs));
 
+    // ให้รางวัล 100 Reward Points แก่ผู้แนะนำ (Referrer Reward) ทันทีตามรายงาน ITDS294
+    if (subData.usedReferralCode) {
+      const cleanRef = String(subData.usedReferralCode).trim().toUpperCase();
+      const referrer = subs.find(s => s.referralCode && s.referralCode.toUpperCase() === cleanRef);
+      if (referrer) {
+        this.addMemberPoints(referrer.subId, 100);
+      }
+    }
+
     // ล็อกอินสถานะสมาชิกให้อัตโนมัติทันที พร้อมรับสิทธิ์ VIP 10% และส่งฟรี
     const memberSession = {
       subId: newSub.subId,

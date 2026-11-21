@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   if (imgElement) {
     imgElement.src = product.image;
     imgElement.alt = product.name;
+    imgElement.setAttribute('fetchpriority', 'high');
     imgElement.style.display = "block";
   }
 
@@ -208,14 +209,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     const btn = document.getElementById("btn-login-member-detail");
     if (btn) {
       btn.addEventListener("click", () => {
-        const query = prompt("กรุณากรอก Subscription ID (เช่น SUB-202611-1991) หรือเบอร์โทรศัพท์ที่ลงทะเบียนไว้:");
-        if (query) {
-          const res = ApiService.verifyMember(query);
-          if (res && res.success) {
-            showToast(res.message, "success");
-            renderMemberPerks();
-          } else {
-            showToast((res && res.message) || "ไม่พบข้อมูลสมาชิก", "error");
+        if (typeof CartManager !== "undefined" && typeof CartManager.openMemberModal === "function") {
+          CartManager.openMemberModal();
+        } else {
+          const query = prompt("กรุณากรอก Subscription ID (เช่น SUB-202611-1991) หรือเบอร์โทรศัพท์ที่ลงทะเบียนไว้:");
+          if (query) {
+            const res = ApiService.verifyMember(query);
+            if (res && res.success) {
+              showToast(res.message, "success");
+              renderMemberPerks();
+            } else {
+              showToast((res && res.message) || "ไม่พบข้อมูลสมาชิก", "error");
+            }
           }
         }
       });
