@@ -114,7 +114,7 @@
           <option value="Out of Stock">Out of Stock</option>
         </select>
 
-        <input type="text" class="admin-search-box" placeholder="Search">
+        <input type="text" class="admin-search-box" placeholder="Search" aria-label="ค้นหาสินค้า (Search products)">
 
         <!-- ปุ่มเปิด Modal เพิ่มสินค้าใหม่ (Cart icon with plus + Add) -->
         <button type="button" class="btn-add-action" onclick="openAddModal()">
@@ -222,7 +222,7 @@
 
         <div class="form-group">
           <label for="new-product-image">Product Image</label>
-          <input type="text" id="new-product-image-url" placeholder="Paste image URL (or upload image file below)" style="margin-bottom: 8px;">
+          <input type="text" id="new-product-image-url" placeholder="Paste image URL (or upload image file below)" aria-label="URL รูปภาพสินค้า (Paste image URL)" style="margin-bottom: 8px;">
           <input type="file" id="new-product-image" accept="image/*" style="display: none;">
           <div id="modal-upload-box" class="modal-upload-box" tabindex="0" role="button" aria-label="Upload Product Image">
             <div id="upload-prompt" class="upload-prompt">

@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Skip Navigation Link (A11y WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to content)</a>
 
   <!-- Header -->
   <header id="main-header">
@@ -143,9 +145,9 @@
           </h2>
 
           <div class="shipping-method-options">
-            <label class="method-radio-card selected" id="shipping-opt-flash">
+            <label class="method-radio-card selected" id="shipping-opt-flash" for="shipping-method-flash">
               <div class="method-left">
-                <input type="radio" name="shipping_method" value="Flash Express" checked data-cost="40">
+                <input type="radio" id="shipping-method-flash" name="shipping_method" value="Flash Express" checked data-cost="40" aria-label="Flash Express จัดส่งด่วน ฿40">
                 <div>
                   <div class="method-title">Flash Express (จัดส่งด่วน)</div>
                   <div class="method-desc">จัดส่งถึงที่หมายใน 1-2 วันทำการ พร้อมประกันพัสดุ</div>
@@ -154,9 +156,9 @@
               <div class="method-price" id="shipping-cost-label-flash">฿40.00</div>
             </label>
 
-            <label class="method-radio-card" id="shipping-opt-ems">
+            <label class="method-radio-card" id="shipping-opt-ems" for="shipping-method-ems">
               <div class="method-left">
-                <input type="radio" name="shipping_method" value="EMS Thailand Post" data-cost="60">
+                <input type="radio" id="shipping-method-ems" name="shipping_method" value="EMS Thailand Post" data-cost="60" aria-label="EMS ไปรษณีย์ไทย ฿60">
                 <div>
                   <div class="method-title">EMS ไปรษณีย์ไทย (ด่วนพิเศษ)</div>
                   <div class="method-desc">จัดส่งถึงที่หมายใน 1-2 วันทำการ ครอบคลุมทุกพื้นที่</div>
@@ -179,9 +181,9 @@
 
           <div class="payment-method-options">
             <!-- 1. PromptPay QR -->
-            <label class="method-radio-card selected" id="pay-opt-promptpay">
+            <label class="method-radio-card selected" id="pay-opt-promptpay" for="payment-method-promptpay">
               <div class="method-left">
-                <input type="radio" name="payment_method" value="PromptPay QR" checked>
+                <input type="radio" id="payment-method-promptpay" name="payment_method" value="PromptPay QR" checked aria-label="พร้อมเพย์ PromptPay QR">
                 <div>
                   <div class="method-title">พร้อมเพย์ (PromptPay QR)</div>
                   <div class="method-desc">ไม่มีค่าธรรมเนียม ตรวจสอบยอดชำระอัตโนมัติ</div>
@@ -220,9 +222,9 @@
             </div>
 
             <!-- 2. Credit Card -->
-            <label class="method-radio-card" id="pay-opt-card">
+            <label class="method-radio-card" id="pay-opt-card" for="payment-method-card">
               <div class="method-left">
-                <input type="radio" name="payment_method" value="Credit Card">
+                <input type="radio" id="payment-method-card" name="payment_method" value="Credit Card" aria-label="บัตรเครดิต หรือ บัตรเดบิต">
                 <div>
                   <div class="method-title">บัตรเครดิต หรือ บัตรเดบิต</div>
                   <div class="method-desc">Visa, Mastercard, JCB พร้อมระบบรักษาความปลอดภัย 3D Secure</div>
@@ -233,29 +235,32 @@
             <div id="credit-card-panel" style="display: none; padding: 16px; background: #fbfaf7; border: 1px solid var(--color-border-grey); border-radius: var(--border-radius-sm);">
               <div style="display: flex; flex-direction: column; gap: 12px;">
                 <div>
-                  <label style="font-size: 12px; font-family: var(--font-th);">หมายเลขบัตร 16 หลัก</label>
-                  <input type="text" id="card-number-input" placeholder="4111 2222 3333 4444" maxlength="19" style="width: 100%; padding: 8px 12px; border: 1px solid #dcd7cc; border-radius: 6px;">
+                  <label for="card-number-input" style="font-size: 12px; font-family: var(--font-th);">หมายเลขบัตร 16 หลัก</label>
+                  <input type="text" id="card-number-input" placeholder="4111 2222 3333 4444" maxlength="19" aria-label="หมายเลขบัตร 16 หลัก" style="width: 100%; padding: 8px 12px; border: 1px solid #dcd7cc; border-radius: 6px;">
                 </div>
                 <div style="display: flex; gap: 12px;">
                   <div style="flex: 1;">
-                    <label style="font-size: 12px; font-family: var(--font-th);">วันหมดอายุ (MM/YY)</label>
-                    <input type="text" id="card-exp-input" placeholder="12/28" maxlength="5" style="width: 100%; padding: 8px 12px; border: 1px solid #dcd7cc; border-radius: 6px;">
+                    <label for="card-exp-input" style="font-size: 12px; font-family: var(--font-th);">วันหมดอายุ (MM/YY)</label>
+                    <input type="text" id="card-exp-input" placeholder="12/28" maxlength="5" aria-label="วันหมดอายุ (MM/YY)" style="width: 100%; padding: 8px 12px; border: 1px solid #dcd7cc; border-radius: 6px;">
                   </div>
                   <div style="width: 100px;">
-                    <label style="font-size: 12px; font-family: var(--font-th);">CVV</label>
-                    <input type="password" id="card-cvv-input" placeholder="123" maxlength="3" style="width: 100%; padding: 8px 12px; border: 1px solid #dcd7cc; border-radius: 6px;">
+                    <label for="card-cvv-input" style="font-size: 12px; font-family: var(--font-th);">CVV</label>
+                    <input type="password" id="card-cvv-input" placeholder="123" maxlength="3" aria-label="รหัส CVV 3 หลัก" style="width: 100%; padding: 8px 12px; border: 1px solid #dcd7cc; border-radius: 6px;">
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- 3. Cash on Delivery -->
-            <label class="method-radio-card" id="pay-opt-cod">
+            <label class="method-radio-card" id="pay-opt-cod" for="payment-method-cod">
               <div class="method-left">
-                <input type="radio" name="payment_method" value="Cash on Delivery">
+                <input type="radio" id="payment-method-cod" name="payment_method" value="Cash on Delivery" aria-label="เก็บเงินปลายทาง Cash on Delivery">
                 <div>
                   <div class="method-title">เก็บเงินปลายทาง (Cash on Delivery)</div>
                   <div class="method-desc">ชำระเงินสดหรือสแกนจ่ายเมื่อพนักงานจัดส่งถึงที่หมาย</div>
+                </div>
+              </div>
+            </label>
                 </div>
               </div>
             </label>
@@ -275,12 +280,12 @@
 
         <!-- กล่องใส่โค้ดส่วนลด -->
         <div class="cart-coupon-box" style="margin-top: 14px;">
-          <input type="text" id="checkout-coupon-input" placeholder="โค้ดส่วนลด เช่น ARTTOY10">
+          <input type="text" id="checkout-coupon-input" placeholder="โค้ดส่วนลด เช่น ARTTOY10" aria-label="กรอกโค้ดส่วนลด เช่น ARTTOY10">
           <button type="button" id="btn-checkout-apply-coupon" class="btn-coupon">ใช้โค้ด</button>
         </div>
         <div id="checkout-coupon-applied-tag" class="coupon-tag" style="display: none;">
           <span>โค้ด: <strong id="checkout-code-name"></strong> ลด 10%</span>
-          <button type="button" id="btn-checkout-remove-coupon" class="btn-remove-coupon">&times;</button>
+          <button type="button" id="btn-checkout-remove-coupon" class="btn-remove-coupon" aria-label="ยกเลิกโค้ดส่วนลด">&times;</button>
         </div>
 
         <!-- Reward Points Redemption Box (รายงาน ITDS294 หน้า 7, 8, 10, 14, 15) -->
@@ -293,7 +298,7 @@
             1 แต้ม = ส่วนลด ฿1.00 (ทุก 10 บาทที่ซื้อได้รับ 1 แต้ม)
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
-            <input type="number" id="input-points-redeem" min="0" placeholder="ระบุจำนวนแต้ม" style="flex: 1; padding: 8px 10px; border: 1px solid #93c5fd; border-radius: 6px; font-size: 13px;">
+            <input type="number" id="input-points-redeem" min="0" placeholder="ระบุจำนวนแต้ม" aria-label="ระบุจำนวนแต้มสะสมที่ต้องการแลกส่วนลด" style="flex: 1; padding: 8px 10px; border: 1px solid #93c5fd; border-radius: 6px; font-size: 13px;">
             <button type="button" id="btn-apply-points" class="btn-coupon" style="background: #2563eb; color: #fff; padding: 8px 12px; font-size: 13px; white-space: nowrap;">ใช้แต้ม</button>
           </div>
           <div id="points-status-msg" style="font-size: 12px; margin-top: 6px; display: none;"></div>

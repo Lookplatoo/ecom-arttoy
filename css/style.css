@@ -5204,3 +5204,73 @@ img {
   box-shadow: 0 2px 6px rgba(184, 134, 11, 0.35);
   font-weight: 700;
 }
+
+/* ==========================================================================
+   WEB ACCESSIBILITY & PERFORMANCE ENHANCEMENTS (WCAG 2.1 AA & LCP)
+   ========================================================================== */
+
+/* 1. Skip Navigation Link (WCAG 2.4.1 Bypass Blocks) */
+.skip-link {
+  position: absolute;
+  top: -120px;
+  left: 20px;
+  background: #1c1b1a;
+  color: #ffffff !important;
+  padding: 12px 22px;
+  border-radius: 0 0 10px 10px;
+  font-family: var(--font-th), var(--font-en), sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  z-index: 999999;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  transition: top 0.2s ease-in-out;
+  border: 2px solid #d4af37;
+  border-top: none;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #ff6d00;
+  outline-offset: 3px;
+}
+
+/* 2. Accessible Keyboard Focus Indicators (WCAG 2.4.7 Focus Visible) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2.5px solid var(--color-primary, #e65100);
+  outline-offset: 2px;
+}
+
+/* 3. Motion Accessibility: Reduced Motion (WCAG 2.3.3 & 2.2.2) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 4. Minimum Tap Target Sizing for Mobile & Touch (WCAG 2.5.5) */
+@media (max-width: 768px) {
+  .btn-qty,
+  .stepper-btn,
+  .btn-remove-item,
+  .cart-close-btn,
+  .modal-close-btn,
+  .btn-close-drawer {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+

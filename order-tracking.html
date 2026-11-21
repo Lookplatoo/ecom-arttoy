@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Skip Navigation Link (A11y WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to content)</a>
 
   <!-- Header -->
   <header id="main-header">
@@ -76,7 +78,7 @@
       
       <!-- ฟอร์มค้นหา -->
       <form id="tracking-search-form" style="display: flex; gap: 12px; margin-bottom: 28px;">
-        <input type="text" id="tracking-input" placeholder="ระบุเลขคำสั่งซื้อ เช่น AT-20261118-8421" style="flex: 1; padding: 12px 16px; border: 1.5px solid var(--color-border-grey); border-radius: 8px; font-size: 15px;" required>
+        <input type="text" id="tracking-input" placeholder="ระบุเลขคำสั่งซื้อ เช่น AT-20261118-8421" aria-label="ระบุเลขคำสั่งซื้อเพื่อติดตามสถานะ เช่น AT-20261118-8421" style="flex: 1; padding: 12px 16px; border: 1.5px solid var(--color-border-grey); border-radius: 8px; font-size: 15px;" required>
         <button type="submit" class="btn-hero-primary" style="padding: 12px 24px; cursor: pointer; border: none;">
           ค้นหา
         </button>

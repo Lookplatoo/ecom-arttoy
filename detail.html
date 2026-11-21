@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Skip Navigation Link (A11y WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to content)</a>
 
   <!-- Header -->
   <header id="main-header">
@@ -79,7 +81,7 @@
         <!-- รูปภาพสินค้า -->
         <figure class="detail-figure">
           <div class="detail-img-box">
-            <img id="detail-product-img" src="" alt="" style="display: none;">
+            <img id="detail-product-img" src="" alt="ภาพสินค้าอาร์ตทอย Art Toy Collection" style="display: none;" fetchpriority="high">
           </div>
           <figcaption class="detail-ref-link">
             ข้อมูลอ้างอิง: <a id="detail-ref-link" href="#" target="_blank" rel="noopener noreferrer"></a>
@@ -124,9 +126,9 @@
             <div class="detail-qty-control">
               <span class="detail-qty-label">จำนวน:</span>
               <div class="detail-stepper">
-                <button type="button" id="btn-qty-minus">-</button>
-                <input type="number" id="detail-qty-input" value="1" min="1" max="99" readonly>
-                <button type="button" id="btn-qty-plus">+</button>
+                <button type="button" id="btn-qty-minus" aria-label="ลดจำนวนสินค้า">-</button>
+                <input type="number" id="detail-qty-input" value="1" min="1" max="99" readonly aria-label="จำนวนสินค้าที่ต้องการสั่งซื้อ">
+                <button type="button" id="btn-qty-plus" aria-label="เพิ่มจำนวนสินค้า">+</button>
               </div>
             </div>
 
@@ -189,12 +191,12 @@
           <form id="product-review-form">
             <div style="display: flex; gap: 16px; margin-bottom: 12px;">
               <div style="flex: 1;">
-                <label style="display: block; font-size: 13px; font-family: var(--font-th); margin-bottom: 4px;">ชื่อของคุณ</label>
-                <input type="text" id="review-user-name" placeholder="ระบุชื่อของคุณ" required style="width: 100%; padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px;">
+                <label for="review-user-name" style="display: block; font-size: 13px; font-family: var(--font-th); margin-bottom: 4px;">ชื่อของคุณ</label>
+                <input type="text" id="review-user-name" placeholder="ระบุชื่อของคุณ" required aria-label="ชื่อของคุณ" style="width: 100%; padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px;">
               </div>
               <div style="width: 140px;">
-                <label style="display: block; font-size: 13px; font-family: var(--font-th); margin-bottom: 4px;">คะแนน</label>
-                <select id="review-rating-val" style="width: 100%; padding: 8px; border: 1px solid var(--color-border-grey); border-radius: 6px;">
+                <label for="review-rating-val" style="display: block; font-size: 13px; font-family: var(--font-th); margin-bottom: 4px;">คะแนน</label>
+                <select id="review-rating-val" aria-label="คะแนนรีวิว" style="width: 100%; padding: 8px; border: 1px solid var(--color-border-grey); border-radius: 6px;">
                   <option value="5">5 ดาว (ดีมาก)</option>
                   <option value="4">4 ดาว (ดี)</option>
                   <option value="3">3 ดาว (ปานกลาง)</option>
@@ -204,8 +206,8 @@
               </div>
             </div>
             <div style="margin-bottom: 12px;">
-              <label style="display: block; font-size: 13px; font-family: var(--font-th); margin-bottom: 4px;">ความคิดเห็น</label>
-              <textarea id="review-comment-val" rows="3" placeholder="ระบุความคิดเห็นของคุณเกี่ยวกับสินค้านี้..." required style="width: 100%; padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th);"></textarea>
+              <label for="review-comment-val" style="display: block; font-size: 13px; font-family: var(--font-th); margin-bottom: 4px;">ความคิดเห็น</label>
+              <textarea id="review-comment-val" rows="3" placeholder="ระบุความคิดเห็นของคุณเกี่ยวกับสินค้านี้..." required aria-label="ความคิดเห็นของคุณ" style="width: 100%; padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th);"></textarea>
             </div>
             <div style="display: flex; gap: 8px;">
               <button type="submit" style="padding: 8px 18px; background: #1c1b1a; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-family: var(--font-th); font-weight: 500;">ส่งรีวิว</button>

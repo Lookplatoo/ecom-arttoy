@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Skip Navigation Link (A11y WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to content)</a>
 
   <!-- Header -->
   <header id="main-header">
@@ -81,7 +83,7 @@
     <!-- Search / Lookup Bar -->
     <div style="background: #ffffff; border: 1px solid var(--color-border-grey); border-radius: 12px; padding: 20px; margin-bottom: 24px; box-shadow: var(--shadow-subtle);">
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <input type="text" id="sub-search-input" placeholder="กรอก Subscription ID (เช่น SUB-202611-8842) หรือเบอร์โทรศัพท์" style="flex: 1; min-width: 240px; padding: 12px 16px; border: 1px solid var(--color-border-grey); border-radius: 8px; font-family: var(--font-th); font-size: 14px;">
+        <input type="text" id="sub-search-input" placeholder="กรอก Subscription ID (เช่น SUB-202611-8842) หรือเบอร์โทรศัพท์" aria-label="กรอก Subscription ID หรือเบอร์โทรศัพท์" style="flex: 1; min-width: 240px; padding: 12px 16px; border: 1px solid var(--color-border-grey); border-radius: 8px; font-family: var(--font-th); font-size: 14px;">
         <button type="button" id="btn-sub-search" class="btn-primary-action" style="padding: 12px 24px; border-radius: 8px; font-size: 14px;">
           ค้นหาข้อมูล
         </button>

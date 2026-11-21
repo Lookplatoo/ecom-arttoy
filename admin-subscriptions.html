@@ -129,7 +129,7 @@
           <option value="secret-master">Secret Master</option>
         </select>
 
-        <input type="text" id="sub-admin-search" class="admin-search-box" placeholder="ค้นหาตาม Subscription ID, ชื่อลูกค้า หรือเบอร์โทร">
+        <input type="text" id="sub-admin-search" class="admin-search-box" placeholder="ค้นหาตาม Subscription ID, ชื่อลูกค้า หรือเบอร์โทร" aria-label="ค้นหาตาม Subscription ID, ชื่อลูกค้า หรือเบอร์โทร">
       </section>
 
       <!-- Subscriptions Table -->
@@ -171,11 +171,11 @@
       <div id="record-dispatch-box" style="padding: 16px 20px; background: #faf9f6; border-top: 1px solid var(--color-border-grey);">
         <h4 style="font-family: var(--font-th); font-size: 15px; font-weight: 700; margin-bottom: 10px;">บันทึกการจัดส่งกล่องประจำรอบ</h4>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
-          <input type="text" id="dispatch-theme" placeholder="ธีมกล่อง (เช่น Chiikawa Winter Special)" style="padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
-          <input type="text" id="dispatch-items" placeholder="ของในกล่อง (คั่นด้วยจุลภาค)" style="padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
+          <input type="text" id="dispatch-theme" placeholder="ธีมกล่อง (เช่น Chiikawa Winter Special)" aria-label="ธีมกล่องสุ่ม" style="padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
+          <input type="text" id="dispatch-items" placeholder="ของในกล่อง (คั่นด้วยจุลภาค)" aria-label="ของในกล่อง" style="padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
         </div>
         <div style="display: flex; gap: 10px;">
-          <input type="text" id="dispatch-tracking" placeholder="เลขพัสดุ (เว้นว่างไว้เพื่อสุ่ม FLASH-TH...)" style="flex: 1; padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
+          <input type="text" id="dispatch-tracking" placeholder="เลขพัสดุ (เว้นว่างไว้เพื่อสุ่ม FLASH-TH...)" aria-label="เลขพัสดุจัดส่ง" style="flex: 1; padding: 8px 12px; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 13px;">
           <button type="button" id="btn-save-dispatch" class="btn-primary-action" style="padding: 8px 18px; font-size: 13px;">
             บันทึกการจัดส่ง
           </button>

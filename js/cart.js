@@ -23,7 +23,7 @@ const CartManager = {
       <div id="cart-drawer-overlay" class="cart-overlay"></div>
 
       <!-- Slide-Over Cart Drawer -->
-      <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart Drawer">
+      <aside id="cart-drawer" class="cart-drawer" aria-label="Shopping Cart Drawer" role="dialog" aria-modal="true">
         <div class="cart-header">
           <div class="cart-header-title">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -33,7 +33,7 @@ const CartManager = {
             </svg>
             <h2>ตะกร้าสินค้า (<span id="cart-drawer-count">0</span>)</h2>
           </div>
-          <button type="button" id="btn-close-cart" class="btn-close-drawer" aria-label="Close Cart">&times;</button>
+          <button type="button" id="btn-close-cart" class="btn-close-drawer" aria-label="ปิดตะกร้าสินค้า (Close Cart)">&times;</button>
         </div>
 
         <!-- Member VIP Status Banner in Cart Drawer -->
@@ -56,12 +56,12 @@ const CartManager = {
 
           <!-- Coupon Box -->
           <div class="cart-coupon-box">
-            <input type="text" id="cart-coupon-input" placeholder="โค้ดส่วนลด เช่น ARTTOY10">
+            <input type="text" id="cart-coupon-input" placeholder="โค้ดส่วนลด เช่น ARTTOY10" aria-label="กรอกโค้ดส่วนลด">
             <button type="button" id="btn-apply-coupon" class="btn-coupon">ใช้โค้ด</button>
           </div>
           <div id="coupon-applied-notice" class="coupon-tag" style="display: none;">
             <span>โค้ด: <strong id="applied-code-name"></strong> ลด 10%</span>
-            <button type="button" id="btn-remove-coupon" class="btn-remove-coupon">&times;</button>
+            <button type="button" id="btn-remove-coupon" class="btn-remove-coupon" aria-label="ยกเลิกโค้ดส่วนลด">&times;</button>
           </div>
 
           <!-- Price Summary Breakdown -->
@@ -108,21 +108,21 @@ const CartManager = {
     if (document.getElementById('member-login-modal')) return;
 
     const modalHTML = `
-      <div id="member-login-modal" class="modal-overlay member-modal-overlay">
+      <div id="member-login-modal" class="modal-overlay member-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="member-modal-title">
         <div class="modal-card member-modal-card">
           <div class="modal-header">
             <div class="modal-title-wrap">
               <span class="member-crown-icon">👑</span>
-              <h3>ยืนยันสิทธิ์สมาชิก Mystery Box Club</h3>
+              <h3 id="member-modal-title">ยืนยันสิทธิ์สมาชิก Mystery Box Club</h3>
             </div>
-            <button type="button" id="btn-close-member-modal" class="modal-close-btn">&times;</button>
+            <button type="button" id="btn-close-member-modal" class="modal-close-btn" aria-label="ปิดหน้าต่างยืนยันสิทธิ์สมาชิก">&times;</button>
           </div>
           <div class="modal-body">
             <p class="member-modal-desc">
               กรอก <strong>Subscription ID</strong> (เช่น <code>SUB-202611-8842</code>) หรือ <strong>เบอร์โทรศัพท์</strong> ที่ลงทะเบียนไว้ เพื่อรับส่วนลดประจำระดับ (5-15%) และสิทธิ์ส่งฟรี ฿0 ทุกคำสั่งซื้อ
             </p>
             <div class="member-modal-input-wrap">
-              <input type="text" id="input-member-verify" class="form-input member-input" placeholder="ระบุ Subscription ID หรือ เบอร์โทร เช่น 0812345678" autocomplete="off">
+              <input type="text" id="input-member-verify" class="form-input member-input" placeholder="ระบุ Subscription ID หรือ เบอร์โทร เช่น 0812345678" aria-label="ระบุ Subscription ID หรือเบอร์โทรศัพท์" autocomplete="off">
             </div>
             <div class="member-quick-hint">
               <span>ตัวอย่างรหัสทดสอบ: <code>SUB-202611-1001</code> (Starter 5%), <code>0823456789</code> (Collector 10%), <code>0898765432</code> (Secret Master 15%)</span>
@@ -356,6 +356,16 @@ const CartManager = {
       this.renderHeaderMemberBadge();
       this.render();
     });
+
+    // Keyboard Accessibility (WCAG 2.1.2): Close drawer & modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Esc') {
+        this.close();
+        this.closeMemberModal();
+        const dropdown = document.getElementById('header-member-dropdown');
+        if (dropdown) dropdown.style.display = 'none';
+      }
+    });
   },
 
   open: function () {
@@ -580,7 +590,7 @@ const CartManager = {
               <div class="cart-item-info">
                 <div class="cart-item-header">
                   <a href="detail.html?id=${encodeURIComponent(item.id)}" class="cart-item-title">${item.name}</a>
-                  <button type="button" class="btn-remove-item" onclick="CartManager.removeItem('${item.id}')" title="ลบสินค้านี้">
+                  <button type="button" class="btn-remove-item" onclick="CartManager.removeItem('${item.id}')" title="ลบสินค้านี้" aria-label="ลบ ${item.name} ออกจากตะกร้า">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <polyline points="3 6 5 6 21 6"></polyline>
                       <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -590,9 +600,9 @@ const CartManager = {
                 <div class="cart-item-category">${item.category}</div>
                 <div class="cart-item-bottom">
                   <div class="cart-item-stepper">
-                    <button type="button" class="stepper-btn" onclick="CartManager.updateQty('${item.id}', ${item.qty - 1})">-</button>
+                    <button type="button" class="stepper-btn" onclick="CartManager.updateQty('${item.id}', ${item.qty - 1})" aria-label="ลดจำนวน ${item.name}">-</button>
                     <span class="stepper-val">${item.qty}</span>
-                    <button type="button" class="stepper-btn" onclick="CartManager.updateQty('${item.id}', ${item.qty + 1})">+</button>
+                    <button type="button" class="stepper-btn" onclick="CartManager.updateQty('${item.id}', ${item.qty + 1})" aria-label="เพิ่มจำนวน ${item.name}">+</button>
                   </div>
                   <div class="cart-item-price">฿${(item.price * item.qty).toFixed(2)}</div>
                 </div>

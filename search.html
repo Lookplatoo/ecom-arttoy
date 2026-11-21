@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Skip Navigation Link (A11y WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to content)</a>
 
   <!-- Header -->
   <header id="main-header">
@@ -110,9 +112,9 @@
             <div class="form-group">
               <label>ช่วงราคา (บาท)</label>
               <div class="price-range-group">
-                <input type="number" name="min_price" class="price-input" placeholder="ต่ำสุด" min="0">
+                <input type="number" name="min_price" class="price-input" placeholder="ต่ำสุด" min="0" aria-label="ช่วงราคาต่ำสุด (บาท)">
                 <span class="price-divider">ถึง</span>
-                <input type="number" name="max_price" class="price-input" placeholder="สูงสุด" min="0">
+                <input type="number" name="max_price" class="price-input" placeholder="สูงสุด" min="0" aria-label="ช่วงราคาสูงสุด (บาท)">
               </div>
             </div>
 

@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="product-card-actions">
               <a href="detail.html?id=${encodeURIComponent(product.id)}" class="btn-card-view-detail">ดูรายละเอียด</a>
-              <button type="button" class="btn-card-add-cart" onclick="CartManager.addItem('${product.id}')" title="เพิ่มลงในตะกร้า" ${isOutOfStock ? 'disabled' : ''}>
+              <button type="button" class="btn-card-add-cart" onclick="CartManager.addItem('${product.id}')" title="เพิ่มลงในตะกร้า" aria-label="เพิ่ม ${product.name} ลงในตะกร้า" ${isOutOfStock ? 'disabled' : ''}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>

@@ -419,7 +419,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             <div class="product-card-price-val">฿${Number(rel.price).toFixed(2)}</div>
             <div class="product-card-actions">
               <a href="detail.html?id=${encodeURIComponent(rel.id)}" class="btn-card-view-detail">ดูสินค้า</a>
-              <button type="button" class="btn-card-add-cart" onclick="CartManager.addItem('${rel.id}')" title="เพิ่มลงในตะกร้า">
+              <button type="button" class="btn-card-add-cart" onclick="CartManager.addItem('${rel.id}')" title="เพิ่มลงในตะกร้า" aria-label="เพิ่ม ${rel.name} ลงในตะกร้า">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="12" y1="5" x2="12" y2="19"></line>
                   <line x1="5" y1="12" x2="19" y2="12"></line>

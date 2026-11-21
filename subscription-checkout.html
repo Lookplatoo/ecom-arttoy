@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <!-- Skip Navigation Link (A11y WCAG 2.4.1) -->
+  <a href="#main-content" class="skip-link">ข้ามไปยังเนื้อหาหลัก (Skip to content)</a>
 
   <!-- Header -->
   <header id="main-header">
@@ -112,24 +114,24 @@
             <h2 class="checkout-card-heading">2. ช่องทางชำระเงินตัดรอบบิล (Auto-Renewal)</h2>
             
             <div class="payment-methods-list">
-              <label class="payment-method-item selected">
-                <input type="radio" name="sub_payment" value="Credit Card" checked>
+              <label class="payment-method-item selected" for="sub-pay-card">
+                <input type="radio" id="sub-pay-card" name="sub_payment" value="Credit Card" checked aria-label="บัตรเครดิต หรือ บัตรเดบิต ตัดยอดอัตโนมัติ">
                 <div class="payment-method-info">
                   <div class="payment-method-title">บัตรเครดิต / บัตรเดบิต (แนะนำ)</div>
                   <div class="payment-method-sub">รองรับ Visa, Mastercard, JCB (ตัดยอดอัตโนมัติทุกรอบบิล)</div>
                 </div>
               </label>
 
-              <label class="payment-method-item">
-                <input type="radio" name="sub_payment" value="PromptPay Recurring">
+              <label class="payment-method-item" for="sub-pay-promptpay">
+                <input type="radio" id="sub-pay-promptpay" name="sub_payment" value="PromptPay Recurring" aria-label="พร้อมเพย์ สมาชิกอัตโนมัติ PromptPay Recurring">
                 <div class="payment-method-info">
                   <div class="payment-method-title">พร้อมเพย์ สมาชิกอัตโนมัติ (PromptPay Recurring)</div>
                   <div class="payment-method-sub">ระบบจะส่งแจ้งเตือนและตัดผ่านพร้อมเพย์ตามรอบบิล</div>
                 </div>
               </label>
 
-              <label class="payment-method-item">
-                <input type="radio" name="sub_payment" value="TrueMoney Auto-Debit">
+              <label class="payment-method-item" for="sub-pay-truemoney">
+                <input type="radio" id="sub-pay-truemoney" name="sub_payment" value="TrueMoney Auto-Debit" aria-label="TrueMoney Wallet เชื่อมต่อวอลเล็ท">
                 <div class="payment-method-info">
                   <div class="payment-method-title">TrueMoney Wallet</div>
                   <div class="payment-method-sub">เชื่อมต่อวอลเล็ทเพื่อหักยอดรายเดือนสะดวกสบาย</div>
@@ -161,7 +163,7 @@
                 🎁 มีรหัสผู้แนะนำ (Referral Code) หรือไม่?
               </label>
               <div style="display: flex; gap: 8px;">
-                <input type="text" id="sub-referral-input" placeholder="เช่น VIP-KITTIKUN96 หรือ ARTTOY100" style="flex: 1; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-family: monospace; text-transform: uppercase;">
+                <input type="text" id="sub-referral-input" placeholder="เช่น VIP-KITTIKUN96 หรือ ARTTOY100" aria-label="รหัสผู้แนะนำ Referral Code" style="flex: 1; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-family: monospace; text-transform: uppercase;">
                 <button type="button" id="btn-apply-referral" class="btn-secondary-action" style="padding: 10px 16px; font-size: 13px; font-weight: 600; white-space: nowrap;">
                   ใช้รหัส
                 </button>
@@ -171,13 +173,8 @@
 
             <!-- Agreement -->
             <div style="margin-top: 20px; padding: 14px; background: #fdfbf7; border: 1px solid #e8e5dc; border-radius: 8px; font-family: var(--font-th); font-size: 13px; color: #5a544f; line-height: 1.6;">
-              <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
-                <input type="checkbox" id="sub-agree-check" checked style="margin-top: 3px;">
-                <span>ฉันรับทราบและยอมรับเงื่อนไขการตัดรอบบิลอัตโนมัติตามระยะเวลาที่เลือก และสามารถปรับเปลี่ยนที่อยู่ พักรอบส่ง หรือยกเลิกสมาชิกได้ตลอดเวลา</span>
-              </label>
-            </div>
-          </div>
-                <input type="checkbox" id="sub-agree-check" checked style="margin-top: 3px;">
+              <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;" for="sub-agree-check">
+                <input type="checkbox" id="sub-agree-check" checked style="margin-top: 3px;" aria-label="ฉันรับทราบและยอมรับเงื่อนไขการตัดรอบบิลอัตโนมัติ">
                 <span>ฉันรับทราบและยอมรับเงื่อนไขการตัดรอบบิลอัตโนมัติตามระยะเวลาที่เลือก และสามารถปรับเปลี่ยนที่อยู่ พักรอบส่ง หรือยกเลิกสมาชิกได้ตลอดเวลา</span>
               </label>
             </div>
