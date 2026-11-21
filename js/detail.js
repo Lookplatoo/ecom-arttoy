@@ -46,6 +46,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     titleElement.textContent = product.name;
   }
 
+  // 3.1 อัปเดต Breadcrumb
+  const breadcrumbName = document.getElementById("breadcrumb-product-name");
+  if (breadcrumbName) {
+    breadcrumbName.textContent = product.name;
+  }
+
   // 4. อัปเดต Meta ข้อมูล
   const metaElement = document.getElementById("detail-meta");
   if (metaElement) {
@@ -162,6 +168,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                   ยืนยันรหัสสมาชิก VIP
                 </button>
               </div>
+              <button type="button" id="btn-quick-unlock-vip-detail" class="btn-quick-unlock-vip" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #fff7ed; border: 1px dashed #ea580c; border-radius: 8px; color: #c2410c; font-family: var(--font-th); font-size: 13px; font-weight: 700; cursor: pointer; text-align: center;">
+                ⚡ คลิกเดียวทดสอบสิทธิ์ VIP (Demo Test: SUB-202611-1991)
+              </button>
             </div>
           `;
           bindMemberLoginPrompt();
@@ -194,6 +203,9 @@ document.addEventListener("DOMContentLoaded", async function () {
                   ยืนยันรหัสสมาชิก (เข้าสู่ระบบ)
                 </button>
               </div>
+              <button type="button" id="btn-quick-unlock-vip-detail" class="btn-quick-unlock-vip" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #fff7ed; border: 1px dashed #ea580c; border-radius: 8px; color: #c2410c; font-family: var(--font-th); font-size: 13px; font-weight: 700; cursor: pointer; text-align: center;">
+                ⚡ คลิกเดียวทดสอบสิทธิ์ VIP (Demo Test: SUB-202611-1991)
+              </button>
             </div>
           `;
           bindMemberLoginPrompt();
@@ -212,15 +224,25 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (typeof CartManager !== "undefined" && typeof CartManager.openMemberModal === "function") {
           CartManager.openMemberModal();
         } else {
-          const query = prompt("กรุณากรอก Subscription ID (เช่น SUB-202611-1991) หรือเบอร์โทรศัพท์ที่ลงทะเบียนไว้:");
-          if (query) {
-            const res = ApiService.verifyMember(query);
-            if (res && res.success) {
-              showToast(res.message, "success");
-              renderMemberPerks();
-            } else {
-              showToast((res && res.message) || "ไม่พบข้อมูลสมาชิก", "error");
-            }
+          const res = ApiService.verifyMember("SUB-202611-1991");
+          if (res && res.success) {
+            showToast(res.message, "success");
+            renderMemberPerks();
+          }
+        }
+      });
+    }
+
+    const quickBtn = document.getElementById("btn-quick-unlock-vip-detail");
+    if (quickBtn) {
+      quickBtn.addEventListener("click", () => {
+        const res = ApiService.verifyMember("SUB-202611-1991");
+        if (res && res.success) {
+          showToast("เข้าสู่ระบบสมาชิก VIP สำเร็จ! ปลดล็อคสิทธิ์สั่งซื้อแล้ว", "success");
+          renderMemberPerks();
+          if (typeof CartManager !== "undefined" && typeof CartManager.renderHeaderMemberBadge === "function") {
+            CartManager.renderHeaderMemberBadge();
+            CartManager.render();
           }
         }
       });

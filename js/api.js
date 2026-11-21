@@ -520,7 +520,12 @@ const MockDB = {
       list = list.filter(p => p.category === filters.category);
     }
     if (filters.status) {
-      list = list.filter(p => p.status === filters.status);
+      const targetStatus = filters.status.toLowerCase();
+      if (targetStatus === 'pre-order') {
+        list = list.filter(p => (p.status && (p.status.toLowerCase() === 'pre-order' || p.status.toLowerCase() === 'vip pre-order')) || p.vipPreorder);
+      } else {
+        list = list.filter(p => p.status && p.status.toLowerCase() === targetStatus);
+      }
     }
     if (filters.min_price !== undefined && filters.min_price !== '') {
       const minP = Number(filters.min_price);

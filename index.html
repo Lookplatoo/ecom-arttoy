@@ -374,6 +374,8 @@
 
       featured.forEach(product => {
         const badgeClass = product.badge ? `badge-${product.badge.toLowerCase().replace(/[\s-]/g, '')}` : 'badge-popular';
+        const isVipPre = product.vipPreorder || product.status === 'VIP Pre-Order';
+        const vipPrice = (Number(product.price) * 0.9).toFixed(2);
         const card = document.createElement("article");
         card.className = "product-card";
         card.innerHTML = `
@@ -392,7 +394,10 @@
               <a href="detail.html?id=${encodeURIComponent(product.id)}" style="color: inherit; text-decoration: none;">${product.name}</a>
             </h3>
             <div class="product-card-footer">
-              <div class="product-card-price-val">฿${Number(product.price).toFixed(2)}</div>
+              <div class="product-card-price-val">
+                <span class="price-main">฿${Number(product.price).toFixed(2)}</span>
+                ${isVipPre ? `<div style="font-size: 11px; color: #ea580c; font-weight: 700;">★ VIP Pre-Order ฿${vipPrice}</div>` : (product.memberOnly ? `<div style="font-size: 11px; color: #b8860b; font-weight: 600;">👑 Member Only ฿${vipPrice}</div>` : `<div style="font-size: 11px; color: #16a34a; font-weight: 600;">👑 VIP ฿${vipPrice} (-10%)</div>`)}
+              </div>
               <div class="product-card-actions">
                 <a href="detail.html?id=${encodeURIComponent(product.id)}" class="btn-card-view-detail">ดูสินค้า</a>
                 <button type="button" class="btn-card-add-cart" onclick="CartManager.addItem('${product.id}')" title="เพิ่มลงในตะกร้า" aria-label="เพิ่ม ${product.name} ลงในตะกร้า" ${product.status === 'Out of Stock' ? 'disabled' : ''}>

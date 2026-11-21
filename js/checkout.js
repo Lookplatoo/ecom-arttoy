@@ -234,7 +234,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const flashLabel = document.getElementById("shipping-cost-label-flash");
     if (flashLabel) {
-      flashLabel.textContent = isFreeShipping ? "ฟรี" : "฿40.00";
+      flashLabel.innerHTML = isFreeShipping 
+        ? '<span style="color: #16a34a; font-weight: 700;">ฟรี ฿0.00</span> <small style="color: #76736d; font-size: 11px;">(สิทธิ์ VIP / ยอดครบ)</small>' 
+        : "฿40.00";
     }
 
     return { 
@@ -334,6 +336,39 @@ document.addEventListener("DOMContentLoaded", function () {
       sessionStorage.removeItem("arttoy_coupon");
       showToast("ยกเลิกโค้ดส่วนลดแล้ว", "success");
       renderCheckoutSummary();
+    });
+  }
+
+  // แนะนำโค้ดส่วนลดคลิกเดียว (1-Click Coupon Suggestion)
+  const btnCoQuickCoupon = document.getElementById("btn-co-quick-coupon");
+  if (btnCoQuickCoupon && couponInput && btnApplyCoupon) {
+    btnCoQuickCoupon.addEventListener("click", () => {
+      couponInput.value = "ARTTOY10";
+      btnApplyCoupon.click();
+    });
+  }
+
+  // เติมข้อมูลจัดส่งทดสอบอัตโนมัติ (1-Click Demo Auto-Fill)
+  const btnDemoAutofill = document.getElementById("btn-demo-autofill-checkout");
+  if (btnDemoAutofill) {
+    btnDemoAutofill.addEventListener("click", () => {
+      const nameInput = document.getElementById("cust-fullname");
+      const phoneInput = document.getElementById("cust-phone");
+      const addressInput = document.getElementById("cust-address");
+      const districtInput = document.getElementById("cust-district");
+      const provinceInput = document.getElementById("cust-province");
+      const postcodeInput = document.getElementById("cust-postcode");
+      const noteInput = document.getElementById("cust-note");
+
+      if (nameInput) nameInput.value = "คุณกิตติคุณ อำนาคา";
+      if (phoneInput) phoneInput.value = "089-123-4567";
+      if (addressInput) addressInput.value = "999 ถนนพุทธมณฑลสาย 4 ตำบลศาลายา";
+      if (districtInput) districtInput.value = "พุทธมณฑล";
+      if (provinceInput) provinceInput.value = "นครปฐม";
+      if (postcodeInput) postcodeInput.value = "73170";
+      if (noteInput) noteInput.value = "โทรแจ้งก่อนส่งพัสดุ";
+
+      showToast("เติมข้อมูลจัดส่งทดสอบเรียบร้อยแล้ว", "success");
     });
   }
 

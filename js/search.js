@@ -69,6 +69,8 @@ document.addEventListener("DOMContentLoaded", function () {
     sortedList.forEach((product) => {
       const badgeClass = product.badge ? `badge-${product.badge.toLowerCase().replace(/[\s-]/g, '')}` : 'badge-popular';
       const isOutOfStock = product.status === 'Out of Stock';
+      const isVipPre = product.vipPreorder || product.status === 'VIP Pre-Order';
+      const vipPrice = (Number(product.price) * 0.9).toFixed(2);
 
       const card = document.createElement("article");
       card.className = "product-card";
@@ -91,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
           </h3>
           <div class="product-card-footer">
             <div class="product-card-price-val">
-              ฿${Number(product.price).toFixed(2)}
-              ${product.memberOnly ? '<div style="font-size: 11px; color: #b8860b; font-weight: 600;">👑 Member Only</div>' : ''}
+              <span class="price-main">฿${Number(product.price).toFixed(2)}</span>
+              ${isVipPre ? `<div style="font-size: 11px; color: #ea580c; font-weight: 700;">★ VIP Pre-Order ฿${vipPrice}</div>` : (product.memberOnly ? `<div style="font-size: 11px; color: #b8860b; font-weight: 600;">👑 Member Only ฿${vipPrice}</div>` : `<div style="font-size: 11px; color: #16a34a; font-weight: 600;">👑 VIP ฿${vipPrice} (-10%)</div>`)}
             </div>
             <div class="product-card-actions">
               <a href="detail.html?id=${encodeURIComponent(product.id)}" class="btn-card-view-detail">ดูรายละเอียด</a>
@@ -144,6 +146,46 @@ document.addEventListener("DOMContentLoaded", function () {
   if (categorySelect) categorySelect.addEventListener("change", loadProducts);
   if (statusSelect) statusSelect.addEventListener("change", loadProducts);
   if (sortSelect) sortSelect.addEventListener("change", loadProducts);
+
+  // 2.1 ทางลัดตัวกรอง Quick Filter Chips
+  const quickChips = document.querySelectorAll(".btn-quick-filter-chip");
+  quickChips.forEach(chip => {
+    chip.addEventListener("click", function () {
+      quickChips.forEach(c => {
+        c.classList.remove("active");
+        c.style.background = "#fff";
+        c.style.color = "#334155";
+        c.style.borderColor = "#cbd5e1";
+      });
+      this.classList.add("active");
+      this.style.background = "#18181b";
+      this.style.color = "#fff";
+      this.style.borderColor = "#18181b";
+
+      const filterType = this.getAttribute("data-filter");
+      if (nameInput) nameInput.value = "";
+      if (minPriceInput) minPriceInput.value = "";
+      if (maxPriceInput) maxPriceInput.value = "";
+
+      if (filterType === "all") {
+        if (categorySelect) categorySelect.value = "";
+        if (statusSelect) statusSelect.value = "";
+      } else if (filterType === "vip-preorder") {
+        if (categorySelect) categorySelect.value = "";
+        if (statusSelect) statusSelect.value = "VIP Pre-Order";
+      } else if (filterType === "available") {
+        if (categorySelect) categorySelect.value = "";
+        if (statusSelect) statusSelect.value = "Available";
+      } else if (filterType === "chiikawa") {
+        if (categorySelect) categorySelect.value = "Chiikawa";
+        if (statusSelect) statusSelect.value = "";
+      } else if (filterType === "blind-box") {
+        if (categorySelect) categorySelect.value = "Blind Box";
+        if (statusSelect) statusSelect.value = "";
+      }
+      loadProducts();
+    });
+  });
 
   // 3. เริ่มต้นอ่านพารามิเตอร์จาก URL และโหลดสินค้าทันที
   initFiltersFromUrl();
