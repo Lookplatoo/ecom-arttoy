@@ -91,16 +91,16 @@ document.addEventListener("DOMContentLoaded", async function () {
         const saveAmt = basePrice * (discountPercent / 100);
         const earnedPoints = Math.floor(discountedPrice / 10);
         memberPriceBox.innerHTML = `
-          <div class="member-price-active-card" style="${isVipPreorder ? 'border-left: 4px solid #e65100;' : ''}">
-            <span class="member-price-crown">👑</span>
+          <div class="member-price-active-card">
+            <span class="member-price-crown" style="font-weight: 700; font-size: 11px; background: var(--color-bg-alt); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--color-border-grey); color: var(--color-dark);">VIP</span>
             <div class="member-price-info">
-              <span class="member-price-tag">${isVipPreorder ? '★ สิทธิ์ VIP Pre-Order Priority (รับส่วนลด VIP 10%)' : `ราคาสมาชิกของคุณ (${activeMember.planName} ลด ${discountPercent}%)`}</span>
+              <span class="member-price-tag">${isVipPreorder ? 'สิทธิ์ VIP Pre-Order Priority (รับส่วนลด VIP 10%)' : `ราคาสมาชิกของคุณ (${activeMember.planName} ลด ${discountPercent}%)`}</span>
               <div class="member-price-row">
                 <span class="member-price-amount">฿${discountedPrice.toFixed(2)}</span>
                 <span class="member-price-savings">ประหยัด ฿${saveAmt.toFixed(2)} + ส่งฟรี ฿0</span>
               </div>
-              <div style="font-size: 12px; color: #16a34a; font-weight: 600; margin-top: 4px;">
-                🎁 ได้รับแต้มสะสม <strong>+${earnedPoints} Reward Points</strong> เมื่อสั่งซื้อออเดอร์นี้
+              <div style="font-size: 12px; color: var(--color-primary); font-weight: 500; margin-top: 4px;">
+                แต้มสะสมที่จะได้รับ: <strong>+${earnedPoints} Reward Points</strong> เมื่อสั่งซื้อออเดอร์นี้
               </div>
             </div>
           </div>
@@ -110,15 +110,15 @@ document.addEventListener("DOMContentLoaded", async function () {
         const guestPoints = Math.floor(basePrice / 10);
         memberPriceBox.innerHTML = `
           <div class="member-price-guest-card">
-            <span class="member-price-crown">👑</span>
+            <span class="member-price-crown" style="font-weight: 700; font-size: 11px; background: var(--color-bg-alt); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--color-border-grey); color: var(--color-dark);">VIP</span>
             <div class="member-price-info">
               <span class="member-price-tag">ราคาสมาชิก Art Toy VIP Club (ลดทันที 10%)</span>
               <div class="member-price-row">
                 <span class="member-price-amount">฿${vipPrice.toFixed(2)}</span>
                 <span class="member-price-savings">+ จัดส่งฟรี ฿0 ทุกออเดอร์ไม่มีขั้นต่ำ</span>
               </div>
-              <div style="font-size: 12px; color: #2563eb; margin-top: 4px;">
-                🪙 สะสม Reward Points ได้ <strong>+${guestPoints} แต้ม</strong> (ทุก 10 บาท = 1 แต้ม)
+              <div style="font-size: 12px; color: var(--color-muted-grey); margin-top: 4px;">
+                สะสมแต้ม Reward Points: <strong>+${guestPoints} แต้ม</strong> (ทุก 10 บาท = 1 แต้ม)
               </div>
             </div>
           </div>
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             if (span) span.textContent = "สั่งจองสิทธิ์ VIP ทันที";
           }
           lockContainer.innerHTML = `
-            <div class="member-access-unlocked-pill" style="background: #fff7ed; border-color: #fed7aa; color: #c2410c;">
+            <div class="member-access-unlocked-pill" style="background: var(--color-bg-alt, #f4f3ef); border: 1px solid var(--color-border-grey); color: var(--color-dark);">
               <span class="unlocked-icon">✓</span>
               <span>คุณได้รับสิทธิ์ <strong>VIP Pre-Order 24h ก่อนใคร</strong> ในฐานะสมาชิก ${activeMember.planName} (การันตีสินค้า 100% ในราคา ฿${(basePrice * 0.9).toFixed(2)})</span>
             </div>
@@ -148,29 +148,26 @@ document.addEventListener("DOMContentLoaded", async function () {
         } else {
           actionButtonsWrap.style.display = "none";
           lockContainer.innerHTML = `
-            <div class="detail-member-lock-card" style="border-top: 4px solid #e65100;">
+            <div class="detail-member-lock-card" style="border: 1px solid var(--color-border-grey); background: #ffffff; border-radius: 10px; padding: 20px;">
               <div class="lock-header">
                 <span class="lock-icon">🔒</span>
-                <h4 style="color: #c2410c;">VIP Pre-Order Priority (สิทธิ์จองพิเศษเฉพาะสมาชิก VIP)</h4>
+                <h4 style="color: var(--color-dark); font-weight: 700;">VIP Pre-Order Priority (สิทธิ์จองพิเศษเฉพาะสมาชิก VIP)</h4>
               </div>
-              <div style="background: #fef2f2; border: 1px solid #fee2e2; border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-family: var(--font-th); font-size: 13px; color: #991b1b; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
-                <span>⏳ นับถอยหลังเปิดขายรอบปกติทั่วไป:</span>
-                <strong style="font-family: monospace; font-size: 14px; color: #dc2626;">23 ชม. 45 นาที (สมาชิก VIP จองได้ทันที)</strong>
+              <div style="background: var(--color-bg-alt, #f4f3ef); border: 1px solid var(--color-border-grey); border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-family: var(--font-th); font-size: 13px; color: var(--color-dark); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 6px;">
+                <span>นับถอยหลังเปิดขายรอบปกติทั่วไป:</span>
+                <strong style="font-family: monospace; font-size: 13.5px; color: var(--color-primary);">23 ชม. 45 นาที (สมาชิก VIP จองได้ทันที)</strong>
               </div>
               <p class="lock-desc">
                 ผลงาน Collaboration ผลิตจำนวนจำกัดเพียง 200 ชิ้นทั่วโลก เปิดสิทธิ์ Pre-Order ให้สมาชิก VIP Club จองก่อนรอบปกติ 24 ชั่วโมง การันตีได้สินค้า 100% ในราคาลด 10% (เหลือ ฿${(basePrice * 0.9).toFixed(2)}) ไม่ต้องแย่งกับบอท ไม่โดนรีเซลโก่งราคา
               </p>
               <div class="lock-actions">
-                <a href="subscription.html" class="btn-unlock-subscribe" style="background: #e65100; border-color: #e65100;">
+                <a href="subscription.html" class="btn-unlock-subscribe" style="background: var(--color-primary); border-color: var(--color-primary);">
                   สมัครสมาชิก VIP เพื่อสั่งจองทันที (฿199/ด.)
                 </a>
                 <button type="button" id="btn-login-member-detail" class="btn-unlock-login">
                   ยืนยันรหัสสมาชิก VIP
                 </button>
               </div>
-              <button type="button" id="btn-quick-unlock-vip-detail" class="btn-quick-unlock-vip" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #fff7ed; border: 1px dashed #ea580c; border-radius: 8px; color: #c2410c; font-family: var(--font-th); font-size: 13px; font-weight: 700; cursor: pointer; text-align: center;">
-                ⚡ คลิกเดียวทดสอบสิทธิ์ VIP (Demo Test: SUB-202611-1991)
-              </button>
             </div>
           `;
           bindMemberLoginPrompt();
@@ -187,7 +184,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         } else {
           actionButtonsWrap.style.display = "none";
           lockContainer.innerHTML = `
-            <div class="detail-member-lock-card">
+            <div class="detail-member-lock-card" style="border: 1px solid var(--color-border-grey); background: #ffffff; border-radius: 10px; padding: 20px;">
               <div class="lock-header">
                 <span class="lock-icon">🔒</span>
                 <h4>สิทธิ์การสั่งซื้อเฉพาะสมาชิก VIP Club</h4>
@@ -196,16 +193,13 @@ document.addEventListener("DOMContentLoaded", async function () {
                 สินค้ารุ่นพิเศษนี้ผลิตจำนวนจำกัด สงวนสิทธิ์การสั่งซื้อเฉพาะสมาชิก VIP เท่านั้น สมัครสมาชิกเพื่อปลดล็อคสิทธิ์สั่งซื้อพร้อมรับส่วนลด 10% และส่งฟรีทันที
               </p>
               <div class="lock-actions">
-                <a href="subscription.html" class="btn-unlock-subscribe">
+                <a href="subscription.html" class="btn-unlock-subscribe" style="background: var(--color-primary); border-color: var(--color-primary);">
                   สมัครสมาชิกเพื่อปลดล็อคสิทธิ์ (฿199/ด.)
                 </a>
                 <button type="button" id="btn-login-member-detail" class="btn-unlock-login">
                   ยืนยันรหัสสมาชิก (เข้าสู่ระบบ)
                 </button>
               </div>
-              <button type="button" id="btn-quick-unlock-vip-detail" class="btn-quick-unlock-vip" style="display: block; width: 100%; margin-top: 12px; padding: 10px; background: #fff7ed; border: 1px dashed #ea580c; border-radius: 8px; color: #c2410c; font-family: var(--font-th); font-size: 13px; font-weight: 700; cursor: pointer; text-align: center;">
-                ⚡ คลิกเดียวทดสอบสิทธิ์ VIP (Demo Test: SUB-202611-1991)
-              </button>
             </div>
           `;
           bindMemberLoginPrompt();
@@ -228,21 +222,6 @@ document.addEventListener("DOMContentLoaded", async function () {
           if (res && res.success) {
             showToast(res.message, "success");
             renderMemberPerks();
-          }
-        }
-      });
-    }
-
-    const quickBtn = document.getElementById("btn-quick-unlock-vip-detail");
-    if (quickBtn) {
-      quickBtn.addEventListener("click", () => {
-        const res = ApiService.verifyMember("SUB-202611-1991");
-        if (res && res.success) {
-          showToast("เข้าสู่ระบบสมาชิก VIP สำเร็จ! ปลดล็อคสิทธิ์สั่งซื้อแล้ว", "success");
-          renderMemberPerks();
-          if (typeof CartManager !== "undefined" && typeof CartManager.renderHeaderMemberBadge === "function") {
-            CartManager.renderHeaderMemberBadge();
-            CartManager.render();
           }
         }
       });

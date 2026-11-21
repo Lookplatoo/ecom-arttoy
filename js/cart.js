@@ -9,7 +9,6 @@ const CartManager = {
   init: function () {
     this.injectCartDrawer();
     this.injectMemberModal();
-    this.injectDemoGuideWidget();
     this.renderHeaderMemberBadge();
     this.bindEvents();
     this.render();
@@ -60,9 +59,9 @@ const CartManager = {
             <input type="text" id="cart-coupon-input" placeholder="โค้ดส่วนลด เช่น ARTTOY10" aria-label="กรอกโค้ดส่วนลด">
             <button type="button" id="btn-apply-coupon" class="btn-coupon">ใช้โค้ด</button>
           </div>
-          <div class="cart-coupon-hint" style="font-size: 11.5px; color: #76736d; margin: 4px 0 8px 0; display: flex; align-items: center; gap: 6px;">
-            <span>💡 แนะนำ:</span>
-            <button type="button" id="btn-quick-coupon-arttoy10" class="btn-quick-coupon-pill" style="background: #fff7ed; border: 1px dashed #ea580c; color: #c2410c; padding: 2px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: 600;">
+          <div class="cart-coupon-hint" style="font-size: 11.5px; color: var(--color-muted-grey); margin: 4px 0 8px 0; display: flex; align-items: center; gap: 6px;">
+            <span>โค้ดแนะนำ:</span>
+            <button type="button" id="btn-quick-coupon-arttoy10" class="btn-quick-coupon-pill" style="background: var(--color-bg-alt, #f4f3ef); border: 1px solid var(--color-border-grey); color: var(--color-dark); padding: 2px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; font-weight: 500;">
               ARTTOY10 (ลด 10%)
             </button>
           </div>
@@ -119,7 +118,7 @@ const CartManager = {
         <div class="modal-card member-modal-card">
           <div class="modal-header">
             <div class="modal-title-wrap">
-              <span class="member-crown-icon">👑</span>
+              <span class="member-crown-icon" style="font-weight: 700; color: var(--color-dark); font-size: 13px; background: var(--color-bg-alt); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--color-border-grey);">VIP</span>
               <h3 id="member-modal-title">ยืนยันสิทธิ์สมาชิก Art Toy VIP Club</h3>
             </div>
             <button type="button" id="btn-close-member-modal" class="modal-close-btn" aria-label="ปิดหน้าต่างยืนยันสิทธิ์สมาชิก">&times;</button>
@@ -132,20 +131,11 @@ const CartManager = {
               <input type="text" id="input-member-verify" class="form-input member-input" placeholder="ระบุ Subscription ID หรือ เบอร์โทร เช่น 0812345678" aria-label="ระบุ Subscription ID หรือเบอร์โทรศัพท์" autocomplete="off">
             </div>
             
-            <!-- Quick Demo Login Chips (1-Click เพื่อความสะดวก ไม่ต้องจำรหัส) -->
-            <div class="member-quick-demo-chips" style="margin: 12px 0 16px 0; background: #faf9f6; border: 1px solid var(--color-border-grey); border-radius: 8px; padding: 10px 12px;">
-              <span style="display: block; font-size: 12px; color: var(--color-dark); margin-bottom: 6px; font-weight: 700;">⚡ คลิกเดียวเพื่อทดสอบสิทธิ์สมาชิก VIP (Quick Demo Login):</span>
-              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                <button type="button" class="btn-demo-login-chip" data-id="SUB-202611-1991" style="background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer;">
-                  👑 คุณกิตติคุณ (VIP 10%)
-                </button>
-                <button type="button" class="btn-demo-login-chip" data-id="SUB-202611-1992" style="background: #fefce8; color: #a16207; border: 1px solid #fef08a; border-radius: 6px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer;">
-                  👑 คุณฐิตารีย์ (Founder)
-                </button>
-                <button type="button" id="btn-demo-logout-chip" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer;">
-                  👤 โหมดผู้ใช้ทั่วไป (Guest)
-                </button>
-              </div>
+            <div class="member-quick-demo-chips" style="margin: 10px 0 14px 0; font-size: 12px; color: var(--color-muted-grey); line-height: 1.5;">
+              <span>ตัวอย่างบัญชีสมาชิก: </span>
+              <button type="button" class="btn-demo-login-chip" data-id="SUB-202611-1991" style="background: none; border: none; padding: 0; color: var(--color-primary); text-decoration: underline; font-size: 12px; cursor: pointer; font-family: inherit; font-weight: 600;">SUB-202611-1991</button>
+              <span> หรือ เบอร์โทร </span>
+              <button type="button" class="btn-demo-login-chip" data-id="0812345678" style="background: none; border: none; padding: 0; color: var(--color-primary); text-decoration: underline; font-size: 12px; cursor: pointer; font-family: inherit; font-weight: 600;">0812345678</button>
             </div>
 
             <button type="button" id="btn-submit-member-verify" class="btn-modal-primary btn-member-action">
@@ -161,58 +151,6 @@ const CartManager = {
     `;
 
     document.body.insertAdjacentHTML('beforeend', modalHTML);
-  },
-
-  // 2.1 ฉีด Floating Prototype Demo Guide Widget ลงใน body
-  injectDemoGuideWidget: function () {
-    if (document.getElementById('demo-guide-widget')) return;
-
-    const widgetHTML = `
-      <div id="demo-guide-widget" class="demo-guide-widget">
-        <button type="button" id="btn-toggle-demo-guide" class="btn-toggle-demo-guide" aria-label="เปิดคู่มือจำลองการใช้งาน">
-          <span class="guide-icon">🧭</span>
-          <span class="guide-text">คู่มือทดสอบระบบ (Demo Flows)</span>
-        </button>
-        <div id="demo-guide-panel" class="demo-guide-panel" style="display: none;">
-          <div class="demo-guide-header">
-            <div style="font-weight: 700; font-size: 13.5px; display: flex; align-items: center; gap: 6px;">
-              <span>🧭</span>
-              <span>เลือกสถานการณ์ทดสอบ (ITDS294 Demo)</span>
-            </div>
-            <button type="button" id="btn-close-demo-guide" class="guide-close-btn" aria-label="ปิดคู่มือ">&times;</button>
-          </div>
-          <div class="demo-guide-body">
-            <p style="font-size: 11.5px; color: #76736d; margin-bottom: 10px; line-height: 1.4;">
-              คลิกเพื่อทดสอบ User Flow หลักตามรายงานโครงงาน:
-            </p>
-            <div class="demo-flow-actions">
-              <button type="button" class="btn-flow-action" id="btn-flow-vip-preorder">
-                <span class="flow-action-title">⭐ Flow 1: สินค้า VIP Pre-Order 24h</span>
-                <span class="flow-action-desc">สลับเป็น VIP และเปิดหน้าน้อง Collab Limited ทันที</span>
-              </button>
-              <button type="button" class="btn-flow-action" id="btn-flow-vip-member">
-                <span class="flow-action-title">👑 Flow 2: ช้อปพร้อมสิทธิ์ VIP ลด 10%</span>
-                <span class="flow-action-desc">ใช้สิทธิ์คุณกิตติคุณ (SUB-202611-1991) ไปหน้าร้าน</span>
-              </button>
-              <button type="button" class="btn-flow-action" id="btn-flow-guest">
-                <span class="flow-action-title">🛍️ Flow 3: ช้อปแบบบุคคลทั่วไป (Guest Mode)</span>
-                <span class="flow-action-desc">ออกจากระบบสมาชิกเพื่อทดสอบการสั่งซื้อปกติ</span>
-              </button>
-              <button type="button" class="btn-flow-action" id="btn-flow-subscribe">
-                <span class="flow-action-title">💳 Flow 4: สมัครสมาชิก VIP Club (3-Click)</span>
-                <span class="flow-action-desc">ไปที่หน้าเลือกแพ็กเกจสมาชิก (เริ่มต้น ฿199/เดือน)</span>
-              </button>
-              <button type="button" class="btn-flow-action" id="btn-flow-tracking">
-                <span class="flow-action-title">📦 Flow 5: ติดตามสถานะจัดส่งพัสดุ</span>
-                <span class="flow-action-desc">ไปที่หน้า Tracking พร้อมโหลดออเดอร์จำลอง</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-
-    document.body.insertAdjacentHTML('beforeend', widgetHTML);
   },
 
   // 3. แสดงผล Member Badge ที่ Header
@@ -239,13 +177,13 @@ const CartManager = {
       slot.innerHTML = `
         <div class="header-member-pill-wrap" id="header-member-pill-wrap">
           <button type="button" class="header-member-pill" id="btn-header-member-pill" title="คลิกเพื่อดูสิทธิประโยชน์หรือจัดการสมาชิก">
-            <span class="member-pill-crown">👑</span>
+            <span class="member-pill-crown" style="font-weight: 700; font-size: 11px; background: var(--color-bg-alt); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--color-border-grey);">VIP</span>
             <span class="member-pill-name">${displayName}</span>
             <span class="member-pill-badge">${activeMember.planName} (-${activeMember.discountPercent}%)</span>
           </button>
           <div class="header-member-dropdown" id="header-member-dropdown" style="display: none;">
             <div class="member-dropdown-header">
-              <div class="dropdown-tier-tag">👑 ${activeMember.planName}</div>
+              <div class="dropdown-tier-tag">${activeMember.planName} VIP</div>
               <div class="dropdown-member-name">${activeMember.customer ? activeMember.customer.fullName : 'สมาชิก VIP'}</div>
               <div class="dropdown-member-id">รหัสสมาชิก: <code>${activeMember.subId}</code></div>
             </div>
@@ -268,7 +206,7 @@ const CartManager = {
     } else {
       slot.innerHTML = `
         <button type="button" id="btn-header-member-login" class="btn-header-member-login" title="ยืนยันสิทธิ์สมาชิก Art Toy VIP Club">
-          <span class="member-login-icon">👑</span>
+          <span class="member-login-icon" style="font-weight: 700; font-size: 11px; background: var(--color-bg-alt); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--color-border-grey);">VIP</span>
           <span class="member-login-text">สิทธิ์สมาชิก VIP</span>
         </button>
       `;
@@ -456,54 +394,6 @@ const CartManager = {
         couponInput.value = 'ARTTOY10';
         applyCouponBtn.click();
       }
-
-      // 4. Floating Demo Guide Widget
-      const toggleGuideBtn = e.target.closest('#btn-toggle-demo-guide');
-      const panel = document.getElementById('demo-guide-panel');
-      if (toggleGuideBtn && panel) {
-        e.preventDefault();
-        panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-      }
-
-      const closeGuideBtn = e.target.closest('#btn-close-demo-guide');
-      if (closeGuideBtn && panel) {
-        e.preventDefault();
-        panel.style.display = 'none';
-      }
-
-      // 5. Demo Flow Shortcuts
-      const flowPreorderBtn = e.target.closest('#btn-flow-vip-preorder');
-      if (flowPreorderBtn) {
-        e.preventDefault();
-        ApiService.verifyMember('SUB-202611-1991');
-        window.location.href = 'detail.html?id=COLLAB-ARTIST-01';
-      }
-
-      const flowVipMemberBtn = e.target.closest('#btn-flow-vip-member');
-      if (flowVipMemberBtn) {
-        e.preventDefault();
-        ApiService.verifyMember('SUB-202611-1991');
-        window.location.href = 'search.html';
-      }
-
-      const flowGuestBtn = e.target.closest('#btn-flow-guest');
-      if (flowGuestBtn) {
-        e.preventDefault();
-        ApiService.clearActiveMember();
-        window.location.href = 'search.html';
-      }
-
-      const flowSubscribeBtn = e.target.closest('#btn-flow-subscribe');
-      if (flowSubscribeBtn) {
-        e.preventDefault();
-        window.location.href = 'subscription.html';
-      }
-
-      const flowTrackingBtn = e.target.closest('#btn-flow-tracking');
-      if (flowTrackingBtn) {
-        e.preventDefault();
-        window.location.href = 'order-tracking.html?orderId=AT-20261118-8421';
-      }
     });
 
     // Keyboard Accessibility (WCAG 2.1.2): Close drawer & modal on Escape key
@@ -606,7 +496,7 @@ const CartManager = {
     if (freeShippingProgress) {
       if (isMemberActive) {
         freeShippingProgress.style.width = '100%';
-        freeShippingProgress.style.background = 'linear-gradient(90deg, #10b981, #059669)';
+        freeShippingProgress.style.background = 'var(--color-primary, #3d5a80)';
       } else {
         const progressPercent = Math.min(100, (subtotal / freeShippingThreshold) * 100);
         freeShippingProgress.style.width = `${progressPercent}%`;
@@ -616,7 +506,7 @@ const CartManager = {
 
     if (freeShippingText) {
       if (isMemberActive) {
-        freeShippingText.innerHTML = `👑 สมาชิก <strong>${activeMember.planName}</strong> ได้รับสิทธิ์ <strong>จัดส่งฟรีทุกออเดอร์</strong>`;
+        freeShippingText.innerHTML = `สมาชิก <strong>${activeMember.planName}</strong> ได้รับสิทธิ์ <strong>จัดส่งฟรีทุกออเดอร์</strong>`;
       } else if (subtotal >= freeShippingThreshold && cart.length > 0) {
         freeShippingText.innerHTML = `คุณได้รับสิทธิ์ <strong>จัดส่งฟรี</strong>`;
       } else {
@@ -632,9 +522,9 @@ const CartManager = {
         cartVipBanner.style.display = 'block';
         cartVipBanner.innerHTML = `
           <div class="cart-vip-inner">
-            <span class="vip-icon">👑</span>
+            <span class="vip-icon" style="font-weight: 700; font-size: 11px; background: var(--color-bg-alt); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--color-border-grey); color: var(--color-dark);">VIP</span>
             <div class="vip-desc">
-              <strong>${activeMember.planName} VIP</strong>: รับส่วนลด ${activeMember.discountPercent}% + ส่งฟรี ฿0
+              <strong>${activeMember.planName} VIP</strong>: ส่วนลด ${activeMember.discountPercent}% + ส่งฟรี ฿0
             </div>
           </div>
         `;

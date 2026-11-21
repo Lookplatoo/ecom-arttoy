@@ -84,10 +84,10 @@
         </button>
       </form>
 
-      <!-- Quick Order Picker (คลิกเดียวเพื่อดูสถานะ ไม่ต้องพิมพ์หรือจำรหัส) -->
-      <div id="tracking-recent-orders-bar" style="margin: -8px 0 28px 0; background: #faf9f6; border: 1px solid var(--color-border-grey); border-radius: 8px; padding: 12px 16px; font-family: var(--font-th);">
-        <div style="font-size: 12px; font-weight: 700; color: var(--color-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
-          <span>📦 คำสั่งซื้อล่าสุดของคุณ (คลิกเพื่อดูสถานะทันที):</span>
+      <!-- Recent Orders Quick Access -->
+      <div id="tracking-recent-orders-bar" style="margin: -8px 0 28px 0; background: var(--color-bg-alt, #f4f3ef); border: 1px solid var(--color-border-grey); border-radius: 8px; padding: 12px 16px; font-family: var(--font-th);">
+        <div style="font-size: 12px; font-weight: 600; color: var(--color-dark); margin-bottom: 8px;">
+          <span>คำสั่งซื้อล่าสุดของคุณ:</span>
         </div>
         <div id="recent-orders-chips-container" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
       </div>
@@ -160,7 +160,7 @@
       </div>
 
       <!-- Quick sample orders picker -->
-      <div id="sample-orders-box" style="margin-top: 32px; padding-top: 24px; border-top: 1px dashed var(--color-border-grey);">
+      <div id="sample-orders-box" style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-border-grey);">
         <h4 style="font-family: var(--font-th); font-size: 14px; color: #76736d; margin-bottom: 12px;">
           คำสั่งซื้อตัวอย่างสำหรับทดสอบ:
         </h4>
@@ -301,7 +301,7 @@
         chipsContainer.innerHTML = orders.slice(0, 4).map(ord => {
           const custName = (ord.customer && ord.customer.fullName) ? ord.customer.fullName.split(' ')[0] : 'ลูกค้า';
           return `
-            <button type="button" class="btn-recent-order-chip" data-order-id="${ord.orderId}" style="padding: 5px 12px; background: #fff; border: 1px solid #cbd5e1; border-radius: 6px; font-family: var(--font-th); font-size: 12px; color: #1e293b; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-weight: 500;">
+            <button type="button" class="btn-recent-order-chip" data-order-id="${ord.orderId}" style="padding: 5px 12px; background: #ffffff; border: 1px solid var(--color-border-grey); border-radius: 6px; font-family: var(--font-th); font-size: 12px; color: var(--color-dark); cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-weight: 500;">
               <strong>${ord.orderId}</strong>
               <span>(${custName} &bull; ${ord.status})</span>
             </button>

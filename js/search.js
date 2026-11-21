@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
           <div class="product-card-footer">
             <div class="product-card-price-val">
               <span class="price-main">฿${Number(product.price).toFixed(2)}</span>
-              ${isVipPre ? `<div style="font-size: 11px; color: #ea580c; font-weight: 700;">★ VIP Pre-Order ฿${vipPrice}</div>` : (product.memberOnly ? `<div style="font-size: 11px; color: #b8860b; font-weight: 600;">👑 Member Only ฿${vipPrice}</div>` : `<div style="font-size: 11px; color: #16a34a; font-weight: 600;">👑 VIP ฿${vipPrice} (-10%)</div>`)}
+              ${isVipPre ? `<div style="font-size: 11px; color: var(--color-primary); font-weight: 600;">VIP Pre-Order ฿${vipPrice}</div>` : (product.memberOnly ? `<div style="font-size: 11px; color: var(--color-dark); font-weight: 600;">เฉพาะสมาชิก ฿${vipPrice}</div>` : `<div style="font-size: 11px; color: var(--color-muted-grey); font-weight: 500;">สมาชิก VIP: ฿${vipPrice} (-10%)</div>`)}
             </div>
             <div class="product-card-actions">
               <a href="detail.html?id=${encodeURIComponent(product.id)}" class="btn-card-view-detail">ดูรายละเอียด</a>
@@ -153,14 +153,14 @@ document.addEventListener("DOMContentLoaded", function () {
     chip.addEventListener("click", function () {
       quickChips.forEach(c => {
         c.classList.remove("active");
-        c.style.background = "#fff";
-        c.style.color = "#334155";
-        c.style.borderColor = "#cbd5e1";
+        c.style.background = "#ffffff";
+        c.style.color = "var(--color-dark)";
+        c.style.borderColor = "var(--color-border-grey)";
       });
       this.classList.add("active");
-      this.style.background = "#18181b";
-      this.style.color = "#fff";
-      this.style.borderColor = "#18181b";
+      this.style.background = "var(--color-primary)";
+      this.style.color = "#ffffff";
+      this.style.borderColor = "var(--color-primary)";
 
       const filterType = this.getAttribute("data-filter");
       if (nameInput) nameInput.value = "";

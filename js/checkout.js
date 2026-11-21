@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
       banner.style.display = 'block';
       banner.innerHTML = `
         <div class="checkout-vip-banner-inner">
-          <span class="vip-badge-icon">👑</span>
+          <span class="vip-badge-icon" style="font-weight: 700; font-size: 11px; background: var(--color-bg-alt); padding: 1px 5px; border-radius: 4px; border: 1px solid var(--color-border-grey); color: var(--color-dark);">VIP</span>
           <div class="vip-info-wrap">
             <div class="vip-header-title">
               <strong>บัญชีสมาชิก VIP: ${activeMember.customer ? activeMember.customer.fullName : 'ท่านสมาชิก'}</strong>
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
       banner.innerHTML = `
         <div class="checkout-guest-banner-inner">
           <div class="guest-prompt-text">
-            <span>👑 <strong>คุณเป็นสมาชิก Art Toy VIP Club หรือไม่?</strong></span>
+            <span><strong>คุณเป็นสมาชิก Art Toy VIP Club หรือไม่?</strong></span>
             <p>กรอกรหัสสมาชิกหรือเบอร์โทรเพื่อรับส่วนลด 5-15% และสิทธิ์ส่งฟรีทันที</p>
           </div>
           <button type="button" id="btn-checkout-verify-member" class="btn-checkout-verify-link">
@@ -345,30 +345,6 @@ document.addEventListener("DOMContentLoaded", function () {
     btnCoQuickCoupon.addEventListener("click", () => {
       couponInput.value = "ARTTOY10";
       btnApplyCoupon.click();
-    });
-  }
-
-  // เติมข้อมูลจัดส่งทดสอบอัตโนมัติ (1-Click Demo Auto-Fill)
-  const btnDemoAutofill = document.getElementById("btn-demo-autofill-checkout");
-  if (btnDemoAutofill) {
-    btnDemoAutofill.addEventListener("click", () => {
-      const nameInput = document.getElementById("cust-fullname");
-      const phoneInput = document.getElementById("cust-phone");
-      const addressInput = document.getElementById("cust-address");
-      const districtInput = document.getElementById("cust-district");
-      const provinceInput = document.getElementById("cust-province");
-      const postcodeInput = document.getElementById("cust-postcode");
-      const noteInput = document.getElementById("cust-note");
-
-      if (nameInput) nameInput.value = "คุณกิตติคุณ อำนาคา";
-      if (phoneInput) phoneInput.value = "089-123-4567";
-      if (addressInput) addressInput.value = "999 ถนนพุทธมณฑลสาย 4 ตำบลศาลายา";
-      if (districtInput) districtInput.value = "พุทธมณฑล";
-      if (provinceInput) provinceInput.value = "นครปฐม";
-      if (postcodeInput) postcodeInput.value = "73170";
-      if (noteInput) noteInput.value = "โทรแจ้งก่อนส่งพัสดุ";
-
-      showToast("เติมข้อมูลจัดส่งทดสอบเรียบร้อยแล้ว", "success");
     });
   }
 
